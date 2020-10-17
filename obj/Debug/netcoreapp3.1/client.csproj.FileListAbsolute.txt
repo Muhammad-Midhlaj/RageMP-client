@@ -1,0 +1,96 @@
+C:\Users\admin\Desktop\server 1.1 full fix\dotnet\resources\client\bin\Debug\netcoreapp3.1\meta.xml
+C:\Users\admin\Desktop\server 1.1 full fix\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.deps.json
+C:\Users\admin\Desktop\server 1.1 full fix\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.dll
+C:\Users\admin\Desktop\server 1.1 full fix\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.pdb
+C:\Users\admin\Desktop\server 1.1 full fix\dotnet\resources\client\bin\Debug\netcoreapp3.1\Bootstrapper.dll
+C:\Users\admin\Desktop\server 1.1 full fix\dotnet\resources\client\bin\Debug\netcoreapp3.1\server.dll
+C:\Users\admin\Desktop\server 1.1 full fix\dotnet\resources\client\bin\Debug\netcoreapp3.1\ServiceData.dll
+C:\Users\admin\Desktop\server 1.1 full fix\dotnet\resources\client\bin\Debug\netcoreapp3.1\server.pdb
+C:\Users\admin\Desktop\server 1.1 full fix\dotnet\resources\client\bin\Debug\netcoreapp3.1\Bootstrapper.xml
+C:\Users\admin\Desktop\server 1.1 full fix\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csprojAssemblyReference.cache
+C:\Users\admin\Desktop\server 1.1 full fix\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.AssemblyInfoInputs.cache
+C:\Users\admin\Desktop\server 1.1 full fix\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.AssemblyInfo.cs
+C:\Users\admin\Desktop\server 1.1 full fix\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\server 1.1 full fix\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csproj.CopyComplete
+C:\Users\admin\Desktop\server 1.1 full fix\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.dll
+C:\Users\admin\Desktop\server 1.1 full fix\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.pdb
+C:\Users\admin\Desktop\hosiron 1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\meta.xml
+C:\Users\admin\Desktop\hosiron 1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.deps.json
+C:\Users\admin\Desktop\hosiron 1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.dll
+C:\Users\admin\Desktop\hosiron 1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.pdb
+C:\Users\admin\Desktop\hosiron 1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\Bootstrapper.dll
+C:\Users\admin\Desktop\hosiron 1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\server.dll
+C:\Users\admin\Desktop\hosiron 1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\ServiceData.dll
+C:\Users\admin\Desktop\hosiron 1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\server.pdb
+C:\Users\admin\Desktop\hosiron 1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\Bootstrapper.xml
+C:\Users\admin\Desktop\hosiron 1.1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csprojAssemblyReference.cache
+C:\Users\admin\Desktop\hosiron 1.1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.AssemblyInfoInputs.cache
+C:\Users\admin\Desktop\hosiron 1.1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.AssemblyInfo.cs
+C:\Users\admin\Desktop\hosiron 1.1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\hosiron 1.1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csproj.CopyComplete
+C:\Users\admin\Desktop\hosiron 1.1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.dll
+C:\Users\admin\Desktop\hosiron 1.1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.pdb
+C:\Users\admin\Desktop\server 11\dotnet\resources\client\bin\Debug\netcoreapp3.1\meta.xml
+C:\Users\admin\Desktop\server 11\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.deps.json
+C:\Users\admin\Desktop\server 11\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.dll
+C:\Users\admin\Desktop\server 11\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.pdb
+C:\Users\admin\Desktop\server 11\dotnet\resources\client\bin\Debug\netcoreapp3.1\Bootstrapper.dll
+C:\Users\admin\Desktop\server 11\dotnet\resources\client\bin\Debug\netcoreapp3.1\server.dll
+C:\Users\admin\Desktop\server 11\dotnet\resources\client\bin\Debug\netcoreapp3.1\ServiceData.dll
+C:\Users\admin\Desktop\server 11\dotnet\resources\client\bin\Debug\netcoreapp3.1\server.pdb
+C:\Users\admin\Desktop\server 11\dotnet\resources\client\bin\Debug\netcoreapp3.1\Bootstrapper.xml
+C:\Users\admin\Desktop\server 11\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csprojAssemblyReference.cache
+C:\Users\admin\Desktop\server 11\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.AssemblyInfoInputs.cache
+C:\Users\admin\Desktop\server 11\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.AssemblyInfo.cs
+C:\Users\admin\Desktop\server 11\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\server 11\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csproj.CopyComplete
+C:\Users\admin\Desktop\server 11\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.dll
+C:\Users\admin\Desktop\server 11\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.pdb
+C:\Users\Admin\Desktop\server 1_1\dotnet\resources\client\bin\Debug\netcoreapp3.1\meta.xml
+C:\Users\Admin\Desktop\server 1_1\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.deps.json
+C:\Users\Admin\Desktop\server 1_1\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.dll
+C:\Users\Admin\Desktop\server 1_1\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.pdb
+C:\Users\Admin\Desktop\server 1_1\dotnet\resources\client\bin\Debug\netcoreapp3.1\Bootstrapper.dll
+C:\Users\Admin\Desktop\server 1_1\dotnet\resources\client\bin\Debug\netcoreapp3.1\server.dll
+C:\Users\Admin\Desktop\server 1_1\dotnet\resources\client\bin\Debug\netcoreapp3.1\ServiceData.dll
+C:\Users\Admin\Desktop\server 1_1\dotnet\resources\client\bin\Debug\netcoreapp3.1\server.pdb
+C:\Users\Admin\Desktop\server 1_1\dotnet\resources\client\bin\Debug\netcoreapp3.1\Bootstrapper.xml
+C:\Users\Admin\Desktop\server 1_1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\server 1_1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.AssemblyInfoInputs.cache
+C:\Users\Admin\Desktop\server 1_1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.AssemblyInfo.cs
+C:\Users\Admin\Desktop\server 1_1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\server 1_1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csproj.CopyComplete
+C:\Users\Admin\Desktop\server 1_1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.dll
+C:\Users\Admin\Desktop\server 1_1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.pdb
+C:\Users\Admin\Desktop\sborka\dotnet\resources\client\bin\Debug\netcoreapp3.1\meta.xml
+C:\Users\Admin\Desktop\sborka\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.deps.json
+C:\Users\Admin\Desktop\sborka\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.dll
+C:\Users\Admin\Desktop\sborka\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.pdb
+C:\Users\Admin\Desktop\sborka\dotnet\resources\client\bin\Debug\netcoreapp3.1\Bootstrapper.dll
+C:\Users\Admin\Desktop\sborka\dotnet\resources\client\bin\Debug\netcoreapp3.1\server.dll
+C:\Users\Admin\Desktop\sborka\dotnet\resources\client\bin\Debug\netcoreapp3.1\ServiceData.dll
+C:\Users\Admin\Desktop\sborka\dotnet\resources\client\bin\Debug\netcoreapp3.1\server.pdb
+C:\Users\Admin\Desktop\sborka\dotnet\resources\client\bin\Debug\netcoreapp3.1\Bootstrapper.xml
+C:\Users\Admin\Desktop\sborka\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\sborka\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.AssemblyInfoInputs.cache
+C:\Users\Admin\Desktop\sborka\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.AssemblyInfo.cs
+C:\Users\Admin\Desktop\sborka\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\sborka\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csproj.CopyComplete
+C:\Users\Admin\Desktop\sborka\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.dll
+C:\Users\Admin\Desktop\sborka\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.pdb
+C:\Users\Administrator\Desktop\Red1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\meta.xml
+C:\Users\Administrator\Desktop\Red1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.deps.json
+C:\Users\Administrator\Desktop\Red1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.dll
+C:\Users\Administrator\Desktop\Red1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\client.pdb
+C:\Users\Administrator\Desktop\Red1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\Bootstrapper.dll
+C:\Users\Administrator\Desktop\Red1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\server.dll
+C:\Users\Administrator\Desktop\Red1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\ServiceData.dll
+C:\Users\Administrator\Desktop\Red1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\server.pdb
+C:\Users\Administrator\Desktop\Red1.1\dotnet\resources\client\bin\Debug\netcoreapp3.1\Bootstrapper.xml
+C:\Users\Administrator\Desktop\Red1.1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\Red1.1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.AssemblyInfoInputs.cache
+C:\Users\Administrator\Desktop\Red1.1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\Red1.1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\Red1.1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.csproj.CopyComplete
+C:\Users\Administrator\Desktop\Red1.1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.dll
+C:\Users\Administrator\Desktop\Red1.1\dotnet\resources\client\obj\Debug\netcoreapp3.1\client.pdb
