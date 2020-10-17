@@ -76,15 +76,15 @@ namespace NeptuneEvo.Core
         #region Menu
         private static Dictionary<string, Color> carColors = new Dictionary<string, Color>
         {
-            { "Черный", new Color(0, 0, 0) },
-            { "Белый", new Color(225, 225, 225) },
-            { "Красный", new Color(230, 0, 0) },
-            { "Оранжевый", new Color(255, 115, 0) },
-            { "Желтый", new Color(240, 240, 0) },
-            { "Зеленый", new Color(0, 230, 0) },
-            { "Голубой", new Color(0, 205, 255) },
-            { "Синий", new Color(0, 0, 230) },
-            { "Фиолетовый", new Color(190, 60, 165) },
+            { "Theblack", new Color(0, 0, 0) },
+            { "White", new Color(225, 225, 225) },
+            { "Red", new Color(230, 0, 0) },
+            { "Orange", new Color(255, 115, 0) },
+            { "Yellow", new Color(240, 240, 0) },
+            { "Green", new Color(0, 230, 0) },
+            { "Blue", new Color(0, 205, 255) },
+            { "Blue", new Color(0, 0, 230) },
+            { "Violet", new Color(190, 60, 165) },
         };
 
         public static void OpenCarromMenu(Player player, int biztype)
@@ -107,7 +107,7 @@ namespace NeptuneEvo.Core
 
             if (Main.Players[player].Money < prod.Price)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Недостаточно средств", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Insufficient funds", 3000);
                 return vNumber;
             }
 
@@ -123,8 +123,8 @@ namespace NeptuneEvo.Core
 
             vNumber = VehicleManager.Create(player.Name, vName, carColors[color], carColors[color]);
 
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы купили {vName} с идентификатором {vNumber} ", 3000);
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Автомобиль доставлен в ваш гараж!", 5000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You bought {vName} with id {vNumber} ", 3000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"The car has been delivered to your garage!", 5000);
 
             return vNumber;
         }
@@ -159,7 +159,7 @@ namespace NeptuneEvo.Core
                     // Проверка свободного места в гараже
                     if (VehicleManager.getAllPlayerVehicles(player.Name).Count >= Houses.GarageManager.GarageTypes[garage.Type].MaxCars)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Ваши гаражи полны", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Your garages are full", 3000);
                         return;
                     }
                     string vNumber = BuyVehicle(player, biz, vName, color);
