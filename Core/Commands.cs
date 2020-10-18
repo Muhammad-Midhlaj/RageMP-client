@@ -47,7 +47,7 @@ namespace NeptuneEvo.Core
                     if (!Main.Players.ContainsKey(p)) continue;
                     if (Main.Players[p].AdminLVL >= 1)
                     {
-                        p.SendChatMessage($"~y~[CHAT-EXPLOIT] {sender.Name} ({sender.Value}) - {message}");
+                        p.SendChatMessage($"~and~[CHAT-EXPLOIT] {sender.Name} ({sender.Value}) - {message}");
                     }
                 }
                 return Regex.Replace(message, "!", string.Empty);
@@ -63,7 +63,11 @@ namespace NeptuneEvo.Core
                 if (!Main.Players.ContainsKey(sender)) return;
                 if (Main.Players[sender].Unmute > 0)
                 {
+<<<<<<< HEAD
                     Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, $"You are tortured for another {Main.Players[sender].Unmute / 60} minutes ", 3000);
+=======
+                    Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, $"You are tortured for another {Main.Players[sender].Unmute / 60} minutes", 3000);
+>>>>>>> d17078e52221222e8bd3b4eeb014e69739cb5079
                     return;
                 }
                 else if (Main.Players[sender].VoiceMuted)
@@ -99,7 +103,7 @@ namespace NeptuneEvo.Core
                         {
                             var pSim = Main.Players[sender].Sim;
                             var contactName = (Main.Players[phoneMeta.Target].Contacts.ContainsKey(pSim)) ? Main.Players[phoneMeta.Target].Contacts[pSim] : pSim.ToString();
-                            phoneMeta.Target.SendChatMessage($"[В телефоне] {contactName}: {message}");
+                            phoneMeta.Target.SendChatMessage($"[In phone] {contactName}: {message}");
                         }
                     }
                     catch (Exception e) { Log.Write("ChatMessage_TaskRun: " + e.Message, nLog.Type.Error); }
@@ -127,7 +131,7 @@ namespace NeptuneEvo.Core
 
                 if (lic < 0 || lic >= Main.Players[target].Licenses.Count)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"lic = от 0 до {Main.Players[target].Licenses.Count - 1}", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"lic = 0 to {Main.Players[target].Licenses.Count - 1}", 3000);
                     return;
                 }
 
@@ -187,7 +191,11 @@ namespace NeptuneEvo.Core
                 if (Bank.Accounts.ContainsKey(bank))
                 {
                     Bank.RemoveByID(bank);
+<<<<<<< HEAD
                     Notify.Send(client, NotifyType.Success, NotifyPosition.BottomCenter, $"You have successfully deleted your bank account number{bank}", 3000);
+=======
+                    Notify.Send(client, NotifyType.Success, NotifyPosition.BottomCenter, $"You have successfully deleted your bank account number {bank}", 3000);
+>>>>>>> d17078e52221222e8bd3b4eeb014e69739cb5079
                 }
                 else Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"Bank account {bank} not found", 3000);
             }
@@ -223,7 +231,11 @@ namespace NeptuneEvo.Core
                     Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, "No player with this ID found", 3000);
                     return;
                 }
+<<<<<<< HEAD
                 client.SendChatMessage("Real SocialClub at" + target.Name + ": " + target.GetData<string>("RealSocialClub"));
+=======
+                client.SendChatMessage("Real SocialClub at " + target.Name + ": " + target.GetData<string>("RealSocialClub"));
+>>>>>>> d17078e52221222e8bd3b4eeb014e69739cb5079
             }
             catch { }
         }
@@ -241,7 +253,11 @@ namespace NeptuneEvo.Core
                     {
                         Main.LoggedIn[login].Kick();
                         Main.LoggedIn.Remove(login);
+<<<<<<< HEAD
                         Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "You kicked the character from the server, in a minute you can try to log into your account.", 3000);
+=======
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "You kicked a character from the server, in a minute you can try to log into your account.", 3000);
+>>>>>>> d17078e52221222e8bd3b4eeb014e69739cb5079
                     }
                     else
                     {
@@ -458,7 +474,11 @@ namespace NeptuneEvo.Core
                 var tryAdd = nInventory.TryAdd(target, new nItem(types[type], amount));
                 if (tryAdd == -1 || tryAdd > 0)
                 {
+<<<<<<< HEAD
                     Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, "Insufficient inventory space", 3000);
+=======
+                    Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, "Insufficient space in inventory", 3000);
+>>>>>>> d17078e52221222e8bd3b4eeb014e69739cb5079
                     return;
                 }
                 nInventory.Add(target, new nItem(types[type], amount));
@@ -480,7 +500,11 @@ namespace NeptuneEvo.Core
 
                 if (VehicleManager.Vehicles.ContainsKey(newNum))
                 {
+<<<<<<< HEAD
                     Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"This number already exists ", 3000);
+=======
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"This number already exists", 3000);
+>>>>>>> d17078e52221222e8bd3b4eeb014e69739cb5079
                     return;
                 }
 
@@ -497,7 +521,11 @@ namespace NeptuneEvo.Core
                 }
 
                 MySQL.Query($"UPDATE vehicles SET number='{newNum}' WHERE number='{oldNum}'");
+<<<<<<< HEAD
                 Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"New number for{oldNum} = {newNum}", 3000);
+=======
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"New number for {oldNum} = {newNum}", 3000);
+>>>>>>> d17078e52221222e8bd3b4eeb014e69739cb5079
             }
             catch (Exception e) { Log.Write("newvnum: " + e.Message, nLog.Type.Error); }
         }
@@ -574,6 +602,7 @@ namespace NeptuneEvo.Core
                 {
                     if (house.Owner == target.Name)
                     {
+<<<<<<< HEAD
                         player.SendChatMessage($"The player has a house worth ${house.Price}class'{Houses.HouseManager.HouseTypeList[house.Type].Name}'");
                         var targetVehicles = VehicleManager.getAllPlayerVehicles(target.Name);
                         foreach (var num in targetVehicles)
@@ -581,6 +610,15 @@ namespace NeptuneEvo.Core
                     }
                     else
                         player.SendChatMessage($"The player is settled in the house{house.Owner} cost${house.Price}");
+=======
+                        player.SendChatMessage($"The player has a house worth ${house.Price} class '{Houses.HouseManager.HouseTypeList[house.Type].Name}'");
+                        var targetVehicles = VehicleManager.getAllPlayerVehicles(target.Name);
+                        foreach (var num in targetVehicles)
+                            player.SendChatMessage($"The player has a car '{VehicleManager.Vehicles[num].Model}' with number '{num}'");
+                    }
+                    else
+                        player.SendChatMessage($"The player is settled in the house {house.Owner} cost ${house.Price}");
+>>>>>>> d17078e52221222e8bd3b4eeb014e69739cb5079
                 }
                 else
                     player.SendChatMessage("The player has no home");
@@ -590,7 +628,7 @@ namespace NeptuneEvo.Core
                 Log.Write("checkprop: " + e.Message, nLog.Type.Error);
             }
         }
-        [Command("id", "~y~/id [имя/id]")]
+        [Command("id", "~and~/id [name/id]")]
         public static void CMD_checkId(Player player, string target)
         {
             try
@@ -763,7 +801,7 @@ namespace NeptuneEvo.Core
                 }
 
                 MoneySystem.Bank.Accounts[biz.BankID].Balance = 0;
-                biz.Owner = "Государство";
+                biz.Owner = "The state";
                 biz.UpdateLabel();
                 GameLog.Money($"server", $"player({Main.PlayerUUIDs[owner]})", Convert.ToInt32(biz.SellPrice * 0.8), $"takeoffBiz({biz.ID})");
                 Notify.Send(admin, NotifyType.Info, NotifyPosition.BottomCenter, $"You took the business away from {owner}", 3000);
@@ -780,7 +818,11 @@ namespace NeptuneEvo.Core
                 if (!Group.CanUseCmd(player, "paydaymultiplier")) return;
                 if (multi < 1 || multi > 5)
                 {
+<<<<<<< HEAD
                     Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"It is possible to install only from 1 to 5 ", 3000);
+=======
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"It is possible to set only from 1 to 5", 3000);
+>>>>>>> d17078e52221222e8bd3b4eeb014e69739cb5079
                     return;
                 }
 

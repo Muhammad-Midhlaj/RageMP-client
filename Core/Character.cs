@@ -109,7 +109,7 @@ namespace NeptuneEvo.Core.Character
 
                     if (Warns > 0)
                         Unwarn = DateTime.Now.AddDays(14);
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"Одно предупреждение было снято. У Вас осталось {Warns}", 3000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"One warning was dropped. You have left {Warns}", 3000);
                 }
 
                 if (!Dashboard.isopen.ContainsKey(player))
@@ -324,12 +324,12 @@ namespace NeptuneEvo.Core.Character
 
                 if (firstName.Length < 1 || lastName.Length < 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Ошибка в длине имени/фамилии", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "First / last name length error", 3000);
                     return -1;
                 }
                 if (Main.PlayerNames.ContainsValue($"{firstName}_{lastName}"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Данное имя уже занято", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "The given name is already taken", 3000);
                     return -1;
                 }
 
