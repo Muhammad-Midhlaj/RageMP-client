@@ -10,23 +10,23 @@ namespace NeptuneEvo.Core
         {
             if (!Main.Players.ContainsKey(player)) return;
             if (!Group.CanUseCmd(player, "sp")) return;
-            int target = player.GetData<int>("spclient"); // Лучше вызвать GetData<object> один раз, чем несколько, т.к. SetData/GetData<object> работают медленно.
+            int target = player.GetData<int>("spclient"); // It is better to call GetData <object> once than several times. SetData / GetData <object> is slow.
             if (target != -1)
             {
                 int id = 0;
                 if (!state)
                 {
                     id = (target - 1);
-                    if (id == player.Value) id--; // Пропускаем свой ID, т.к. следить за собой мы не можем
+                    if (id == player.Value) id--; // We skip our ID, because we cannot look after ourselves
                 }
                 else
                 {
                     id = (target + 1);
-                    if (id == player.Value) id++; // Пропускаем свой ID, т.к. следить за собой мы не можем
+                    if (id == player.Value) id++; // We skip our ID, because we cannot look after ourselves
                 }
                 Spectate(player, id);
             }
-            else player.SendChatMessage("Невозможно переключиться на другого игрока.");
+            else player.SendChatMessage("Unable to switch to another player.");
         }
         
         public static void Spectate(Player player, int id)
@@ -45,27 +45,27 @@ namespace NeptuneEvo.Core
                                 if (target.GetData<bool>("spmode") == false)
                                 {
                                     if (player.GetData<bool>("spmode") == false)
-                                    { // Не сохраняем новые данные о позиции, если мы уже в режиме слежки
+                                    { // We do not save new position data if we are already in tracking mode
                                         player.SetData("sppos", player.Position);
                                         player.SetData("spdim", player.Dimension);
                                     }
-                                    else NAPI.ClientEvent.TriggerClientEvent(player, "spmode", null, false); // Если уже за кем-то SPшит и потом на другюго, то сначала deattach
-                                    player.SetSharedData("INVISIBLE", true); // Ваша переменная с Вашей системы инвизов, чтобы игроки не видели ника над головой
+                                    else NAPI.ClientEvent.TriggerClientEvent(player, "spmode", null, false); // If SP is already sewn for someone and then on another, then first deattach
+                                    player.SetSharedData("INVISIBLE", true); // Your variable from your invisibility system so that players do not see the nickname over their heads
                                     player.SetData("spmode", true);
                                     player.SetData("spclient", target.Value);
                                     player.Transparency = 0; // Сначала устанавливаем игроку полную прозрачность, а только потом телепортируем к игроку
                                     player.Dimension = target.Dimension;
                                     player.Position = new Vector3(target.Position.X, target.Position.Y, (target.Position.Z + 3)); // Сначала телепортируем к игроку, чтобы он загрузился
                                     NAPI.ClientEvent.TriggerClientEvent(player, "spmode", target, true); // И только потом аттачим админа к игроку
-                                    player.SendChatMessage("Вы наблюдаете за " + target.Name + " [ID: " + target.Value + "].");
+                                    player.SendChatMessage("Are you watching " + target.Name + " [ID: " + target.Value + "].");
                                 }
                             }
-                            else player.SendChatMessage("Игрок под данным ID еще не авторизовался.");
+                            else player.SendChatMessage("The player with this ID has not logged in yet.");
                         }
                     }
-                    else player.SendChatMessage("Игрок под ID " + id + " отсутствует.");
+                    else player.SendChatMessage("Player ID " + id + " absent.");
                 }
-                else player.SendChatMessage("ID игрока недействительно (меньше 0 или больше количества слотов).");
+                else player.SendChatMessage("Player ID is invalid (less than 0 or more slots).");
             }
         }
 
@@ -91,10 +91,10 @@ namespace NeptuneEvo.Core
                         player.Transparency = 255;
                         player.SetSharedData("INVISIBLE", false); // Включаем видимость ника и отключаем отображение хп всех игроков рядом
                         player.SetData("spmode", false);
-                        player.SendChatMessage("Вы вышли из режима наблюдателя.");
+                        player.SendChatMessage("You are out of spectator mode.");
                     });
                 }
-                else player.SendChatMessage("Вы не находитесь в режиме наблюдателя.");
+                else player.SendChatMessage("You are not in spectator mode.");
             }
         }
     }
