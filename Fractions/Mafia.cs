@@ -23,10 +23,10 @@ namespace NeptuneEvo.Fractions
         [ServerEvent(Event.ResourceStart)]
         public void Event_ResourceStart()
         {
-            NAPI.TextLabel.CreateTextLabel("~r~Руслан Антонов", new Vector3(-113.9224, 985.793, 236.754), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
-            NAPI.TextLabel.CreateTextLabel("~r~Алмаст Измалов", new Vector3(-1811.368, 438.4105, 129.7074), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
-            NAPI.TextLabel.CreateTextLabel("~r~Рамон Гертруда", new Vector3(-1549.287, -89.35114, 55.92917), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
-            NAPI.TextLabel.CreateTextLabel("~r~Бьянки Эспозито", new Vector3(1392.098, 1155.892, 115.4433), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
+            NAPI.TextLabel.CreateTextLabel("~r~Ruslan Antonov", new Vector3(-113.9224, 985.793, 236.754), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
+            NAPI.TextLabel.CreateTextLabel("~r~Almast Izmalov ", new Vector3(-1811.368, 438.4105, 129.7074), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
+            NAPI.TextLabel.CreateTextLabel("~r~Ramon Gertrude ", new Vector3(-1549.287, -89.35114, 55.92917), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
+            NAPI.TextLabel.CreateTextLabel("~r~Bianchi Esposito", new Vector3(1392.098, 1155.892, 115.4433), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
 
             foreach (var point in EnterPoints)
             {

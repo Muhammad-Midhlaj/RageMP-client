@@ -40,83 +40,83 @@ namespace NeptuneEvo.Fractions
                     NAPI.Marker.CreateMarker(1, vec - new Vector3(0, 0, 0.7), new Vector3(), new Vector3(), 1f, new Color(0, 255, 255));
                 }
 
-                NAPI.TextLabel.CreateTextLabel("~g~Steve Hain", new Vector3(149.1317, -758.3485, 243.152), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
-                NAPI.TextLabel.CreateTextLabel("~g~Michael Bisping", new Vector3(120.0836, -726.7773, 243.152), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
+                NAPI.TextLabel.CreateTextLabel("~r~Steve Hain", new Vector3(149.1317, -758.3485, 243.152), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
+                NAPI.TextLabel.CreateTextLabel("~r~Michael Bisping", new Vector3(120.0836, -726.7773, 243.152), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
 
                 #region cols
                 Cols.Add(0, NAPI.ColShape.CreateCylinderColShape(fbiCheckpoints[0], 1, 2, 0)); // duty fbi
                 Cols[0].SetData("INTERACT", 20);
                 Cols[0].OnEntityEnterColShape += fbiShape_onEntityEnterColShape;
                 Cols[0].OnEntityExitColShape += fbiShape_onEntityExitColShape;
-                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~g~Press E to change clothes"), new Vector3(fbiCheckpoints[0].X, fbiCheckpoints[0].Y, fbiCheckpoints[0].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
+                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~r~Press E to change clothes"), new Vector3(fbiCheckpoints[0].X, fbiCheckpoints[0].Y, fbiCheckpoints[0].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
 
                 Cols.Add(1, NAPI.ColShape.CreateCylinderColShape(EnterFBI, 1, 2, 0)); // fbi enter
                 Cols[1].SetData("INTERACT", 21);
                 Cols[1].OnEntityEnterColShape += fbiShape_onEntityEnterColShape;
                 Cols[1].OnEntityExitColShape += fbiShape_onEntityExitColShape;
-                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~g~Press E"), new Vector3(EnterFBI.X, EnterFBI.Y, EnterFBI.Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
+                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~r~Press E"), new Vector3(EnterFBI.X, EnterFBI.Y, EnterFBI.Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
                 NAPI.Marker.CreateMarker(21, EnterFBI + new Vector3(0, 0, 0.7), new Vector3(), new Vector3(), 0.8f, new Color(255, 255, 255, 60));
 
                 Cols.Add(2, NAPI.ColShape.CreateCylinderColShape(ExitFBI, 1, 2, 0)); // fbi exit
                 Cols[2].SetData("INTERACT", 22);
                 Cols[2].OnEntityEnterColShape += fbiShape_onEntityEnterColShape;
                 Cols[2].OnEntityExitColShape += fbiShape_onEntityExitColShape;
-                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~g~Press E"), new Vector3(ExitFBI.X, ExitFBI.Y, ExitFBI.Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
+                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~r~Press E"), new Vector3(ExitFBI.X, ExitFBI.Y, ExitFBI.Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
                 NAPI.Marker.CreateMarker(21, ExitFBI + new Vector3(0, 0, 0.7), new Vector3(), new Vector3(), 0.8f, new Color(255, 255, 255, 60));
 
                 Cols.Add(3, NAPI.ColShape.CreateCylinderColShape(fbiCheckpoints[1], 1, 2, 0)); // 49 floor to 53
                 Cols[3].SetData("INTERACT", 23);
                 Cols[3].OnEntityEnterColShape += fbiShape_onEntityEnterColShape;
                 Cols[3].OnEntityExitColShape += fbiShape_onEntityExitColShape;
-                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~g~Press E"), new Vector3(fbiCheckpoints[1].X, fbiCheckpoints[1].Y, fbiCheckpoints[1].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
+                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~r~Press E"), new Vector3(fbiCheckpoints[1].X, fbiCheckpoints[1].Y, fbiCheckpoints[1].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
 
                 Cols.Add(4, NAPI.ColShape.CreateCylinderColShape(fbiCheckpoints[2], 1, 2, 0)); // 49 floor
                 Cols[4].SetData("INTERACT", 26);
                 Cols[4].OnEntityEnterColShape += fbiShape_onEntityEnterColShape;
                 Cols[4].OnEntityExitColShape += fbiShape_onEntityExitColShape;
-                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~g~Press E"), new Vector3(fbiCheckpoints[2].X, fbiCheckpoints[2].Y, fbiCheckpoints[2].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
+                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~r~Press E"), new Vector3(fbiCheckpoints[2].X, fbiCheckpoints[2].Y, fbiCheckpoints[2].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
 
                 Cols.Add(5, NAPI.ColShape.CreateCylinderColShape(fbiCheckpoints[3], 1, 2, 0)); // 53 floor to 49
                 Cols[5].SetData("INTERACT", 27);
                 Cols[5].OnEntityEnterColShape += fbiShape_onEntityEnterColShape;
                 Cols[5].OnEntityExitColShape += fbiShape_onEntityExitColShape;
-                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~g~Press E"), new Vector3(fbiCheckpoints[3].X, fbiCheckpoints[3].Y, fbiCheckpoints[3].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
+                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~r~Press E"), new Vector3(fbiCheckpoints[3].X, fbiCheckpoints[3].Y, fbiCheckpoints[3].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
 
                 Cols.Add(6, NAPI.ColShape.CreateCylinderColShape(fbiCheckpoints[4], 1, 2, 0)); // roof
                 Cols[6].SetData("INTERACT", 23);
                 Cols[6].OnEntityEnterColShape += fbiShape_onEntityEnterColShape;
                 Cols[6].OnEntityExitColShape += fbiShape_onEntityExitColShape;
-                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~g~Press E"), new Vector3(fbiCheckpoints[4].X, fbiCheckpoints[4].Y, fbiCheckpoints[4].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
+                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~r~Press E"), new Vector3(fbiCheckpoints[4].X, fbiCheckpoints[4].Y, fbiCheckpoints[4].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
 
                 Cols.Add(7, NAPI.ColShape.CreateCylinderColShape(fbiCheckpoints[5], 1, 2, 0)); // gun menu
                 Cols[7].SetData("INTERACT", 24);
                 Cols[7].OnEntityEnterColShape += fbiShape_onEntityEnterColShape;
                 Cols[7].OnEntityExitColShape += fbiShape_onEntityExitColShape;
-                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~g~Press E to open gun menu"), new Vector3(fbiCheckpoints[5].X, fbiCheckpoints[5].Y, fbiCheckpoints[5].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
+                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~r~Press E to open gun menu"), new Vector3(fbiCheckpoints[5].X, fbiCheckpoints[5].Y, fbiCheckpoints[5].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
 
                 Cols.Add(8, NAPI.ColShape.CreateCylinderColShape(fbiCheckpoints[6], 1, 2, 0)); // 1 floor
                 Cols[8].SetData("INTERACT", 23);
                 Cols[8].OnEntityEnterColShape += fbiShape_onEntityEnterColShape;
                 Cols[8].OnEntityExitColShape += fbiShape_onEntityExitColShape;
-                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~g~Press E"), new Vector3(fbiCheckpoints[6].X, fbiCheckpoints[6].Y, fbiCheckpoints[6].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
+                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~r~Press E"), new Vector3(fbiCheckpoints[6].X, fbiCheckpoints[6].Y, fbiCheckpoints[6].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
 
                 Cols.Add(9, NAPI.ColShape.CreateCylinderColShape(fbiCheckpoints[7], 1, 2, 0)); // garage
                 Cols[9].SetData("INTERACT", 23);
                 Cols[9].OnEntityEnterColShape += fbiShape_onEntityEnterColShape;
                 Cols[9].OnEntityExitColShape += fbiShape_onEntityExitColShape;
-                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~g~Press E"), new Vector3(fbiCheckpoints[7].X, fbiCheckpoints[7].Y, fbiCheckpoints[7].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
+                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~r~Press E"), new Vector3(fbiCheckpoints[7].X, fbiCheckpoints[7].Y, fbiCheckpoints[7].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
 
                 Cols.Add(10, NAPI.ColShape.CreateCylinderColShape(fbiCheckpoints[8], 1, 2, 0)); // warg
                 Cols[10].SetData("INTERACT", 46);
                 Cols[10].OnEntityEnterColShape += fbiShape_onEntityEnterColShape;
                 Cols[10].OnEntityExitColShape += fbiShape_onEntityExitColShape;
-                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~g~Press E to change SWAT clothes"), new Vector3(fbiCheckpoints[8].X, fbiCheckpoints[8].Y, fbiCheckpoints[8].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
+                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~r~Press E to change SWAT clothes"), new Vector3(fbiCheckpoints[8].X, fbiCheckpoints[8].Y, fbiCheckpoints[8].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
 
                 Cols.Add(11, NAPI.ColShape.CreateCylinderColShape(fbiCheckpoints[9], 1, 2, 0)); // stock
                 Cols[11].SetData("INTERACT", 61);
                 Cols[11].OnEntityEnterColShape += fbiShape_onEntityEnterColShape;
                 Cols[11].OnEntityExitColShape += fbiShape_onEntityExitColShape;
-                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~g~Open gun stock"), new Vector3(fbiCheckpoints[9].X, fbiCheckpoints[9].Y, fbiCheckpoints[9].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
+                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~r~Open gun stock"), new Vector3(fbiCheckpoints[9].X, fbiCheckpoints[9].Y, fbiCheckpoints[9].Z + 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
                 #endregion
             }
             catch (Exception e) { Log.Write("ResourceStart: " + e.Message, nLog.Type.Error); }

@@ -118,16 +118,16 @@ namespace NeptuneEvo.Fractions
             if (!Main.Players.ContainsKey(player)) return;
             if (!player.IsInVehicle || !player.Vehicle.HasData("CANDRUGS"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы должны находиться в машине, которая может перевозить drugs", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You must be in a vehicle that can carry drugs", 3000);
                 return;
             }
             if (Fractions.Manager.FractionTypes[Main.Players[player].FractionID] != 1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не можете закупать drugs", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You cannot purchase drugs", 3000);
                 return;
             }
             if (!Fractions.Manager.canUseCommand(player, "buydrugs")) return;
-            Trigger.ClientEvent(player, "openInput", "Закупить drugs", $"Введите кол-во:", 4, "buy_drugs");
+            Trigger.ClientEvent(player, "openInput", "Purchase drugs ", $" Enter quantity:", 4, "buy_drugs");
         }
 
         public static void BuyDrugs(Player player, int amount)
@@ -135,12 +135,12 @@ namespace NeptuneEvo.Fractions
             if (!Main.Players.ContainsKey(player)) return;
             if (!player.IsInVehicle || !player.Vehicle.HasData("CANDRUGS"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы должны находиться в машине, которая может перевозить drugs", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You must be in a car that can carry drugs", 3000);
                 return;
             }
             if (Fractions.Manager.FractionTypes[Main.Players[player].FractionID] != 1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не можете закупать drugs", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You cannot purchase drugs", 3000);
                 return;
             }
             if (!Fractions.Manager.canUseCommand(player, "buydrugs")) return;
@@ -148,19 +148,19 @@ namespace NeptuneEvo.Fractions
             var tryAdd = VehicleInventory.TryAdd(player.Vehicle, new nItem(ItemType.Drugs, amount));
             if (tryAdd == -1 || tryAdd > 0)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Недостаточно места в машине", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Not enough space in the car", 3000);
                 return;
             }
             if (Fractions.Stocks.fracStocks[Main.Players[player].FractionID].Money < amount * PricePerDrug)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Недостаточно средств на складе банды", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Not enough funds in the gang warehouse", 3000);
                 return;
             }
 
             VehicleInventory.Add(player.Vehicle, new nItem(ItemType.Drugs, amount));
             Fractions.Stocks.fracStocks[Main.Players[player].FractionID].Money -= amount * PricePerDrug;
 
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы закупили {amount}г наркотиков", 3000);
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You bought {amount} g of drugs", 3000);
         }
     }
 }

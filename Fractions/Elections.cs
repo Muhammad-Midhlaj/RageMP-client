@@ -59,8 +59,8 @@ namespace NeptuneEvo.Fractions
                 if (!Main.Players.ContainsKey(player)) return;
                 if (Main.Players[player].LVL < minVoteLVL)
                 {
-                    player.SendChatMessage($"Ваш уровень должен быть не менее {minVoteLVL}LVL!");
-                    Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, $"Ваш уровень должен быть не менее {minVoteLVL}LVL!", 3000);
+                    player.SendChatMessage($"Your level must be at least {minVoteLVL}LVL!");
+                    Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, $"Your level must be at least {minVoteLVL}LVL!", 3000);
                     return;
                 }
                 for (int i = 0; i != ElectionPointsList.Count; i++)
@@ -79,19 +79,19 @@ namespace NeptuneEvo.Fractions
                                         if (ElectionList[l].Election == ElectionPointsList[i].Election)
                                         {
                                             Console.Write("Menu open");
-                                            Trigger.ClientEvent(player, "openelem", ElectionList[l].Name); // Первый итем добавляется вместе с созданием самой меню natifveui, иначе рандомно случается краш, не у всех и не всегда
+                                            Trigger.ClientEvent(player, "openelem", ElectionList[l].Name); // The first item is added along with the creation of the natifveui menu itself, otherwise a crash happens randomly, not for everyone and not always
                                             second = l + 1;
                                             break;
                                         }
                                     }
                                     for (int l = second; l != ElectionList.Count; l++)
                                     {
-                                        if (ElectionList[l].Election == ElectionPointsList[i].Election) Trigger.ClientEvent(player, "addcandidate", ElectionList[l].Name); // Добавление всех остальных кандидатов к текущей менюшке
+                                        if (ElectionList[l].Election == ElectionPointsList[i].Election) Trigger.ClientEvent(player, "addcandidate", ElectionList[l].Name); // Adding all other candidates to the current menu
                                     }
                                 }
-                                else player.SendChatMessage("Вы уже голосовали с данного аккаунта в этих выборах.");
+                                else player.SendChatMessage("You have already voted with this account in this election.");
                             }
-                            else player.SendChatMessage("Кандидатов для этих выборов не найдено.");
+                            else player.SendChatMessage("No candidates were found for this election.");
                         }
                         break;
                     }
@@ -107,7 +107,7 @@ namespace NeptuneEvo.Fractions
         {
             if (!Main.Players.ContainsKey(player)) return;
             if (Main.Players[player].AdminLVL < 6) return;
-            Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, "Перезагрузка данных...", 3000);
+            Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, "Reloading data ...", 3000);
             for (int l = 0; l != ElectionPointsList.Count; l++)
             {
                 if (ElectionPointsList[l].Opened)
@@ -159,7 +159,7 @@ namespace NeptuneEvo.Fractions
                         if (point.Opened)
                         {
                             point.Point = NAPI.ColShape.CreateSphereColShape(point.Position, 2f, point.Dimension);
-                            point.Info = NAPI.TextLabel.CreateTextLabel("Точка голосования\nВыборов №" + point.Election, new Vector3(point.Position.X, point.Position.Y, point.Position.Z + 1), 10f, 1f, 0, new Color(255, 255, 255), dimension: point.Dimension);
+                            point.Info = NAPI.TextLabel.CreateTextLabel("Voting point \n Elections #" + point.Election, new Vector3(point.Position.X, point.Position.Y, point.Position.Z + 1), 10f, 1f, 0, new Color(255, 255, 255), dimension: point.Dimension);
                         }
                     }
                 }
@@ -217,9 +217,9 @@ namespace NeptuneEvo.Fractions
                 for (int i = 0; i != ElectionPointsList.Count; i++)
                 {
                     if (player.Position.DistanceTo(ElectionPointsList[i].Position) <= 2)
-                    { // Лучше проверять на дистанцию, чтобы игроки могли голосовать только около точки.
+                    { // Better to check for distance so that players can only vote near the dot.
                         if (ElectionPointsList[i].Opened)
-                        { // Проверка на то, открыто ли еще голосование, чтобы не добавлять голоса после того, как выборы закончились, а игрок не успел выбрать.
+                        { // Check if the vote is still open, so as not to add votes after the elections are over, and the player has not had time to choose.
                             for (int l = 0; l != ElectionList.Count; l++)
                             {
                                 if (ElectionList[l].Election == ElectionPointsList[i].Election)
@@ -250,10 +250,10 @@ namespace NeptuneEvo.Fractions
                                         });
 
                                         GameLog.Votes(ElectionList[l].Election, Main.Accounts[player].Login, Name);
-                                        player.SendChatMessage($"Вы сделали свой голос на выборах № {ElectionList[l].Election} в пользу {Name}");
+                                        player.SendChatMessage($"You made your vote in election no. {ElectionList[l].Election} in favor {Name}");
 
                                         Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter,
-                                            $"Вы сделали свой голос на выборах № {ElectionList[l].Election} в пользу {Name}", 3000);
+                                            $"You made your vote in election no. {ElectionList[l].Election} in favor {Name}", 3000);
                                         break;
                                     }
                                 }
@@ -270,7 +270,7 @@ namespace NeptuneEvo.Fractions
         }
 
         private static bool CheckPlayerVoted(string login, uint election)
-        { // Проверка на то, голосовал ли уже в этих выборах
+        { // Checking whether he has already voted in this election
             try
             {
                 foreach(Voter v in Voters)
@@ -286,7 +286,7 @@ namespace NeptuneEvo.Fractions
             {
                 Log.Write(e.ToString(), nLog.Type.Error);
             }
-            return true; // Если таблица voted не доступна по какой-либо причине, то игрок получит 'Вы уже голосовали на этих выборах', дабы не было сбоев.
+            return true; // If the voted table is not available for any reason, then the player will receive 'You have already voted in this election' so that there are no failures.
         }
 
         [Command("election_addpoint")]
@@ -297,8 +297,8 @@ namespace NeptuneEvo.Fractions
 
             if(ElectionList.Find(x => x.Election == ElectionID) != null)
             {
-                client.SendChatMessage("Такой Election уже существует!");
-                Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, "Такой Election уже существует!", 3000);
+                client.SendChatMessage("Such an Election already exists!");
+                Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, "Such an Election already exists!", 3000);
                 return;
             }
 

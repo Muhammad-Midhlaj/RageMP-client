@@ -269,7 +269,7 @@ namespace NeptuneEvo.Fractions
                 Timers.Stop(player.GetData<string>("loadMatsTimer"));
                 player.ResetData("loadMatsTimer");
                 Trigger.ClientEvent(player, "hideLoader");
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Загрузка материалов отменена, так как машина покинула чекпоинт", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Loading materials canceled because the car left the checkpoint", 3000);
             }
         }
 

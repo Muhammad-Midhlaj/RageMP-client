@@ -17,10 +17,10 @@ namespace NeptuneEvo.Fractions
         private static Dictionary<int, ColShape> Cols = new Dictionary<int, ColShape>();
         public static List<Vector3> Coords = new List<Vector3>
         {
-            new Vector3(1571.831, 2240.648, 78.40011), // Колшэйп входа в бункер
-            new Vector3(2154.641, 2921.034, -62.82243), // Колшэйп изнутри интерьера для телепорта наверх
-            new Vector3(2033.842, 2942.104, -62.82434), // Колшэйп входа на другой этаж
-            new Vector3(2155.425, 2921.066, -81.99551), // Колшэйп изнутри этажа, чтобы вернуться назад
+            new Vector3(1571.831, 2240.648, 78.40011), // Bunker Entrance Coleshape
+            new Vector3(2154.641, 2921.034, -62.82243), //Coleshape from inside the interior for the teleport naveрх
+            new Vector3(2033.842, 2942.104, -62.82434), //Coleshape entrance to another floor
+            new Vector3(2155.425, 2921.066, -81.99551), //Coleshape from inside the floor to go back
         };
 
         [ServerEvent(Event.ResourceStart)]
@@ -88,12 +88,12 @@ namespace NeptuneEvo.Fractions
                     if (player.IsInVehicle) return;
                     if (player.HasData("FOLLOWING"))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вас кто-то тащит за собой", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Someone drags you along", 3000);
                         return;
                     }
                     if(Main.Players[player].FractionID != 17)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не состоите в Merryweather", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You are not a member of Merryweather", 3000);
                         return;
                     }
                     if(interact == 82) NAPI.Entity.SetEntityPosition(player, Coords[1] + new Vector3(0, 0, 1.12));

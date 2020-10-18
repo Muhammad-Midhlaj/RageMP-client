@@ -80,7 +80,7 @@ namespace NeptuneEvo.Fractions
             if (!Manager.canUseCommand(player, "takebiz")) return;
             if (player.GetData<int>("BIZ_ID") == -1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не находитесь ни на одном из бизнесов", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not in any of the businesses", 3000);
                 return;
             }
             Business biz = BusinessManager.BizList[player.GetData<int>("BIZ_ID")];
@@ -94,23 +94,23 @@ namespace NeptuneEvo.Fractions
             if (!Manager.canUseCommand(player, "bizwar")) return;
             if (player.GetData<int>("BIZ_ID") == -1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не находитесь ни на одном из бизнесов", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not in any of the businesses", 3000);
                 return;
             }
             Business biz = BusinessManager.BizList[player.GetData<int>("BIZ_ID")];
             if (biz.Mafia == Main.Players[player].FractionID)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не можете начать войну за свой бизнес", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You cannot start a war for your business", 3000);
                 return;
             }
             if (biz.Mafia == -1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Бизнес не принадлежит ни одной мафии", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The business is not owned by any mafia", 3000);
                 return;
             }
             if (DateTime.Now.Hour < 13 || DateTime.Now.Hour > 23)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы можете начать войну с 13:00 до 23:00", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You can start a war from 13:00 to 23:00", 3000);
                 return;
             }
             if (DateTime.Now < nextCaptDate[Main.Players[player].FractionID])
@@ -118,7 +118,7 @@ namespace NeptuneEvo.Fractions
                 DateTime g = new DateTime((nextCaptDate[Main.Players[player].FractionID] - DateTime.Now).Ticks);
                 var min = g.Minute;
                 var sec = g.Second;
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы сможете начать войну только через {min}:{sec}", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You can only start a war after {min}:{sec}", 3000);
                 return;
             }
             if (DateTime.Now < protectDate[biz.Mafia])
@@ -126,26 +126,26 @@ namespace NeptuneEvo.Fractions
                 DateTime g = new DateTime((protectDate[biz.Mafia] - DateTime.Now).Ticks);
                 var min = g.Minute;
                 var sec = g.Second;
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы сможете начать войну с этой мафией только через {min}:{sec}", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You can only start a war with this mafia after {min}:{sec}", 3000);
                 return;
             }
             if (Manager.countOfFractionMembers(biz.Mafia) < 4)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Недостаточный онлайн в мафии противника", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Insufficient online in the enemy mafia ", 3000);
                 return;
             }
             if (smbTryCapture) return;
             smbTryCapture = true;
             if (warIsGoing || warStarting)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Война за территорию уже идёт", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The war for territory is already underway ", 3000);
                 smbTryCapture = false;
                 return;
             }
             var ter = Jobs.WorkManager.rnd.Next(0, 5);
             warBlips[ter].Color = 49;
-            Manager.sendFractionMessage(biz.Mafia, $"Ахтунг! У нас есть 20 минут на сборы! {Manager.getName(Main.Players[player].FractionID)} решили отхватить наш бизнес");
-            Manager.sendFractionMessage(Main.Players[player].FractionID, "Стреляй! Отжимай! Примерно через 20 минут подлетят противники");
+            Manager.sendFractionMessage(biz.Mafia, $"Ahtung! We have 20 minutes to get ready! {Manager.getName(Main.Players[player].FractionID)} решили отхватить наш бизнес");
+            Manager.sendFractionMessage(Main.Players[player].FractionID, "Shoot! Wring it out! In about 20 minutes, opponents will fly up");
             
             timerCount = 0;
             bizID = biz.ID;
@@ -190,8 +190,8 @@ namespace NeptuneEvo.Fractions
             warStarting = false;
             warIsGoing = true;
 
-            Manager.sendFractionMessage(biz.Mafia, $"Ахтунг! На нас напали! {Manager.getName(attackersFracID)} решили отхватить наш бизнес");
-            Manager.sendFractionMessage(attackersFracID, "Стреляй! Отжимай! Вы начали войну за бизнес");
+            Manager.sendFractionMessage(biz.Mafia, $"Ahtung! We were attacked! {Manager.getName (attackersFracID)} decided to take over our business ");
+            Manager.sendFractionMessage(attackersFracID, "Shoot! Push! You've started a war for business.");
         }
 
         private static void timerUpdate()
@@ -244,8 +244,8 @@ namespace NeptuneEvo.Fractions
                 protectDate[attackersFracID] = DateTime.Now.AddMinutes(20);
                 if (attackersSt <= defendersSt)
                 {
-                    Manager.sendFractionMessage(biz.Mafia, $"Обсосы сбежали! Вы дали им под хвост! Вы отстояли бизнес");
-                    Manager.sendFractionMessage(attackersFracID, "Вы лохонулись! Враги были сильнее! Вы не смогли захватить бизнес");
+                    Manager.sendFractionMessage(biz.Mafia, $"The suckers escaped! You gave them a go! You defended the business.");
+                    Manager.sendFractionMessage(attackersFracID, "You are lost! The enemies were stronger! You have failed to take over the business ");
 
                     foreach (var m in Manager.Members.Keys)
                     {
@@ -258,8 +258,8 @@ namespace NeptuneEvo.Fractions
                 }
                 else if (attackersSt > defendersSt)
                 {
-                    Manager.sendFractionMessage(biz.Mafia, $"Вы прошляпили бизнес..");
-                    Manager.sendFractionMessage(attackersFracID, "Шугнули их как детей! Вы захватили бизнес!");
+                    Manager.sendFractionMessage(biz.Mafia, $"You screwed up the business ..");
+                    Manager.sendFractionMessage(attackersFracID, "They were shocked like children! You have taken over the business!");
                     biz.Mafia = attackersFracID;
                     foreach (var m in Manager.Members.Keys)
                     {

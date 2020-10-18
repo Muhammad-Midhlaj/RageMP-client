@@ -221,13 +221,13 @@ namespace NeptuneEvo.Fractions
 
                 if (Main.Players[sender].Unmute > 0)
                 {
-                    Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы замучены еще на {Main.Players[sender].Unmute / 60} минут", 3000);
+                    Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, $"You are tortured for another {Main.Players[sender].Unmute / 60} minutes", 3000);
                     return;
                 }
 
                 int Fraction = Main.Players[sender].FractionID;
                 if (!Members.ContainsKey(sender)) return;
-                string msgSender = $"~b~[Рация] {Members[sender].inFracName} " + sender.Name.ToString().Replace('_', ' ') + " (" + sender.Value + "): " + message;
+                string msgSender = $"~g~[Рация] {Members[sender].inFracName} " + sender.Name.ToString().Replace('_', ' ') + " (" + sender.Value + "): " + message;
                 var fracid = Main.Players[sender].FractionID;
                 foreach (var p in NAPI.Pools.GetAllPlayers())
                 {
@@ -265,7 +265,7 @@ namespace NeptuneEvo.Fractions
             if (!canUseCommand(sender, "dep")) return;
             if (Main.Players[sender].Unmute > 0)
             {
-                Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы замучены еще на {Main.Players[sender].Unmute / 60} минут", 3000);
+                Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, $" {Main.Players[sender].Unmute / 60} minutes", 3000);
                 return;
             }
             int Fraction = Main.Players[sender].FractionID;
@@ -438,7 +438,7 @@ namespace NeptuneEvo.Fractions
             if (fraclvl < minrank)
             {
                 if (notify)
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Нет доступа", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"No access", 3000);
                 return false;
             }
             else return true;
@@ -459,7 +459,7 @@ namespace NeptuneEvo.Fractions
             if (fraclvl < minrank)
             {
                 if (notify)
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Нет доступа", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"No access", 3000);
                 return false;
             }
             else return true;
@@ -1102,14 +1102,14 @@ namespace NeptuneEvo.Fractions
                 DateTime g = new DateTime((date - DateTime.Now).Ticks);
                 var min = g.Minute;
                 var sec = g.Second;
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы сможете взять {gun.ToString()} через {min}:{sec}", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You can take {gun.ToString()} across {min}:{sec}", 3000);
                 return;
             }
 
             var frac = Main.Players[player].FractionID;
             if (Configs.FractionWeapons[frac].ContainsKey(weaponstr) && Main.Players[player].FractionLVL < Configs.FractionWeapons[frac][weaponstr])
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не имеете доступа к данному виду оружия", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You do not have access to this type of weapon", 3000);
                 return;
             }
             if (Stocks.fracStocks[Main.Players[player].FractionID].Materials < matsForGun[gun])
@@ -1121,7 +1121,7 @@ namespace NeptuneEvo.Fractions
             var wType = (ItemType)Enum.Parse(typeof(ItemType), gun.ToString());
             if (nInventory.TryAdd(player, new nItem(wType)) == -1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Недостаточно места в инвентаре", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Insufficient space in inventory", 3000);
                 return;
             }
 
@@ -1136,7 +1136,7 @@ namespace NeptuneEvo.Fractions
             player.SetData($"GET_{gun.ToString()}", DateTime.Now.AddMinutes(minutes));
 
             GameLog.Stock(Main.Players[player].FractionID, Main.Players[player].UUID, $"{gun.ToString()}({serial})", 1, false);
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы получили {wType.ToString()}", 3000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You received {wType.ToString()}", 3000);
             return;
         }
 
@@ -1153,7 +1153,7 @@ namespace NeptuneEvo.Fractions
             var tryAdd = nInventory.TryAdd(player, new nItem(ammoType, ammo));
             if (tryAdd == -1 || tryAdd > 0)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Недостаточно места в инвентаре", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Insufficient space in inventory", 3000);
                 return;
             }
 
@@ -1162,7 +1162,7 @@ namespace NeptuneEvo.Fractions
 
             nInventory.Add(player, new nItem(ammoType, ammo));
             GameLog.Stock(Main.Players[player].FractionID, Main.Players[player].UUID, ammoType.ToString(), 1, false);
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы получили {nInventory.ItemsNames[(int)ammoType]} x{ammo}", 3000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You received {nInventory.ItemsNames[(int)ammoType]} x{ammo}", 3000); // TODO: POSSIBLE ERROR HERE
             return;
         }
 
@@ -1200,7 +1200,7 @@ namespace NeptuneEvo.Fractions
 
             if (FractionTypes[fracid] == -1 || FractionTypes[fracid] == 2)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не умеете крафтить оружие", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You can't craft weapons", 3000);
                 return;
             }
             else if (FractionTypes[fracid] == 1) list = gangGuns;
@@ -1235,14 +1235,14 @@ namespace NeptuneEvo.Fractions
                 string selected = list[cat][index];
                 if (FractionTypes[frac] == -1 || FractionTypes[frac] == 2)
                 {
-                    Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не умеете крафтить оружие", 3000);
+                    Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, "You can't craft weapons", 3000);
                     return;
                 }
                 var mItem = nInventory.Find(Main.Players[client].UUID, ItemType.Material);
                 var count = (mItem == null) ? 0 : mItem.Count;
                 if (count < matsForGun[Weapons.GetHash(selected)])
                 {
-                    Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, "У Вас недостаточно материала", 3000);
+                    Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, "You don't have enough material", 3000);
                     return;
                 }
 
@@ -1250,7 +1250,7 @@ namespace NeptuneEvo.Fractions
                 var tryAdd = nInventory.TryAdd(client, new nItem(wType, 1));
                 if (tryAdd == -1 || tryAdd > 0)
                 {
-                    Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, "Недостаточно места в инвентаре", 3000);
+                    Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, "Insufficient inventory space", 3000);
                     return;
                 }
 
@@ -1259,7 +1259,7 @@ namespace NeptuneEvo.Fractions
                     nInventory.Add(client, new nItem(ItemType.BodyArmor, 1, $"50"));
                 else
                     Weapons.GiveWeapon(client, wType, Weapons.GetSerial(true, frac));
-                Notify.Send(client, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы скрафтили {selected} за {matsForGun[Weapons.GetHash(selected)]} матов", 3000);
+                Notify.Send(client, NotifyType.Info, NotifyPosition.BottomCenter, $"You crafted {selected} for {matsForGun[Weapons.GetHash(selected)]} mats", 3000);
             }
             catch (Exception e)
             {
@@ -1281,7 +1281,7 @@ namespace NeptuneEvo.Fractions
 
                 if (ammo == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не указали количество патрон", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You have not specified the number of rounds", 3000);
                     return;
                 }
 
@@ -1289,20 +1289,20 @@ namespace NeptuneEvo.Fractions
                 var matsCount = (matsItem == null) ? 0 : matsItem.Count;
                 if (matsCount < MatsForAmmo[category] * ammo)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас недостаточно материалов", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't have enough materials", 3000);
                     return;
                 }
 
                 var tryAdd = nInventory.TryAdd(player, new nItem(AmmoTypes[category], ammo));
                 if (tryAdd == -1 || tryAdd > 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Недостаточно места в инвентаре", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Insufficient inventory space", 3000);
                     return;
                 }
 
                 nInventory.Remove(player, ItemType.Material, MatsForAmmo[category] * ammo);
                 nInventory.Add(player, new nItem(AmmoTypes[category], ammo));
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы успешно скрафтили {nInventory.ItemsNames[(int)AmmoTypes[category]]} x{ammo}", 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You have successfully crafted {nInventory.ItemsNames[(int)AmmoTypes[category]]} x{ammo}", 3000);
             }
             catch (Exception e) { Log.Write(e.ToString(), nLog.Type.Error); }
         }
@@ -1412,7 +1412,7 @@ namespace NeptuneEvo.Fractions
                             Player target = NAPI.Player.GetPlayerFromName(data1);
                             if (target == null)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок с таким именем не найден", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"No player with this name found", 3000);
                                 return;
                             }
                             FractionCommands.InviteToFraction(player, target);
@@ -1433,7 +1433,7 @@ namespace NeptuneEvo.Fractions
                         {
                             if (!Main.PlayerNames.ContainsValue(data1))
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок с таким именем не найден", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"No player with this name was found", 3000);
                                 return;
                             }
                             Player target = NAPI.Player.GetPlayerFromName(data1);
@@ -1455,16 +1455,16 @@ namespace NeptuneEvo.Fractions
 
                                 if (targetFrac != Main.Players[player].FractionID)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок не состоит в Вашей фракции", 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The player is not in your faction", 3000);
                                     return;
                                 }
                                 if (targetLvl >= Main.Players[player].FractionLVL)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не можете уволить этого игрока", 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You cannot fire this player", 3000);
                                     return;
                                 }
                                 MySQL.Query($"UPDATE `characters` SET fraction=0,fractionlvl=0 WHERE firstname='{split[0]}' AND lastname='{split[1]}'");
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы уволили игрока {data1} из Вашей фракции", 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You fired a player {data1} from your faction", 3000);
 
                                 int index = Fractions.Manager.AllMembers.FindIndex(m => m.Name == data1);
                                 if (index > -1) Manager.AllMembers.RemoveAt(index);
@@ -1477,7 +1477,7 @@ namespace NeptuneEvo.Fractions
                     case 4: //change
                         if (!Int32.TryParse(data2, out rank))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Введите корректные данные", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Enter correct data", 3000);
                             return;
                         }
                         if (Int32.TryParse(data1, out id))
@@ -1495,7 +1495,7 @@ namespace NeptuneEvo.Fractions
                             Player target = NAPI.Player.GetPlayerFromName(data1);
                             if (target == null)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок с таким именем не найден", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"No player with this name was found", 3000);
                                 return;
                             }
                             FractionCommands.SetFracRank(player, target, rank);
@@ -1606,7 +1606,7 @@ namespace NeptuneEvo.Fractions
                     colshape.OnEntityEnterColShape += enterStockShape;
                     colshape.OnEntityExitColShape += exitStockShape;
                     NAPI.Marker.CreateMarker(1, stockCoords[id] - new Vector3(0, 0, 0.7), new Vector3(), new Vector3(), 1f, new Color(227, 252, 252, 220));
-                    NAPI.TextLabel.CreateTextLabel(Main.StringToU16($"~b~Склад {Manager.getName(id)}"), new Vector3(stockCoords[id].X, stockCoords[id].Y, stockCoords[id].Z + 0.6), 5F, 0.5F, 0, new Color(227, 252, 252));
+                    NAPI.TextLabel.CreateTextLabel(Main.StringToU16($"~b~Storage {Manager.getName(id)}"), new Vector3(stockCoords[id].X, stockCoords[id].Y, stockCoords[id].Z + 0.6), 5F, 0.5F, 0, new Color(227, 252, 252));
 
                     colshape = NAPI.ColShape.CreateCylinderColShape(garageCoords[id], 5, 8, 0); // garage colshape
                     colshape.SetData("FRACID", id);
@@ -1727,7 +1727,7 @@ namespace NeptuneEvo.Fractions
             foreach (var p in Main.Players.Keys.ToList())
             {
                 if (p == null || !Main.Players.ContainsKey(p)) continue;
-                if (p.HasData("OPENOUT_TYPE") && p.GetData<int>("OPENOUT_TYPE") == 6 && p.HasData("ONFRACSTOCK") && p.GetData<int>("ONFRACSTOCK") == fraction) Dashboard.OpenOut(p, fracStocks[fraction].Weapons, "Склад оружия", 6);
+                if (p.HasData("OPENOUT_TYPE") && p.GetData<int>("OPENOUT_TYPE") == 6 && p.HasData("ONFRACSTOCK") && p.GetData<int>("ONFRACSTOCK") == fraction) Dashboard.OpenOut(p, fracStocks[fraction].Weapons, "Armory", 6);
             }
         }
         public static void Remove(int fraction, nItem item)
@@ -1763,7 +1763,7 @@ namespace NeptuneEvo.Fractions
             foreach (var p in Main.Players.Keys.ToList())
             {
                 if (p == null || !Main.Players.ContainsKey(p)) continue;
-                if (p.HasData("OPENOUT_TYPE") && p.GetData<int>("OPENOUT_TYPE") == 6 && p.HasData("ONFRACSTOCK") && p.GetData<int>("ONFRACSTOCK") == fraction) Dashboard.OpenOut(p, fracStocks[fraction].Weapons, "Склад оружия", 6);
+                if (p.HasData("OPENOUT_TYPE") && p.GetData<int>("OPENOUT_TYPE") == 6 && p.HasData("ONFRACSTOCK") && p.GetData<int>("ONFRACSTOCK") == fraction) Dashboard.OpenOut(p, fracStocks[fraction].Weapons, "Armory", 6);
             }
         }
         public static int GetCountOfType(int fraction, ItemType type)
@@ -1799,7 +1799,7 @@ namespace NeptuneEvo.Fractions
                             if (Main.Players[player].FractionID == 14) maxstock = 250000;
                             if (stockContains + amount > maxstock)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Склад не может вместить такое кол-во материала", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The warehouse cannot accommodate this amount of material", 3000);
                                 return;
                             }
                             playerHave = (nInventory.Find(Main.Players[player].UUID, ItemType.Material) == null) ? 0 : nInventory.Find(Main.Players[player].UUID, ItemType.Material).Count;
@@ -1809,7 +1809,7 @@ namespace NeptuneEvo.Fractions
                             stockContains = data.Drugs;
                             if (stockContains + amount > 10000)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Склад не может вместить такое кол-во наркотиков", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The warehouse cannot accommodate this amount of drugs", 3000);
                                 return;
                             }
                             playerHave = (nInventory.Find(Main.Players[player].UUID, ItemType.Drugs) == null) ? 0 : nInventory.Find(Main.Players[player].UUID, ItemType.Drugs).Count;
@@ -1829,7 +1829,7 @@ namespace NeptuneEvo.Fractions
 
                         if (playerHave < amount)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас нет столько", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't have so many", 3000);
                             return;
                         }
 
@@ -1855,7 +1855,7 @@ namespace NeptuneEvo.Fractions
                             nInventory.Remove(player, ItemType.HealthKit, amount);
                         }
                         GameLog.Stock(Main.Players[player].FractionID, Main.Players[player].UUID, item, amount, true);
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"На складе осталось {stockContains + amount}, у Вас {playerHave - amount}", 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"In stock left {stockContains + amount},you have {playerHave - amount}", 3000);
                         data.UpdateLabel();
                         break;
                     case "take_stock":
@@ -1871,7 +1871,7 @@ namespace NeptuneEvo.Fractions
                             playerHave = (nInventory.Find(Main.Players[player].UUID, ItemType.Material) == null) ? 0 : nInventory.Find(Main.Players[player].UUID, ItemType.Material).Count;
                             if (playerHave + amount > 300)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не можете вместить столько в свой инвентарь", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You cannot fit that much into your inventory", 3000);
                                 return;
                             }
                         }
@@ -1881,7 +1881,7 @@ namespace NeptuneEvo.Fractions
                             playerHave = (nInventory.Find(Main.Players[player].UUID, ItemType.Drugs) == null) ? 0 : nInventory.Find(Main.Players[player].UUID, ItemType.Drugs).Count;
                             if (playerHave + amount > 50)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не можете вместить столько в свой инвентарь", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You cannot fit that much into your inventory", 3000);
                                 return;
                             }
                         }
@@ -1900,7 +1900,7 @@ namespace NeptuneEvo.Fractions
 
                         if (stockContains < amount)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"На складе столько нет", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"There is not so much in stock", 3000);
                             return;
                         }
 
@@ -1909,7 +1909,7 @@ namespace NeptuneEvo.Fractions
                             var tryAdd = nInventory.TryAdd(player, new nItem(ItemType.Material, amount));
                             if (tryAdd == -1 || tryAdd > 0)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Недостаточно места в инвентаре", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Insufficient inventory space", 3000);
                                 return;
                             }
                             data.Materials -= amount;
@@ -1920,7 +1920,7 @@ namespace NeptuneEvo.Fractions
                             var tryAdd = nInventory.TryAdd(player, new nItem(ItemType.Drugs, amount));
                             if (tryAdd == -1 || tryAdd > 0)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Недостаточно места в инвентаре", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Insufficient inventory space", 3000);
                                 return;
                             }
                             data.Drugs -= amount;
@@ -1937,14 +1937,14 @@ namespace NeptuneEvo.Fractions
                             var tryAdd = nInventory.TryAdd(player, new nItem(ItemType.HealthKit, amount));
                             if (tryAdd == -1 || tryAdd > 0)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Недостаточно места в инвентаре", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Insufficient inventory space", 3000);
                                 return;
                             }
                             data.Medkits -= amount;
                             nInventory.Add(player, new nItem(ItemType.HealthKit, amount));
                         }
                         GameLog.Stock(Main.Players[player].FractionID, Main.Players[player].UUID, item, amount, false);
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"На складе осталось {stockContains - amount}, у Вас {playerHave + amount}", 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"In stock left {stockContains - amount},you have {playerHave + amount}", 3000);
                         data.UpdateLabel();
                         break;
                 }
@@ -1953,13 +1953,13 @@ namespace NeptuneEvo.Fractions
             {
                 if (!player.IsInVehicle)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны находиться в машине", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must be in the car", 3000);
                     return;
                 }
                 var vehicle = player.Vehicle;
                 if (!vehicle.HasData("CANMATS") && !vehicle.HasData("CANDRUGS") && !vehicle.HasData("CANMEDKITS"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Машина не может ничего перевозить", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The car cannot carry anything", 3000);
                     return;
                 }
                 int onfrac = player.GetData<int>("ONFRACSTOCK");
@@ -1968,32 +1968,32 @@ namespace NeptuneEvo.Fractions
                     case "load_mats":
                         if (onfrac != 14 && Main.Players[player].FractionID != onfrac)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не состоите в {Fractions.Manager.getName(player.GetData<int>("ONFRACSTOCK"))}", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not a member {Fractions.Manager.getName(player.GetData<int>("ONFRACSTOCK"))}", 3000);
                             return;
                         }
                         if (onfrac != 14 && !Manager.canUseCommand(player, "takestock")) return;
                         if (fracStocks[onfrac].Materials < amount)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"На складе нет такого кол-ва матов", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"There is no such quantity of mats in stock", 3000);
                             return;
                         }
                         var maxMats = (Fractions.Stocks.maxMats.ContainsKey(vehicle.DisplayName)) ? Fractions.Stocks.maxMats[vehicle.DisplayName] : 600;
                         if (VehicleInventory.GetCountOfType(vehicle, ItemType.Material) + amount > maxMats)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Невозможно загрузить такое кол-во матов", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"It is impossible to load so many mats", 3000);
                             return;
                         }
                         var tryAdd = VehicleInventory.TryAdd(vehicle, new nItem(ItemType.Material, amount));
                         if (tryAdd == -1 || tryAdd > 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Невозможно загрузить такое кол-во матов", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"It is impossible to load so many mats", 3000);
                             return;
                         }
                         var data = new nItem(ItemType.Material);
                         data.Count = amount;
                         VehicleInventory.Add(vehicle, data);
                         fracStocks[onfrac].Materials -= amount;
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы загрузили материалы в машину", 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You have loaded materials into the machine", 3000);
                         fracStocks[onfrac].UpdateLabel();
                         GameLog.Stock(Main.Players[player].FractionID, Main.Players[player].UUID, "mats", amount, false);
                         return;
@@ -2001,45 +2001,45 @@ namespace NeptuneEvo.Fractions
                         var count = VehicleInventory.GetCountOfType(vehicle, ItemType.Material);
                         if (count < amount)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"В машине нет такого кол-ва матов", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"There is no such number of mats in the car", 3000);
                             return;
                         }
                         var maxstock = 50000;
                         if (onfrac == 14) maxstock = 250000;
                         if (fracStocks[onfrac].Materials + amount > maxstock)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Склад не может вместить такое кол-во материала", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The warehouse cannot accommodate this amount of material", 3000);
                             return;
                         }
                         VehicleInventory.Remove(vehicle, ItemType.Material, amount);
                         fracStocks[onfrac].Materials += amount;
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы выгрузили материалы из машины", 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You have unloaded materials from the machine", 3000);
                         fracStocks[onfrac].UpdateLabel();
                         GameLog.Stock(Main.Players[player].FractionID, Main.Players[player].UUID, "mats", amount, true);
                         return;
                     case "load_drugs":
                         if (Main.Players[player].FractionID != onfrac)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не состоите в ~y~{Fractions.Manager.getName(player.GetData<int>("ONFRACSTOCK"))}", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not a member of ~y~{Fractions.Manager.getName(player.GetData<int>("ONFRACSTOCK"))}", 3000);
                             return;
                         }
                         if (!Manager.canUseCommand(player, "takestock")) return;
                         if (fracStocks[onfrac].Drugs < amount)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"На складе нет такого кол-ва наркотиков", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"There is no such amount of drugs in stock", 3000);
                             return;
                         }
                         tryAdd = VehicleInventory.TryAdd(vehicle, new nItem(ItemType.Drugs, amount));
                         if (tryAdd == -1 || tryAdd > 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Невозможно загрузить такое кол-во наркотиков", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"It is impossible to load so many drugs", 3000);
                             return;
                         }
                         data = new nItem(ItemType.Drugs);
                         data.Count = amount;
                         VehicleInventory.Add(vehicle, data);
                         fracStocks[onfrac].Drugs -= amount;
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы загрузили наркотики в машину", 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You loaded drugs into your car", 3000);
                         fracStocks[onfrac].UpdateLabel();
                         GameLog.Stock(Main.Players[player].FractionID, Main.Players[player].UUID, "drugs", amount, false);
                         return;
@@ -2047,24 +2047,24 @@ namespace NeptuneEvo.Fractions
                         count = VehicleInventory.GetCountOfType(vehicle, ItemType.Drugs);
                         if (count < amount)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"В машине нет такого кол-ва наркотиков", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The car has no such amount of drugs", 3000);
                             return;
                         }
                         if (fracStocks[onfrac].Drugs + amount > 10000)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Склад не может вместить такое кол-во наркотиков", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The warehouse cannot accommodate such quantity drugs", 3000);
                             return;
                         }
                         VehicleInventory.Remove(vehicle, ItemType.Drugs, amount);
                         fracStocks[onfrac].Drugs += amount;
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы выгрузили наркотики из машины", 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You unloaded drugs from the car", 3000);
                         fracStocks[onfrac].UpdateLabel();
                         GameLog.Stock(Main.Players[player].FractionID, Main.Players[player].UUID, "drugs", amount, true);
                         return;
                     case "load_medkits":
                         if (Main.Players[player].FractionID != onfrac)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не состоите в {Fractions.Manager.getName(player.GetData<int>("ONFRACSTOCK"))}", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not a member {Fractions.Manager.getName(player.GetData<int>("ONFRACSTOCK"))}", 3000);
                             return;
                         }
                         if (!player.GetData<bool>("ON_DUTY"))
@@ -2074,24 +2074,24 @@ namespace NeptuneEvo.Fractions
                         }
                         if (fracStocks[onfrac].Medkits < amount)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"На складе нет такого кол-ва аптечек", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"There is no such number of first-aid kits in stock", 3000);
                             return;
                         }
                         var maxMedkits = 100;
                         if (VehicleInventory.GetCountOfType(vehicle, ItemType.HealthKit) + amount > maxMedkits)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Невозможно загрузить такое кол-во аптечек", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"It is impossible to load such quantity of first aid kit", 3000);
                             return;
                         }
                         tryAdd = VehicleInventory.TryAdd(vehicle, new nItem(ItemType.HealthKit, amount));
                         if (tryAdd == -1 || tryAdd > 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Невозможно загрузить такое кол-во аптечек", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"It is impossible to load this number of first aid kits", 3000);
                             return;
                         }
                         VehicleInventory.Add(vehicle, new nItem(ItemType.HealthKit, amount));
                         fracStocks[onfrac].Medkits -= amount;
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы загрузили аптечки в машину", 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You loaded first aid kits into your car", 3000);
                         fracStocks[onfrac].UpdateLabel();
                         GameLog.Stock(Main.Players[player].FractionID, Main.Players[player].UUID, "medkits", amount, false);
                         return;
@@ -2104,17 +2104,17 @@ namespace NeptuneEvo.Fractions
                         count = VehicleInventory.GetCountOfType(vehicle, ItemType.HealthKit);
                         if (count < amount)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"В машине нет такого кол-ва аптечек", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"В There is no such number of first aid kits", 3000);
                             return;
                         }
                         if (fracStocks[onfrac].Medkits + amount > 1000)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Склад не может вместить такое кол-во аптечек", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The warehouse cannot accommodate such a number of first aid kits", 3000);
                             return;
                         }
                         VehicleInventory.Remove(vehicle, ItemType.HealthKit, amount);
                         fracStocks[onfrac].Medkits += amount;
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы выгрузили аптечки из машины", 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You unloaded first aid kits from the car", 3000);
                         fracStocks[onfrac].UpdateLabel();
                         GameLog.Stock(Main.Players[player].FractionID, Main.Players[player].UUID, "medkits", amount, true);
                         return;
@@ -2129,19 +2129,19 @@ namespace NeptuneEvo.Fractions
                 case 32:
                     if (!player.IsInVehicle)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны находиться в машине", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must be in the car", 3000);
                         return;
                     }
                     var vehicle = player.Vehicle;
                     if (!vehicle.HasData("CANMATS") && !vehicle.HasData("CANDRUGS") && !vehicle.HasData("CANMEDKITS"))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Машина не может ничего перевозить", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The car cannot carry anything", 3000);
                         return;
                     }
 
                     if (player.GetData<int>("ONFRACSTOCK") == 14 && (DateTime.Now.Hour < 13 && DateTime.Now.Hour > 1))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Склад намертво закрыт", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The warehouse is tightly closed", 3000);
                         return;
                     }
                     else if (!fracStocks[(int)player.GetData<int>("ONFRACSTOCK")].IsOpen && player.GetData<int>("ONFRACSTOCK") != 14)
@@ -2155,7 +2155,7 @@ namespace NeptuneEvo.Fractions
                 case 33:
                     if (Main.Players[player].FractionID != player.GetData<int>("ONFRACSTOCK"))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не состоите в {Manager.getName(player.GetData<int>("ONFRACSTOCK"))}", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not a member {Manager.getName(player.GetData<int>("ONFRACSTOCK"))}", 3000);
                         return;
                     }
                     if (!fracStocks[Main.Players[player].FractionID].IsOpen)
@@ -2217,23 +2217,23 @@ namespace NeptuneEvo.Fractions
             int amount = 0;
             if (!Int32.TryParse(data, out amount))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Введите корректные данные", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Enter correct data", 3000);
                 return;
             }
             if (amount < 1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Введите корректные данные", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Enter correct data", 3000);
                 return;
             }
             if (!player.IsInVehicle)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны находиться в машине", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must be in the car", 3000);
                 return;
             }
             var vehicle = player.Vehicle;
             if (!vehicle.HasData("CANMATS") && !vehicle.HasData("CANDRUGS") && !vehicle.HasData("CANMEDKITS"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Машина не может ничего перевозить", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The car cannot carry anything", 3000);
                 return;
             }
             switch (eventName)
@@ -2241,7 +2241,7 @@ namespace NeptuneEvo.Fractions
                 case "loadmats":
                     if (player.GetData<int>("ONFRACSTOCK") != 14 && Main.Players[player].FractionID != player.GetData<int>("ONFRACSTOCK"))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не состоите в {Manager.getName(player.GetData<int>("ONFRACSTOCK"))}", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not a member {Manager.getName(player.GetData<int>("ONFRACSTOCK"))}", 3000);
                         return;
                     }
                     //Main.OpenInputMenu(player, "Введите кол-во материалов", "load_mats");
@@ -2259,7 +2259,7 @@ namespace NeptuneEvo.Fractions
                     }
                     if (Main.Players[player].FractionID != player.GetData<int>("ONFRACSTOCK"))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не состоите в {Manager.getName(player.GetData<int>("ONFRACSTOCK"))}", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not a member {Manager.getName(player.GetData<int>("ONFRACSTOCK"))}", 3000);
                         return;
                     }
                     //Main.OpenInputMenu(player, "Введите кол-во наркотиков", "load_drugs");
@@ -2317,26 +2317,26 @@ namespace NeptuneEvo.Fractions
             if (item == "mats")
             {
                 var count = (nInventory.Find(Main.Players[player].UUID, ItemType.Material) == null) ? 0 : nInventory.Find(Main.Players[player].UUID, ItemType.Material).Count;
-                itemcount += count + " матов";
-                menuname = "Материалы";
+                itemcount += count + " mats";
+                menuname = "Materials";
             }
             else if (item == "drugs")
             {
                 var count = (nInventory.Find(Main.Players[player].UUID, ItemType.Drugs) == null) ? 0 : nInventory.Find(Main.Players[player].UUID, ItemType.Drugs).Count;
                 itemcount += count + "г";
-                menuname = "Наркотики";
+                menuname = "Drugs";
             }
             else if (item == "money")
             {
                 itemcount += Main.Players[player].Money + "$";
-                menuname = "Деньги";
+                menuname = "Money";
             }
             else if (item == "medkits")
             {
                 var invitem = nInventory.Find(Main.Players[player].UUID, ItemType.HealthKit);
                 if (invitem == null) itemcount += "0 шт";
                 else itemcount += invitem.Count + " шт";
-                menuname = "Аптечки";
+                menuname = "First aid kits";
             }
             Menu menu = new Menu("stockselect", false, false);
             menu.Callback = callback_stockselect;
@@ -2346,19 +2346,19 @@ namespace NeptuneEvo.Fractions
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("uhave", Menu.MenuItem.Card);
-            menuItem.Text = $"У Вас есть {itemcount}";
+            menuItem.Text = $"You have {itemcount}";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("put", Menu.MenuItem.Button);
-            menuItem.Text = "Положить";
+            menuItem.Text = "Put";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("take", Menu.MenuItem.Button);
-            menuItem.Text = "Взять";
+            menuItem.Text = "Take";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("back", Menu.MenuItem.Button);
-            menuItem.Text = "Назад";
+            menuItem.Text = "Back to";
             menu.Add(menuItem);
 
             menu.Open(player);
@@ -2369,11 +2369,11 @@ namespace NeptuneEvo.Fractions
             {
                 case "put":
                     MenuManager.Close(player);
-                    Main.OpenInputMenu(player, "Введите кол-во", "put_stock");
+                    Main.OpenInputMenu(player, "Enter the number", "put_stock");
                     return;
                 case "take":
                     MenuManager.Close(player);
-                    Main.OpenInputMenu(player, "Введите кол-во", "take_stock");
+                    Main.OpenInputMenu(player, "Enter quantity", "take_stock");
                     return;
                 case "back":
                     MenuManager.Close(player);
@@ -2402,9 +2402,9 @@ namespace NeptuneEvo.Fractions
             {
                 if (label == null) return;
                 var text = $"~b~";
-                if (Drugs > 0) text += $"Наркотиков: {Drugs}/10000\n";
-                if (Materials > 0) text += $"Материалов: {Materials}/{maxMats}\n";
-                if (Medkits > 0) text += $"Аптечек: {Medkits}\n";
+                if (Drugs > 0) text += $"Drugs: {Drugs}/10000\n";
+                if (Materials > 0) text += $"Materials: {Materials}/{maxMats}\n";
+                if (Medkits > 0) text += $"Pharmacy: {Medkits}\n";
                 label.Text = text;
             }
         }
@@ -2431,22 +2431,22 @@ namespace NeptuneEvo.Fractions
                 col.OnEntityEnterColShape += onEntityEnterColShape;
                 col.OnEntityExitColShape += onEntityExitColShape;
 
-                warblip = NAPI.Blip.CreateBlip(478, warPosition, 1, 40, Main.StringToU16("Война за материалы"), 255, 0, true, 0, 0);
+                warblip = NAPI.Blip.CreateBlip(478, warPosition, 1, 40, Main.StringToU16("War for Materials"), 255, 0, true, 0, 0);
             }
             catch (Exception e) { Log.Write("ResourceStart: " + e.Message, nLog.Type.Error); }
         }
 
         public static void startMatWarTimer()
         {
-            Manager.sendFractionMessage(1, "Через 10 минут в порт Los-Santos прибудет корабль с материалами.");
-            Manager.sendFractionMessage(2, "Через 10 минут в порт Los-Santos прибудет корабль с материалами.");
-            Manager.sendFractionMessage(3, "Через 10 минут в порт Los-Santos прибудет корабль с материалами.");
-            Manager.sendFractionMessage(4, "Через 10 минут в порт Los-Santos прибудет корабль с материалами.");
-            Manager.sendFractionMessage(5, "Через 10 минут в порт Los-Santos прибудет корабль с материалами.");
-            Manager.sendFractionMessage(10, "Через 10 минут в порт Los-Santos прибудет корабль с материалами.");
-            Manager.sendFractionMessage(11, "Через 10 минут в порт Los-Santos прибудет корабль с материалами.");
-            Manager.sendFractionMessage(12, "Через 10 минут в порт Los-Santos прибудет корабль с материалами.");
-            Manager.sendFractionMessage(13, "Через 10 минут в порт Los-Santos прибудет корабль с материалами.");
+            Manager.sendFractionMessage(1, "Across 10 minutes a ship with materials will arrive at the port of Los-Santos.");
+            Manager.sendFractionMessage(2, "Across 10 minutes a ship with materials will arrive at the port of Los-Santos.");
+            Manager.sendFractionMessage(3, "In 10 minutes a ship with materials will arrive at the port of Los Santos.");
+            Manager.sendFractionMessage(4, "In 10 minutes a ship with materials will arrive at the port of Los Santos.");
+            Manager.sendFractionMessage(5, "In 10 minutes a ship with materials will arrive at the port of Los Santos.");
+            Manager.sendFractionMessage(10,"In 10 minutes a ship with materials will arrive at the port of Los-Santos.");
+            Manager.sendFractionMessage(11,"In 10 minutes a ship with materials will arrive at the port of Los-Santos.");
+            Manager.sendFractionMessage(12,"In 10 minutes a ship with materials will arrive at the port of Los-Santos.");
+            Manager.sendFractionMessage(13,"In 10 minutes a ship with materials will arrive at the port of Los-Santos.");
             //startWarTimer = Main.StartT(600000, 99999999, (o) => startWar(), "STARTMATWAR_TIMER");
             startWarTimer = Timers.StartOnce(600000, () => startWar()); //600000
         }
@@ -2461,15 +2461,15 @@ namespace NeptuneEvo.Fractions
                     matsLeft = 15000;
                     warMarker = NAPI.Marker.CreateMarker(1, warPosition - new Vector3(0, 0, 5), new Vector3(), new Vector3(), 6f, new Color(155, 0, 0, 255));
                     isWar = true;
-                    Manager.sendFractionMessage(1, "Корабль с материалами прибыл в порт Los-Santos.");
-                    Manager.sendFractionMessage(2, "Корабль с материалами прибыл в порт Los-Santos.");
-                    Manager.sendFractionMessage(3, "Корабль с материалами прибыл в порт Los-Santos.");
-                    Manager.sendFractionMessage(4, "Корабль с материалами прибыл в порт Los-Santos.");
-                    Manager.sendFractionMessage(5, "Корабль с материалами прибыл в порт Los-Santos.");
-                    Manager.sendFractionMessage(10, "Корабль с материалами прибыл в порт Los-Santos.");
-                    Manager.sendFractionMessage(11, "Корабль с материалами прибыл в порт Los-Santos.");
-                    Manager.sendFractionMessage(12, "Корабль с материалами прибыл в порт Los-Santos.");
-                    Manager.sendFractionMessage(13, "Корабль с материалами прибыл в порт Los-Santos.");
+                    Manager.sendFractionMessage(1, "The material ship has arrived at the port of Los Santos.");
+                    Manager.sendFractionMessage(2, "The material ship has arrived at the port of Los Santos.");
+                    Manager.sendFractionMessage(3, "The material ship has arrived at the port of Los Santos.");
+                    Manager.sendFractionMessage(4, "The material ship has arrived at the port of Los Santos.");
+                    Manager.sendFractionMessage(5, "The material ship has arrived at the port of Los Santos.");
+                    Manager.sendFractionMessage(10,"The material ship has arrived at the port of Los Santos.");
+                    Manager.sendFractionMessage(11,"The material ship has arrived at the port of Los Santos.");
+                    Manager.sendFractionMessage(12,"The material ship has arrived at the port of Los Santos.");
+                    Manager.sendFractionMessage(13,"The material ship has arrived at the port of Los Santos.");
                     warblip.Color = 49;
                     //Main.StopT(startWarTimer, "timer_11");
                 }
@@ -2485,15 +2485,15 @@ namespace NeptuneEvo.Fractions
                 {
                     NAPI.Entity.DeleteEntity(warMarker);
                     isWar = false;
-                    Manager.sendFractionMessage(1, "Корабль ушел из порта Los-Santos.");
-                    Manager.sendFractionMessage(2, "Корабль ушел из порта Los-Santos.");
-                    Manager.sendFractionMessage(3, "Корабль ушел из порта Los-Santos.");
-                    Manager.sendFractionMessage(4, "Корабль ушел из порта Los-Santos.");
-                    Manager.sendFractionMessage(5, "Корабль ушел из порта Los-Santos.");
-                    Manager.sendFractionMessage(10, "Корабль ушел из порта Los-Santos.");
-                    Manager.sendFractionMessage(11, "Корабль ушел из порта Los-Santos.");
-                    Manager.sendFractionMessage(12, "Корабль ушел из порта Los-Santos.");
-                    Manager.sendFractionMessage(13, "Корабль ушел из порта Los-Santos.");
+                    Manager.sendFractionMessage(1, "The ship has left the port of Los Santos.");
+                    Manager.sendFractionMessage(2, "The ship has left the port of Los Santos.");
+                    Manager.sendFractionMessage(3, "The ship has left the port of Los Santos.");
+                    Manager.sendFractionMessage(4, "The ship has left the port of Los Santos.");
+                    Manager.sendFractionMessage(5, "The ship has left the port of Los Santos.");
+                    Manager.sendFractionMessage(10,"The ship has left the port of Los Santos.");
+                    Manager.sendFractionMessage(11,"The ship has left the port of Los Santos.");
+                    Manager.sendFractionMessage(12,"The ship has left the port of Los Santos.");
+                    Manager.sendFractionMessage(13,"The ship has left the port of Los Santos.");
                     warblip.Color = 49;
                 });
             }
@@ -2506,35 +2506,35 @@ namespace NeptuneEvo.Fractions
             var fracid = Main.Players[player].FractionID;
             if (!((fracid >= 1 && fracid <= 5) || (fracid >= 10 && fracid <= 13)))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не можете сделать это", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You can't do this", 3000);
                 return;
             }
             if (!player.IsInVehicle)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны находиться в машине", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must be in the car ", 3000);
                 return;
             }
             if (!player.Vehicle.HasData("CANMATS"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"На этой машине нельзя перевозить маты", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Mats cannot be transported on this machine", 3000);
                 return;
             }
             if (player.HasData("loadMatsTimer"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы уже загружаете материалы в машину", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are already loading materials into the machine", 3000);
                 return;
             }
             var count = VehicleInventory.GetCountOfType(player.Vehicle, ItemType.Material);
             if (count >= Fractions.Stocks.maxMats[player.Vehicle.DisplayName])
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"В машине максимальное кол-во материала", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"В machine maximum amount of material", 3000);
                 return;
             }
             //player.SetData("loadMatsTimer", Main.StartT(20000, 99999999, (o) => Fractions.Army.loadMaterialsTimer(player), "GMLOADMATS_TIMER"));
             player.SetData("loadMatsTimer", Timers.StartOnce(20000, () => Fractions.Army.loadMaterialsTimer(player)));
             player.Vehicle.SetData("loaderMats", player);
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Загрузка материалов началась (20 секунд)", 3000);
-            Trigger.ClientEvent(player, "showLoader", "Загрузка материалов", 1);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Content download started (20 seconds)", 3000);
+            Trigger.ClientEvent(player, "showLoader", "Loading materials", 1);
             player.SetData("vehicleMats", player.Vehicle);
             player.SetData("whereLoad", "WAR");
             return;
@@ -2566,7 +2566,7 @@ namespace NeptuneEvo.Fractions
                         NAPI.Data.ResetEntityData(entity.Vehicle, "loaderMats");
                         player.ResetData("loadMatsTimer");
                         Trigger.ClientEvent(player, "hideLoader");
-                        Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"Загрузка материалов отменена, так как машина покинула чекпоинт", 3000);
+                        Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"Loading materials canceled because the car left the checkpoint", 3000);
                     }
                 }
             }

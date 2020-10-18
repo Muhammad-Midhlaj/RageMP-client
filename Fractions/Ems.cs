@@ -83,7 +83,7 @@ namespace NeptuneEvo.Fractions
                 col.OnEntityEnterColShape += emsShape_onEntityEnterColShape;
                 col.OnEntityExitColShape += emsShape_onEntityExitColShape;
                 NAPI.Marker.CreateMarker(1, new Vector3(3597.154, 3670.129, 29.75175), new Vector3(), new Vector3(), 4, new Color(255, 0, 0));
-                NAPI.Blip.CreateBlip(305, new Vector3(3588.917, 3661.756, 41.48687), 1, 3, "Склад аптечек", 255, 0, true);
+                NAPI.Blip.CreateBlip(305, new Vector3(3588.917, 3661.756, 41.48687), 1, 3, "The composition of first aid kits", 255, 0, true);
                 #endregion
 
                 col = NAPI.ColShape.CreateCylinderColShape(emsCheckpoints[7], 1, 2, 0); // roof
@@ -827,7 +827,7 @@ namespace NeptuneEvo.Fractions
             menu.Open(player);
         }
 
-        private static List<string> TattooZonesNames = new List<string>() { "торса", "головы", "левой руки", "правой руки", "левой ноги", "правой ноги" };
+        private static List<string> TattooZonesNames = new List<string>() { "torso", "head", "left arm", "right arm", "left leg", "right leg"};
         private static void callback_tattoodelete(Player client, Menu menu, Menu.Item item, string eventName, dynamic data)
         {
             if (item.ID == "close")

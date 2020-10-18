@@ -111,12 +111,12 @@ namespace NeptuneEvo.Fractions
                     if (player.IsInVehicle) return;
                     if (player.HasData("FOLLOWING"))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вас кто-то тащит за собой", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Someone drags you along", 3000);
                         return;
                     }
                     if(Main.Players[player].FractionID != 15)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не состоите в News", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You are not a member of News ", 3000);
                         return;
                     }
                     NAPI.Entity.SetEntityPosition(player, LSNewsCoords[1] + new Vector3(0, 0, 1.12));
@@ -125,12 +125,12 @@ namespace NeptuneEvo.Fractions
                     if (player.IsInVehicle) return;
                     if (player.HasData("FOLLOWING"))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вас кто-то тащит за собой", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Someone drags you along", 3000);
                         return;
                     }
                     if(Main.Players[player].FractionID != 15)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не состоите в News", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You are not a member of News", 3000);
                         return;
                     }
                     NAPI.Entity.SetEntityPosition(player, LSNewsCoords[0] + new Vector3(0, 0, 1.12));
@@ -246,7 +246,7 @@ SELECT * FROM advertised;";
                 }
                 else
                 {
-                    player.SendChatMessage("Это объявление более недоступно для изменения.");
+                    player.SendChatMessage("This ad is no longer available for change..");
                     Remove(ID, player);
                 }
             }
@@ -263,7 +263,7 @@ SELECT * FROM advertised;";
 
                 GameLog.Money($"bank({Main.Players[player].Bank})", $"server", price, "ad");
                 player.SetData("NEXT_AD", DateTime.Now.AddMinutes(45));
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "Вы подали объявление. Ожидайте модерации", 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "You submitted an ad. Wait for moderation ", 3000);
 
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.CommandText = "INSERT INTO `advertised` (`Author`,`AuthorSIM`,`AD`,`Opened`,`Closed`) VALUES (@pn,@sim,@ques,@time,@ntime); SELECT LAST_INSERT_ID();";
@@ -294,7 +294,7 @@ SELECT * FROM advertised;";
                 foreach (Player p in Main.Players.Keys.ToList())
                 {
                     if (!Main.Players.ContainsKey(p)) continue;
-                    if (Main.Players[p].AdminLVL >= 1) p.SendChatMessage($"~r~Объявление от {player.Name.Replace('_', ' ')} (ID {player.Value} | Объявление №{id}): {question}");
+                    if (Main.Players[p].AdminLVL >= 1) p.SendChatMessage($"~r~Announcement from {player.Name.Replace('_', ' ')} (ID {player.Value} | Announcement No.{id}): {question}");
                 }
             }
             catch (Exception e)
@@ -314,7 +314,7 @@ SELECT * FROM advertised;";
                     if (Main.Players[player].FractionID != 15) return;
                 }
                 if (!Adverts.ContainsKey(repID)) {
-                    if(deleted) player.SendChatMessage("Объявления с подобным номером не было найдено.");
+                    if(deleted) player.SendChatMessage("Ads with a similar number were not found.");
                     return;
                 }
                 DateTime now = DateTime.Now;
@@ -325,17 +325,17 @@ SELECT * FROM advertised;";
                         int moneyad = Adverts[repID].AD.Length / 15 * 6;
                         MoneySystem.Bank.Change(Main.Players[player].Bank, (moneyad*60/100), false);
                         Stocks.fracStocks[6].Money += moneyad*40/100;
-                        if(Adverts[repID].AuthorSIM >= 1) NAPI.Chat.SendChatMessageToAll("!{#00BCD4}" + $"Объявление от {Adverts[repID].Author.Replace('_', ' ')}: {response} | Тел: {Adverts[repID].AuthorSIM}");
-                        else NAPI.Chat.SendChatMessageToAll("!{#00BCD4}" + $"Объявление от {Adverts[repID].Author.Replace('_', ' ')}: {response}");
-                        NAPI.Chat.SendChatMessageToAll("!{#00BCD4}" + $"Редактор объявления: {player.Name.Replace('_', ' ')}.");
+                        if(Adverts[repID].AuthorSIM >= 1) NAPI.Chat.SendChatMessageToAll("!{#00BCD4}" + $"Announcement from {Adverts[repID].Author.Replace('_', ' ')}: {response} | Тел: {Adverts[repID].AuthorSIM}");
+                        else NAPI.Chat.SendChatMessageToAll("!{#00BCD4}" + $"Announcement from {Adverts[repID].Author.Replace('_', ' ')}: {response}");
+                        NAPI.Chat.SendChatMessageToAll("!{#00BCD4}" + $"Ad editor: {player.Name.Replace('_', ' ')}.");
                     } catch {
                     }
                 } else {
                     if(Main.Players[player].AdminLVL != 0) GameLog.Admin($"{player.Name}", $"delAd", $"{Adverts[repID].Author}");
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы удалили объявление игрока {Adverts[repID].Author}", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You removed a player's ad{Adverts[repID].Author}", 3000);
                     Player target = NAPI.Player.GetPlayerFromName(Adverts[repID].Author);
-                    if (target != null) Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, $"{player.Name} удалил Ваше объявление по причине: {response}.", 3000);
-                    response += " | Удалено";
+                    if (target != null) Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, $"{player.Name} deleted your ad due to:{response}.", 3000);
+                    response += " | Removed";
                 }
 
                 MySqlCommand cmd = new MySqlCommand();

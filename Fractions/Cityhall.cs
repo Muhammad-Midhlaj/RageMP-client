@@ -119,8 +119,8 @@ namespace NeptuneEvo.Fractions
                     if (Main.Players[player].FractionID == 6 && Main.Players[player].FractionLVL > 1)
                     {
                         Doormanager.SetDoorLocked(player.GetData<int>("DOOR"), !Doormanager.GetDoorLocked(player.GetData<int>("DOOR")), 0);
-                        string msg = "Вы открыли дверь";
-                        if (Doormanager.GetDoorLocked(player.GetData<int>("DOOR"))) msg = "Вы закрыли дверь";
+                        string msg = "You opened the door";
+                        if (Doormanager.GetDoorLocked(player.GetData<int>("DOOR"))) msg = "You closed the door";
                         Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, msg, 3000);
                     }
                     return;
@@ -131,7 +131,7 @@ namespace NeptuneEvo.Fractions
                     if (player.IsInVehicle) return;
                     if (player.HasData("FOLLOWING"))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вас кто-то тащит за собой", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Someone drags you along", 3000);
                         return;
                     }
                     if (player.Position.Z < 50)
@@ -148,7 +148,7 @@ namespace NeptuneEvo.Fractions
                 case 62:
                     if (Main.Players[player].FractionID != 6)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не сотрудник мэрии", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not an employee of the mayor's office", 3000);
                         return;
                     }
                     if (!NAPI.Data.GetEntityData(player, "ON_DUTY"))
@@ -163,7 +163,7 @@ namespace NeptuneEvo.Fractions
                     }
                     if (!Manager.canUseCommand(player, "openweaponstock")) return;
                     player.SetData("ONFRACSTOCK", 6);
-                    GUI.Dashboard.OpenOut(player, Stocks.fracStocks[6].Weapons, "Склад оружия", 6);
+                    GUI.Dashboard.OpenOut(player, Stocks.fracStocks[6].Weapons, "Armory", 6);
                     return;
             }
         }
@@ -191,7 +191,7 @@ namespace NeptuneEvo.Fractions
                     return;
                 }
             }
-            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не сотрудник мэрии", 3000);
+            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not an employee of the mayor's office", 3000);
         }
 
         #region menu
@@ -200,7 +200,7 @@ namespace NeptuneEvo.Fractions
 
             if (Main.Players[player].FractionID != 6)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не имеете доступа", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't have access", 3000);
                 return;
             }
             if (!Stocks.fracStocks[6].IsOpen)

@@ -221,18 +221,18 @@ namespace NeptuneEvo.Fractions
             if (!Manager.canUseCommand(player, "capture")) return;
             if (player.GetData<int>("GANGPOINT") == -1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не находитесь ни на одном из регионов", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not in any of the regions", 3000);
                 return;
             }
             GangPoint region = gangPoints[player.GetData<int>("GANGPOINT")];
             if (region.GangOwner == Main.Players[player].FractionID)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не можете напасть на свою территорию", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You cannot attack your territory", 3000);
                 return;
             }
             if (DateTime.Now.Hour < 13 || DateTime.Now.Hour > 23)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы можете напасть только с 13:00 до 23:00", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You can only attack from 13:00 to 23:00", 3000);
                 return;
             }
             if (DateTime.Now < nextCaptDate[Main.Players[player].FractionID])
@@ -240,7 +240,7 @@ namespace NeptuneEvo.Fractions
                 DateTime g = new DateTime((nextCaptDate[Main.Players[player].FractionID] - DateTime.Now).Ticks);
                 var min = g.Minute;
                 var sec = g.Second;
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы сможете начать захват только через {min}:{sec}", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You can start capturing only after {min}:{sec}", 3000);
                 return;
             }
             if (DateTime.Now < protectDate[region.GangOwner])
@@ -248,19 +248,19 @@ namespace NeptuneEvo.Fractions
                 DateTime g = new DateTime((protectDate[region.GangOwner] - DateTime.Now).Ticks);
                 var min = g.Minute;
                 var sec = g.Second;
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы сможете начать захват территории этой банды только через {min}:{sec}", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You can start seizing the territory of this gang only across {min}:{sec}", 3000);
                 return;
             }
             if (Manager.countOfFractionMembers(region.GangOwner) < 3)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Недостаточный онлайн в банде противников", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Insufficient online in a gang of opponents", 3000);
                 return;
             }
             if (smbTryCapture) return;
             smbTryCapture = true;
             if (captureStarting || captureIsGoing)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Захват территории уже идёт", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The seizure of the territory is already underway", 3000);
                 smbTryCapture = false;
                 return;
             }
@@ -278,8 +278,8 @@ namespace NeptuneEvo.Fractions
             captureStarting = true;
             smbTryCapture = false;
 
-            Manager.sendFractionMessage(region.GangOwner, $"Ахтунг! Сбор в течении 15 минут! {Manager.getName(attackersFracID)} решили отхватить нашу территорию");
-            Manager.sendFractionMessage(attackersFracID, "Стреляй! Отжимай! Примерно через 15 минут подлетят противники");
+            Manager.sendFractionMessage(region.GangOwner, $"Ahtung! Collection within 15 minutes! {Manager.getName(attackersFracID)} decided grab our territory");
+            Manager.sendFractionMessage(attackersFracID, "Shoot! Wring it out! In about 15 minutes, opponents will fly up ");
         }
 
         private static void timerStartCapture(GangPoint region)
@@ -309,8 +309,8 @@ namespace NeptuneEvo.Fractions
             captureTimer = Timers.Start(1000, () => timerUpdate(region, region.ID));
             //Main.StopT(toStartCaptureTimer, "toStartCaptureTimer_gangcapture");
 
-            Manager.sendFractionMessage(region.GangOwner, $"Ахтунг! На нас напали! {Manager.getName(attackersFracID)} решили отхватить нашу территорию");
-            Manager.sendFractionMessage(attackersFracID, "Стреляй! Отжимай! Вы начали войну за территорию");
+            Manager.sendFractionMessage(region.GangOwner, $"Ahtung! We were attacked!{Manager.getName(attackersFracID)} decided to grab our territory");
+            Manager.sendFractionMessage(attackersFracID, "Shoot! Wring it out! You started a war for territory");
         }
 
         private static void timerUpdate(GangPoint region, int id)
@@ -384,8 +384,8 @@ namespace NeptuneEvo.Fractions
             protectDate[attackersFracID] = DateTime.Now.AddMinutes(20);
             if (attackers <= defenders)
             {
-                Manager.sendFractionMessage(region.GangOwner, $"Обсосы сбежали! Вы дали им под хвост! Вы отстояли территорию");
-                Manager.sendFractionMessage(attackersFracID, "Вы лохонулись! Враги были сильнее! Вы не смогли захватить территорию");
+                Manager.sendFractionMessage(region.GangOwner, $"The suckers have escaped! You gave them up! You have defended the territory");
+                Manager.sendFractionMessage(attackersFracID, "You are lost! The enemies were stronger! You were unable to capture territory");
                 foreach (var m in Manager.Members.Keys)
                 {
                     if (Main.Players[m].FractionID == region.GangOwner)
@@ -397,8 +397,8 @@ namespace NeptuneEvo.Fractions
             }
             else if (attackers > defenders)
             {
-                Manager.sendFractionMessage(region.GangOwner, $"Вы прошляпили территорию");
-                Manager.sendFractionMessage(attackersFracID, "Шугнули их как детей! Вы захватили территорию");
+                Manager.sendFractionMessage(region.GangOwner, $"You have missed the territory");
+                Manager.sendFractionMessage(attackersFracID, "They were shocked like children! You have seized territory ");
                 region.GangOwner = attackersFracID;
                 foreach (var m in Manager.Members.Keys)
                 {

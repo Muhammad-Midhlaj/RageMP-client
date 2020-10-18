@@ -18,6 +18,8 @@ namespace NeptuneEvo.Fractions
             {13, "Armenian Mafia" },
         */
         private static nLog Log = new nLog("AlcoFabrication");
+        
+        // Alcohol shop CORDS
         private static Dictionary<int, Vector3> EnterAlcoShop = new Dictionary<int, Vector3>()
         {
             { 10, new Vector3(-1388.761, -586.3921, 29.09945) },
@@ -183,7 +185,7 @@ namespace NeptuneEvo.Fractions
                     };
 
                     NAPI.Marker.CreateMarker(1, pair.Value - new Vector3(0, 0, 0.7), new Vector3(), new Vector3(), 1, new Color(0, 255, 255), false, NAPI.GlobalDimension);
-                    NAPI.TextLabel.CreateTextLabel($"~g~Клуб\n\"{ClubsNames[pair.Key]}\"", pair.Value + new Vector3(0, 0, 0.5), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
+                    NAPI.TextLabel.CreateTextLabel($"~r~ Keyб\n\"{ClubsNames[pair.Key]}\"", pair.Value + new Vector3(0, 0, 0.5), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
                 }
                 #endregion
                 #region Exit AlcoShops
@@ -210,7 +212,7 @@ namespace NeptuneEvo.Fractions
                     };
 
                     NAPI.Marker.CreateMarker(1, pair.Value - new Vector3(0, 0, 0.7), new Vector3(), new Vector3(), 1, new Color(0, 255, 255), false, NAPI.GlobalDimension);
-                    NAPI.TextLabel.CreateTextLabel($"~g~Выход", pair.Value + new Vector3(0, 0, 0.5), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
+                    NAPI.TextLabel.CreateTextLabel($"~r~ Exit", pair.Value + new Vector3(0, 0, 0.5), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
                 }
                 #endregion
                 #region Unloadpoints
@@ -237,7 +239,7 @@ namespace NeptuneEvo.Fractions
                     };
 
                     NAPI.Marker.CreateMarker(1, pair.Value - new Vector3(0, 0, 4.5), new Vector3(), new Vector3(), 5, new Color(255, 0, 0, 220), false, NAPI.GlobalDimension);
-                    NAPI.TextLabel.CreateTextLabel($"~g~Выгрузить все materials", pair.Value + new Vector3(0, 0, 0.5), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
+                    NAPI.TextLabel.CreateTextLabel($"~r~ Unload all materials", pair.Value + new Vector3(0, 0, 0.5), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
                 }
                 #endregion
                 #region BuyPoints
@@ -264,7 +266,7 @@ namespace NeptuneEvo.Fractions
                     };
 
                     NAPI.Marker.CreateMarker(1, pair.Value - new Vector3(0, 0, 0.7), new Vector3(), new Vector3(), 1, new Color(0, 255, 255), false, NAPI.GlobalDimension);
-                    NAPI.TextLabel.CreateTextLabel($"~g~Купить / управлять алкоголем", pair.Value + new Vector3(0, 0, 0.5), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
+                    NAPI.TextLabel.CreateTextLabel($"~r~ Buy / Manage alcohol", pair.Value + new Vector3(0, 0, 0.5), 5f, 0.3f, 0, new Color(255, 255, 255), true, NAPI.GlobalDimension);
                 }
                 #endregion
             }
@@ -286,13 +288,13 @@ namespace NeptuneEvo.Fractions
 
                     if (Main.Players[player].FractionID != player.GetData<int>("CLUB"))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не состоите в {Fractions.Manager.getName(player.GetData<int>("CLUB"))}", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not a member {Fractions.Manager.getName(player.GetData<int>("CLUB"))}", 3000);
                         return;
                     }
 
                     if (!player.IsInVehicle)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы должны находиться в машине", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You must be in the car", 3000);
                         return;
                     }
 
@@ -301,20 +303,20 @@ namespace NeptuneEvo.Fractions
                     var matCount = VehicleInventory.GetCountOfType(player.Vehicle, ItemType.Material);
                     if (matCount == 0)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "В машине нет материала", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "There is no material in the car", 3000);
                         return;
                     }
 
                     if (ClubsStocks[club].Materials >= MaxMats)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Склад заполнен", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "The warehouse is full", 3000);
                         return;
                     }
 
                     VehicleInventory.Remove(player.Vehicle, ItemType.Material, matCount);
                     ClubsStocks[club].Materials += matCount;
                     ClubsStocks[club].UpdateLabel();
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "Вы выгрузили весь материал из машины на склад клуба", 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "You unloaded all the material from the car to the club warehouse", 3000);
                     return;
                 case 57:
                     if (!Main.Players.ContainsKey(player)) return;
@@ -383,18 +385,18 @@ namespace NeptuneEvo.Fractions
                     case 0: // buy
                         if (alcoCounts[index] <= 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Недостаточно товара на складе", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Not enough product in stock", 3000);
                             return;
                         }
                         var tryAdd = nInventory.TryAdd(player, new nItem(invItem));
                         if (tryAdd == -1 || tryAdd > 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Недостаточно места в инвентаре", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Insufficient space in inventory", 3000);
                             return;
                         }
                         if (!MoneySystem.Wallet.Change(player, -Convert.ToInt32(DrinksPrices[index] * ClubsStocks[club].PriceModifier)))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "У Вас недостаточно средств", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You don't have enough funds", 3000);
                             return;
                         }
                         Stocks.fracStocks[club].Money += Convert.ToInt32(DrinksPrices[index] * ClubsStocks[club].PriceModifier);
@@ -415,18 +417,18 @@ namespace NeptuneEvo.Fractions
                         }
                         ClubsStocks[club].UpdateLabel();
                         OpenBuyAlcoholMenu(player);
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы купили {nInventory.ItemsNames[(int)invItem]}", 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You bought {nInventory.ItemsNames[(int)invItem]}", 3000);
                         return;
                     case 1: // take
                         if (alcoCounts[index] <= 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Недостаточно товара на складе", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Not enough product in stock", 3000);
                             return;
                         }
                         tryAdd = nInventory.TryAdd(player, new nItem(invItem));
                         if (tryAdd == -1 || tryAdd > 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Недостаточно места в инвентаре", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Insufficient space in inventory", 3000);
                             return;
                         }
                         nInventory.Add(player, new nItem(invItem));
@@ -445,17 +447,17 @@ namespace NeptuneEvo.Fractions
                         }
                         ClubsStocks[club].UpdateLabel();
                         OpenBuyAlcoholMenu(player);
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы взяли {nInventory.ItemsNames[(int)invItem]}. На складе {alcoCounts[index] - 1}шт", 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"you took {nInventory.ItemsNames[(int)invItem]}. In stock {alcoCounts[index] - 1}PC", 3000);
                         return;
                     case 2: // craft
                         if (alcoCounts[index] >= 80)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"На складе максимум {nInventory.ItemsNames[(int)invItem]}", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"In stock maximum {nInventory.ItemsNames[(int)invItem]}", 3000);
                             return;
                         }
                         if (ClubsStocks[club].Materials < DrinksMats[index])
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"На складе недостаточно материалов", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Not enough materials in stock", 3000);
                             return;
                         }
 
@@ -475,10 +477,10 @@ namespace NeptuneEvo.Fractions
 
                         ClubsStocks[club].UpdateLabel();
                         OpenBuyAlcoholMenu(player);
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы скрафтили {nInventory.ItemsNames[(int)invItem]}. На складе {alcoCounts[index] + 1}шт", 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You crafted {nInventory.ItemsNames[(int)invItem]}.In stock {alcoCounts[index] + 1}PC", 3000);
                         return;
                     case 3: // setprice
-                        Trigger.ClientEvent(player, "openInput", "Установить цену", "Введите цену для алкоголя в процентах", 3, "club_setprice");
+                        Trigger.ClientEvent(player, "openInput", "Set price", "Enter the price for alcohol as a percentage", 3, "club_setprice");
                         return;
                 }
             }
@@ -490,12 +492,12 @@ namespace NeptuneEvo.Fractions
 
             if (price < 50 || price > 150)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Установите цену от 50% до 150%", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Set a price from 50% to 150%", 3000);
                 return;
             }
 
             ClubsStocks[Main.Players[player].FractionID].PriceModifier = price / 100.0f;
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы изменили цену алкогольной продукции до {price}%", 3000);
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You have changed the price of alcoholic beverages to {price}%", 3000);
         }
         #endregion
 
@@ -511,7 +513,7 @@ namespace NeptuneEvo.Fractions
 
             public Stock(int mats, int a1, int a2, int a3, float price, Vector3 pos)
             {
-                Label = NAPI.TextLabel.CreateTextLabel($"~g~Materials: {mats}\nAlcohol: {a1 + a2 + a3}", pos, 30f, 0.3f, 0, new Color());
+                Label = NAPI.TextLabel.CreateTextLabel($"~r~Materials: {mats}\nAlcohol: {a1 + a2 + a3}", pos, 30f, 0.3f, 0, new Color());
 
                 Materials = mats;
                 Alco1 = a1;
@@ -522,7 +524,7 @@ namespace NeptuneEvo.Fractions
 
             public void UpdateLabel()
             {
-                Label.Text = $"~g~Materials: {Materials}\nAlcohol: {Alco1 + Alco2 + Alco3}";
+                Label.Text = $"~r~Materials: {Materials}\nAlcohol: {Alco1 + Alco2 + Alco3}";
             }
         }
     }

