@@ -630,7 +630,7 @@ namespace NeptuneEvo.Houses
                     catch (Exception e) { Log.Write($"garage load vehicles {e.ToString()}", nLog.Type.Error); }
                 }
             }
-            Log.Write($"{count} машины появились в гаражах.", nLog.Type.Success);
+            Log.Write($"{count}cars appeared in garages.", nLog.Type.Success);
         }
 
         public static void interactionPressed(Player player, int id)
@@ -649,7 +649,7 @@ namespace NeptuneEvo.Houses
                         var vehicles = VehicleManager.getAllPlayerVehicles(house.Owner);
                         if (player.IsInVehicle && !vehicles.Contains(player.Vehicle.NumberPlate))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Ты не можешь зайти в гараж с этой машиной", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You can't go to the garage with this car", 3000);
                             return;
                         }
                         else if (player.IsInVehicle && vehicles.Contains(player.Vehicle.NumberPlate))
@@ -670,14 +670,14 @@ namespace NeptuneEvo.Houses
                             if (vehicles.Count == 0) return;
                             if (garage.CheckCar(false, vehicles[0]))
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Ваша машина сейчас где-то в штате, вы можете эвакуироваться", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Your car is somewhere in the state now, you can evacuate ", 3000);
                                 return;
                             }
                             if (player.IsInVehicle) return;
 
                             if (VehicleManager.Vehicles[vehicles[0]].Health < 1)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вам нужно восстановить машину", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You need to restore the car", 3000);
                                 return;
                             }
                             garage.GetVehicleFromGarage(player, vehicles[0]);
@@ -712,7 +712,7 @@ namespace NeptuneEvo.Houses
             if (!Group.CanUseCmd(player, "ban")) return;
             if (!player.HasData("HOUSEID"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Sie müssen auf der Hausmarkierung stehen", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must be on the house marker", 3000);
                 return;
             }
 
@@ -729,7 +729,7 @@ namespace NeptuneEvo.Houses
         {
             if (!player.IsInVehicle)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Du musst im Auto sitzen!", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You have to sit in the car! ", 3000);
                 return;
             }
 
