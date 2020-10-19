@@ -152,7 +152,7 @@ SELECT * FROM questions;";
             }
             else
             {
-                player.SendChatMessage("Эта жалоба более недоступна для изменения.");
+                player.SendChatMessage("This complaint is no longer available for change.");
                 Remove(ID, player);
             }
         }
@@ -220,7 +220,7 @@ SELECT * FROM questions;";
                     else
                     {
                         target.SendChatMessage($"~r~Ответ от {player.Name} ({player.Value}): {response}");
-                        Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, $"Ответ от {player.Name}: {response}", 5000);
+                        Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, $"Answer from {player.Name}: {response}", 5000);
                         foreach (var p in Main.Players.Keys.ToList())
                         {
                             if (Main.Players[p].AdminLVL >= adminLvL)

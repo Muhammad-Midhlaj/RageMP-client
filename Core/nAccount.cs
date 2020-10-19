@@ -188,7 +188,7 @@ namespace NeptuneEvo.Core.nAccount
                                 else subData.Add("ERROR");
                             } else {
                                 if (Main.LoggedIn.ContainsKey(Login)) Main.LoggedIn.Remove(Login);
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.Center, $"К сожалению, невозможно получить данные о персонаже с номером паспорта {uuid}, обратитесь в тех.раздел на форуме.", 5000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.Center, $"Unfortunately, it is impossible to get data about a character with a passport number {uuid}, refer to the technical section on the forum.", 5000);
                                 return;
                             }
                         }
@@ -203,7 +203,7 @@ namespace NeptuneEvo.Core.nAccount
             catch (Exception e)
             {
                 if (Main.LoggedIn.ContainsKey(Login)) Main.LoggedIn.Remove(Login);
-                Notify.Send(player, NotifyType.Error, NotifyPosition.Center, "К сожалению, невозможно получить данные о персонажах аккаунта, сообщите в тех.раздел на форуме.", 5000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.Center, "Unfortunately, it is impossible to get data about the characters of the account, report it in the technical section on the forum.", 5000);
                 Log.Write("EXCEPTION AT \"LoadSlots\":\n" + e.ToString(), nLog.Type.Error);
                 return;
             }
@@ -228,7 +228,7 @@ namespace NeptuneEvo.Core.nAccount
             if (result == null || result.Rows.Count == 0) return;
             Ban ban = Ban.Get2(Characters[slot - 1]);
             if (ban != null && ban.CheckDate()) {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Невозможно удалить персонажа, который находится в бане.", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "It is impossible to delete a character who is in the bath.", 3000);
                 return;
             }
             var row = result.Rows[0];
@@ -241,19 +241,19 @@ namespace NeptuneEvo.Core.nAccount
 
             if (firstName != firstName_ || lastName != lastName_)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Имя и фамилия не соответствуют персонажу на выбранном слоте", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "The first and last name does not match the character on the selected slot", 3000);
                 return;
             }
 
             password_ = GetSha256(password_);
             if (Password != password_)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Неправильный пароль от аккаунта", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Incorrect account password", 3000);
                 return;
             }
 
             foreach (var b in biz)
-                BusinessManager.changeOwner($"{firstName}_{lastName}", "Государство");
+                BusinessManager.changeOwner($"{firstName}_{lastName}", "The state");
 
             await MySQL.QueryAsync("DELETE FROM `customization` WHERE uuid=" + uuid);
 
@@ -281,7 +281,7 @@ namespace NeptuneEvo.Core.nAccount
 
             GameLog.CharacterDelete($"{firstName}_{lastName}", uuid, Login);
 
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Персонаж {firstName} {lastName} успешно удален", 3000);
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Персонаж {firstName} {lastName} successfully deleted", 3000);
             NAPI.Task.Run(() => Trigger.ClientEvent(player, "delCharSuccess", slot));
         }
         public void changePassword(string newPass)

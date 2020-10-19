@@ -82,14 +82,14 @@ namespace NeptuneEvo.Core
                         {
                             player.Health = 0;
                             player.Armor = 0;
-                            player.SendChatMessage("Вы покинули территорию мероприятия.");
+                            player.SendChatMessage("You left the event area.");
                         }
                     }
                 }
             }
         }
 
-        [Command("createmp", "Используйте: /createmp [Лимит участников] [Радиус зоны] [Название мероприятия]", GreedyArg = true)]
+        [Command("createmp", "Use: /createmp [Participant limit] [Zone radius] [event title]", GreedyArg = true)]
         public void CreateEvent(Player player, ushort members, float radius, string eventname)
         {
             if (Main.Players.ContainsKey(player))
@@ -112,15 +112,15 @@ namespace NeptuneEvo.Core
                         AdminEvent.Dimension = player.Dimension;
                         AdminEvent.Admin = player;
                         AddAdminEventLog();
-                        NAPI.Chat.SendChatMessageToAll("!{#A87C33}Уважаемые игроки, скоро начнётся мероприятие '" + eventname + "'!");
-                        if (members != 0) NAPI.Chat.SendChatMessageToAll("!{#A87C33}На данном мероприятии установлен лимит участников: " + members + ".");
-                        else NAPI.Chat.SendChatMessageToAll("!{#A87C33}На данном мероприятии не установлен лимит участников.");
-                        if (AdminEvent.Zone != null) NAPI.Chat.SendChatMessageToAll("!{#A87C33}Мероприятие действует в зоне " + radius + "м от точки телепорта.");
-                        NAPI.Chat.SendChatMessageToAll("!{#A87C33}Чтобы телепортироваться на мероприятие, введите команду /mp");
+                        NAPI.Chat.SendChatMessageToAll("!{#A87C33}Dear players, the event is starting soon '" + eventname + "'!");
+                        if (members != 0) NAPI.Chat.SendChatMessageToAll("!{#A87C33}This event has a limit of participants: " + members + ".");
+                        else NAPI.Chat.SendChatMessageToAll("!{#A87C33}There is no participant limit for this event.");
+                        if (AdminEvent.Zone != null) NAPI.Chat.SendChatMessageToAll("!{#A87C33}The event operates in the zone " + radius + "m from the teleport points.");
+                        NAPI.Chat.SendChatMessageToAll("!{#A87C33}To teleport to the event, enter the command /mp");
                     }
-                    else player.SendChatMessage("Слишком длинное название мероприятия, придумайте покороче.");
+                    else player.SendChatMessage("The name of the event is too long, please make it shorter.");
                 }
-                else player.SendChatMessage("Одно мероприятие уже создано, нельзя создать новое, пока старое активно.");
+                else player.SendChatMessage("One event has already been created, you cannot create a new one while the old one is active.");
             }
         }
 
@@ -135,16 +135,16 @@ namespace NeptuneEvo.Core
                     if (AdminEvent.EventMembers.Count >= 1)
                     {
                         AdminEvent.EventState = 2;
-                        NAPI.Chat.SendChatMessageToAll("!{#A87C33}Мероприятие '" + AdminEvent.Name + "' началось, телепорт закрыт!");
-                        NAPI.Chat.SendChatMessageToAll("!{#A87C33}Игроков на мероприятии: " + AdminEvent.EventMembers.Count + ".");
+                        NAPI.Chat.SendChatMessageToAll("!{#A87C33}Event'" + AdminEvent.Name + "' started, teleport closed!");
+                        NAPI.Chat.SendChatMessageToAll("!{#A87C33} Players at the event: " + AdminEvent.EventMembers.Count + ".");
                     }
-                    else player.SendChatMessage("Невозможно запустить мероприятие без участников.");
+                    else player.SendChatMessage("It is impossible to start an event without participants.");
                 }
-                else player.SendChatMessage("Мероприятие либо не создано, либо уже запущено.");
+                else player.SendChatMessage("The event is either not created or is already running.");
             }
         }
 
-        [Command("stopmp", "Используйте: /stopmp [ID игрока] [Награда]")]
+        [Command("stopmp", "Use: /stopmp [ID player] [Reward]")]
         public void MPReward(Player player, int pid, uint reward)
         {
             if (Main.Players.ContainsKey(player))
@@ -160,19 +160,19 @@ namespace NeptuneEvo.Core
                             if (target != null)
                             {
                                 if (AdminEvent.EventMembers.Contains(target) || AdminEvent.Admin == target) CloseAdminEvent(target, reward);
-                                else player.SendChatMessage("Данный игрок был найден, но он не участник мероприятия.");
+                                else player.SendChatMessage("This player was found, but he is not a participant in the event.");
                             }
-                            else player.SendChatMessage("Игрока с таким ID не было найдено.");
+                            else player.SendChatMessage("No player with that ID was found. ");
                         }
-                        else player.SendChatMessage("Победитель уже был назначен.");
+                        else player.SendChatMessage("The winner has already been nominated.");
                     }
-                    else player.SendChatMessage("Награда не может превышать выставленный лимит: " + AdminEvent.RewardLimit + ".");
+                    else player.SendChatMessage("The reward cannot exceed the set limit: " + AdminEvent.RewardLimit + ".");
                 }
-                else player.SendChatMessage("Мероприятие либо не создано, либо еще не запущено.");
+                else player.SendChatMessage("The event has either not been created or has not yet started.");
             }
         }
 
-        [Command("mpveh", "Используйте: /mpveh [Название модели] [Цвет] [Цвет] [Количество машин]")]
+        [Command("mpveh", "Use: /mpveh [Model name] [Colour] [Colour] [Number of cars]")]
         public void CreateMPVehs(Player player, string model, byte c1, byte c2, byte count)
         {
             if (Main.Players.ContainsKey(player))
@@ -194,15 +194,15 @@ namespace NeptuneEvo.Core
                             }
                             AdminEvent.Admin = player;
                         }
-                        else player.SendChatMessage("Машины с таким названием не найдено в базе.");
+                        else player.SendChatMessage("Cars with this name were not found in the database.");
                     }
-                    else player.SendChatMessage("За один раз можно создать от 1 до 10 машин.");
+                    else player.SendChatMessage("You can create from 1 to 10 cars at a time.");
                 }
-                else player.SendChatMessage("Создать транспорт можно только после создания и до начала мероприятия.");
+                else player.SendChatMessage("Vehicles can be created only after creation and before the event starts.");
             }
         }
 
-        [Command("mpreward", "Используйте: /mpreward [Новый лимит]")]
+        [Command("mpreward", "Use: /mpreward [New limit]")]
         public void SetMPReward(Player player, uint newreward)
         {
             if (Main.Players.ContainsKey(player))
@@ -215,14 +215,14 @@ namespace NeptuneEvo.Core
                         try
                         {
                             MySQL.Query($"UPDATE `eventcfg` SET `RewardLimit`={newreward}");
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "Вы установили лимит на " + newreward, 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "You have set a limit on " + newreward, 3000);
                         }
                         catch (Exception e)
                         {
                             Log.Write("EXCEPTION AT \"SetMPReward\":\n" + e.ToString(), nLog.Type.Error);
                         }
                     }
-                    else player.SendChatMessage("Вы ввели слишком большой лимит. Максимально возможный лимит: 999999");
+                    else player.SendChatMessage("You have entered too high a limit. Maximum possible limit: 999999");
                 }
             }
         }
@@ -243,19 +243,19 @@ namespace NeptuneEvo.Core
                                 AdminEvent.EventMembers.Add(player);
                                 player.Position = AdminEvent.Position;
                                 player.Dimension = AdminEvent.Dimension;
-                                player.SendChatMessage("Вы были телепортированы на мероприятие '" + AdminEvent.Name + "'.");
+                                player.SendChatMessage("You were teleported to an event '" + AdminEvent.Name + "'.");
                             }
-                            else player.SendChatMessage("К сожалению, список участников полон.");
+                            else player.SendChatMessage("Unfortunately, the list of participants is full.");
                         }
-                        else player.SendChatMessage("Вы уже занесены в список участников.");
+                        else player.SendChatMessage("You are already on the list of participants.");
                     }
-                    else player.SendChatMessage("Телепорт закрыт.");
+                    else player.SendChatMessage("The teleport is closed. ");
                 }
-                else player.SendChatMessage("Телепорт для Вас недоступен.");
+                else player.SendChatMessage("Teleport is not available for you.");
             }
         }
 
-        [Command("mpkick", "Используйте: /mpkick [ID игрока]")]
+        [Command("mpkick", "Use: /mpkick [ID player]")]
         public void MPKick(Player player, int pid)
         {
             if (Main.Players.ContainsKey(player))
@@ -271,17 +271,17 @@ namespace NeptuneEvo.Core
                             AdminEvent.Admin = player;
                             target.Health = 0;
                             target.Armor = 0;
-                            player.SendChatMessage("Вы выгнали " + target.Name + " с мероприятия.");
+                            player.SendChatMessage("You kicked out " + target.Name + " from the event.");
                         }
-                        else player.SendChatMessage("Игрок с данным ID был найден, но он не участник мероприятия.");
+                        else player.SendChatMessage("A player with the given ID was found, but he is not a participant in the event.");
                     }
-                    else player.SendChatMessage("Игрока с таким ID не было найдено.");
+                    else player.SendChatMessage("No player with this ID was found.");
                 }
-                else player.SendChatMessage("Выгнать игрока можно только после создания и до начала мероприятия.");
+                else player.SendChatMessage("A player can be kicked out only after creation and before the start of the event.");
             }
         }
 
-        [Command("mphp", "Используйте: /mphp [Количество HP]")]
+        [Command("mphp", "Use: /mphp [number HP]")]
         public void MPHeal(Player player, byte health)
         {
             if (Main.Players.ContainsKey(player))
@@ -296,15 +296,15 @@ namespace NeptuneEvo.Core
                         {
                             NAPI.Player.SetPlayerHealth(target, health);
                         }
-                        player.SendChatMessage("Вы успешно установили всем участником МП " + health + " HP.");
+                        player.SendChatMessage("You have successfully installed all MP members " + health + " HP.");
                     }
-                    else player.SendChatMessage("Количество HP, которое можно выставить, находится в диапозоне от 1 до 100.");
+                    else player.SendChatMessage("The amount of HP that can be set is in the range from 1 to 100.");
                 }
-                else player.SendChatMessage("Выдать HP игрокам можно только до начала мероприятия.");
+                else player.SendChatMessage("You can only give HP to players before the event starts.");
             }
         }
 
-        [Command("mpar", "Используйте: /mpar [Количество Armor]")]
+        [Command("mpar", "Use: /mpar [number Armor]")]
         public void MPArmor(Player player, byte armor)
         {
             if (Main.Players.ContainsKey(player))
@@ -319,11 +319,11 @@ namespace NeptuneEvo.Core
                         {
                             NAPI.Player.SetPlayerArmor(target, armor);
                         }
-                        player.SendChatMessage("Вы успешно установили всем участником МП " + armor + " брони.");
+                        player.SendChatMessage("You have successfully installed all MP members " + armor + " брони.");
                     }
-                    else player.SendChatMessage("Количество Armor, которое можно выставить, находится в диапозоне от 0 до 100.");
+                    else player.SendChatMessage("The amount of Armor that can be set is in the range from 0 to 100.");
                 }
-                else player.SendChatMessage("Выдать Armor игрокам можно только до начала мероприятия.");
+                else player.SendChatMessage("You can only give Armor to players before the event starts.");
             }
         }
 
@@ -344,13 +344,13 @@ namespace NeptuneEvo.Core
                             {
                                 player.SendChatMessage("ID: " + target.Value + " | Имя: " + target.Name);
                             }
-                            player.SendChatMessage("Игроков на мероприятии: " + memcount);
+                            player.SendChatMessage("Players at the event: " + memcount);
                         }
-                        else player.SendChatMessage("Игроков на мероприятии: " + memcount);
+                        else player.SendChatMessage("Players at the event: " + memcount);
                     }
-                    else player.SendChatMessage("Игроков на мероприятии не обнаружено.");
+                    else player.SendChatMessage("No players found at the event. ");
                 }
-                else player.SendChatMessage("Мероприятие еще не создано.");
+                else player.SendChatMessage("The event has not yet been created.");
             }
         }
         
@@ -396,15 +396,15 @@ namespace NeptuneEvo.Core
             AdminEvent.Reward = reward;
             AdminEvent.EventState = 0;
             UpdateLastAdminEventLog();
-            NAPI.Chat.SendChatMessageToAll("!{#A87C33}Мероприятие '" + AdminEvent.Name + "' закончилось, спасибо за участие!");
+            NAPI.Chat.SendChatMessageToAll("!{#A87C33}Event '" + AdminEvent.Name + "' ended, thanks for your participation!");
             if (winner != AdminEvent.Admin)
             {
                 if (reward != 0)
                 {
-                    NAPI.Chat.SendChatMessageToAll("!{#A87C33}Победитель " + winner.Name + " получил приз в размере " + reward + "$.");
+                    NAPI.Chat.SendChatMessageToAll("!{#A87C33}Winner " + winner.Name + " received a prize of " + reward + "$.");
                     MoneySystem.Wallet.Change(winner, (int)reward);
                 }
-                else NAPI.Chat.SendChatMessageToAll("!{#A87C33}Победитель: " + winner.Name + ".");
+                else NAPI.Chat.SendChatMessageToAll("!{#A87C33}Winner: " + winner.Name + ".");
             }
         }
     }

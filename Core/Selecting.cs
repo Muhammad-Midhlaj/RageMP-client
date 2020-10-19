@@ -53,7 +53,7 @@ namespace NeptuneEvo.Core
                             if (item.Type == ItemType.BodyArmor && nInventory.Find(Main.Players[player].UUID, ItemType.BodyArmor) != null)
                             {
                                 entity.SetSharedData("PICKEDT", false);
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Недостаточно места в инвентаре", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Insufficient space in inventory", 3000);
                                 Items.InProcessering.Remove(id);
                                 return;
                             }
@@ -62,7 +62,7 @@ namespace NeptuneEvo.Core
                             if (tryAdd == -1 || (tryAdd > 0 && nInventory.WeaponsItems.Contains(item.Type)))
                             {
                                 entity.SetSharedData("PICKEDT", false);
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Недостаточно места в инвентаре", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Insufficient space in inventory", 3000);
                                 Items.InProcessering.Remove(id);
                                 return;
                             }
@@ -96,7 +96,7 @@ namespace NeptuneEvo.Core
                             House house = HouseManager.Houses.FirstOrDefault(h => h.ID == Main.Players[player].InsideHouseID);
                             if(house == null) return;
                             if(!house.Owner.Equals(player.Name)) {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Пользоваться мебелью может только владелец дома.", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Only the owner of the house can use the furniture.", 3000);
                                 return;
                             }
                             var furnID = NAPI.Data.GetEntityData(entity, "ID");
@@ -113,7 +113,7 @@ namespace NeptuneEvo.Core
                             if (player.HasData("HEIST_DRILL") || NAPI.Data.HasEntityData(player, "HAND_MONEY"))
                             {
                                 entity.SetSharedData("PICKEDT", false);
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас уже есть сумка", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You already have a bag", 3000);
                                 return;
                             }
 
@@ -135,7 +135,7 @@ namespace NeptuneEvo.Core
                             if (player.HasData("HEIST_DRILL") || player.HasData("HAND_MONEY"))
                             {
                                 entity.SetSharedData("PICKEDT", false);
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас уже есть дрель или money в руках", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You already have a drill or money in your hands", 3000);
                                 return;
                             }
                             
@@ -163,7 +163,7 @@ namespace NeptuneEvo.Core
                 int index = (int)arguments[1];
                 if (vehicle == null || player.Position.DistanceTo(vehicle.Position) > 5)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Машина находится далеко от Вас", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "The car is far from you", 3000);
                     return;
                 }
                 switch (index)
@@ -171,14 +171,14 @@ namespace NeptuneEvo.Core
                     case 0:
                         if (player.IsInVehicle)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не можете открыть/закрыть капот, находясь в машине", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You cannot open / close the hood while in the car", 3000);
                             return;
                         }
                         if (VehicleStreaming.GetDoorState(vehicle, DoorID.DoorHood) == DoorState.DoorClosed)
                         {
                             if (VehicleStreaming.GetLockState(vehicle))
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не можете открыть капот, пока машина закрыта", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You cannot open the hood while the car is closed", 3000);
                                 return;
                             }
                             VehicleStreaming.SetDoorState(vehicle, DoorID.DoorHood, DoorState.DoorOpen);
@@ -188,7 +188,7 @@ namespace NeptuneEvo.Core
                     case 1:
                         if (player.IsInVehicle)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не можете открыть/закрыть багажник, находясь в машине", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You cannot open / close the trunk while in the car", 3000);
                             return;
                         }
                         if (VehicleStreaming.GetDoorState(vehicle, DoorID.DoorTrunk) == DoorState.DoorOpen)
@@ -216,7 +216,7 @@ namespace NeptuneEvo.Core
                             {
                                 if (Main.Players[player].FractionID != 7 && Main.Players[player].FractionID != 9)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не можете открыть багажник у этой машины", 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You cannot open the trunk of this car", 3000);
                                     return;
                                 }
                             }
@@ -230,21 +230,21 @@ namespace NeptuneEvo.Core
                     case 3:
                         if (player.IsInVehicle)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не можете открыть инвентарь, находясь в машине", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You cannot open your inventory while in the car", 3000);
                             return;
                         }
                         if (NAPI.Data.GetEntityData(vehicle, "ACCESS") == "WORK" || vehicle.Class == 13 || vehicle.Class == 8)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Эта транспортное средство не поддерживает инвентарь", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "This vehicle does not support inventory", 3000);
                             return;
                         }
                         if (Main.Players[player].AdminLVL == 0 && VehicleStreaming.GetDoorState(vehicle, DoorID.DoorTrunk) == DoorState.DoorClosed)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не можете открыть инвентарь машины, пока багажник закрыт", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You cannot open the inventory of the car while the trunk is closed", 3000);
                             return;
                         }
                         if(vehicle.GetData<bool>("BAGINUSE") == true) {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Дождитесь, пока другой человек перестанет пользоваться багажником.", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Wait until the other person stops using the trunk.", 3000);
                             return;
                         }
                         vehicle.SetData("BAGINUSE", true);
@@ -265,7 +265,7 @@ namespace NeptuneEvo.Core
                 var target = (Player)arguments[0];
                 if (target == null || player.Position.DistanceTo(target.Position) > 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Игрок находится далеко от Вас", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "The player is far from you ", 3000);
                     return;
                 }
                 player.SetData("SELECTEDPLAYER", target);
@@ -274,38 +274,38 @@ namespace NeptuneEvo.Core
                 var action = arguments[1].ToString();
                 switch (action)
                 {
-                    case "Пожать руку":
+                    case "To shake the hand":
                         if (player.IsInVehicle) return;
                         playerHandshakeTarget(player, target);
                         return;
-                    case "Вести за собой":
+                    case "To lead":
                         if (player.IsInVehicle) return;
                         Fractions.FractionCommands.targetFollowPlayer(player, target);
                         return;
-                    case "Ограбить":
+                    case "Rob ":
                         if (player.IsInVehicle) return;
                         Fractions.FractionCommands.robberyTarget(player, target);
                         return;
-                    case "Отпустить":
+                    case "Let go":
                         if (player.IsInVehicle) return;
                         if (!target.HasData("FOLLOWING"))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Этого игрока никто не тащит", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Nobody drags this player", 3000);
                             return;
                         }
                         if (!player.HasData("FOLLOWER") || player.GetData<Player>("FOLLOWER") != target)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Этого игрока тащит кто-то другой", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "This player is being dragged by someone else", 3000);
                             return;
                         }
                         Fractions.FractionCommands.unFollow(player, target);
                         return;
-                    case "Обыскать":
+                    case "Search":
                         if (player.IsInVehicle) return;
                         {
                             if (!target.GetData<bool>("CUFFED"))
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок не в наручниках", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Player not in handcuffs", 3000);
                                 return;
                             }
 
@@ -330,19 +330,19 @@ namespace NeptuneEvo.Core
                             Trigger.ClientEvent(player, "bsearchOpen", JsonConvert.SerializeObject(data));
                             return;
                         }
-                    case "Посмотреть паспорт":
+                    case "View passport":
                         if (player.IsInVehicle) return;
                         {
                             if (!target.GetData<bool>("CUFFED"))
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок не в наручниках", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The player is not in handcuffs", 3000);
                                 return;
                             }
 
                             var acc = Main.Players[target];
-                            string gender = (acc.Gender) ? "Мужской" : "Женский";
-                            string fraction = (acc.FractionID > 0) ? Fractions.Manager.FractionNames[acc.FractionID] : "Нет";
-                            string work = (acc.WorkID > 0) ? Jobs.WorkManager.JobStats[acc.WorkID] : "Безработный";
+                            string gender = (acc.Gender) ? "Male" : "Female";
+                            string fraction = (acc.FractionID > 0) ? Fractions.Manager.FractionNames[acc.FractionID] :"No";
+                            string work = (acc.WorkID > 0) ? Jobs.WorkManager.JobStats[acc.WorkID] : "Unemployed";
                             List<object> data = new List<object>
                             {
                                 acc.UUID,
@@ -358,22 +358,22 @@ namespace NeptuneEvo.Core
                             Trigger.ClientEvent(player, "newPassport", target, acc.UUID);
                         }
                         return;
-                    case "Посмотреть лицензии":
+                    case "View licenses":
                         if (player.IsInVehicle) return;
                         {
                             if (!target.GetData<bool>("CUFFED"))
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок не в наручниках", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The player is not in handcuffs", 3000);
                                 return;
                             }
 
                             var acc = Main.Players[target];
-                            string gender = (acc.Gender) ? "Мужской" : "Женский";
+                            string gender = (acc.Gender) ? "Male" : "Female";
 
                             var lic = "";
                             for (int i = 0; i < acc.Licenses.Count; i++)
                                 if (acc.Licenses[i]) lic += $"{Main.LicWords[i]} / ";
-                            if (lic == "") lic = "Отсутствуют";
+                            if (lic == "") lic = "Absent ";
 
                             List<string> data = new List<string>
                             {
@@ -397,11 +397,11 @@ namespace NeptuneEvo.Core
                         playerTakeIlleagal(player, target);
                         return;
                     case "Продать аптечку":
-                        Trigger.ClientEvent(player, "openInput", "Продать аптечку", "Цена $$$", 4, "player_medkit");
+                        Trigger.ClientEvent(player, "openInput", "Sell first aid kit", "Price $$$", 4, "player_medkit");
                         return;
                     case "Предложить лечение":
                         if (player.IsInVehicle) return;
-                        Trigger.ClientEvent(player, "openInput", "Предложить лечение", "Цена $$$", 4, "player_heal");
+                        Trigger.ClientEvent(player, "openInput", "Suggest treatment", "Price $$$", 4, "player_heal");
                         return;
                     case "Вылечить":
                         if (player.IsInVehicle) return;
@@ -417,7 +417,7 @@ namespace NeptuneEvo.Core
                             Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас нет дома", 3000);
                             return;
                         }
-                        Trigger.ClientEvent(player, "openInput", "Продать дом", "Цена $$$", 8, "player_offerhousesell");
+                        Trigger.ClientEvent(player, "openInput", "Sell a house", "Price $$$", 8, "player_offerhousesell");
                         return;
                     case "Заселить в дом":
                         HouseManager.InviteToRoom(player, target);
@@ -428,17 +428,17 @@ namespace NeptuneEvo.Core
                     case "Передать money":
                         if (Main.Players[player].LVL < 1)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Перевод денег доступен после первого уровня", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Money transfer is available after the first level", 3000);
                             return;
                         }
-                        Trigger.ClientEvent(player, "openInput", "Передать money", "Сумма $$$", 4, "player_givemoney");
+                        Trigger.ClientEvent(player, "openInput", "Transfer to money", "Сумма $$$", 4, "player_givemoney");
                         return;
                     case "Предложить обмен":
                         target.SetData("OFFER_MAKER", player);
                         target.SetData("REQUEST", "OFFER_ITEMS");
                         target.SetData("IS_REQUESTED", true);
-                        Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, $"Игрок ({player.Value}) предложил Вам обменяться предметами. Y/N - принять/отклонить", 3000);
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы предложили игроку ({target.Value}) обменяться предметами.", 3000);
+                        Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, $"Player ({player.Value}) invited you to exchange items. Y / N - accept / reject", 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You suggested to the player({target.Value}) exchange items. ", 3000);
                         return;
                     case "Мешок":
                         if (player.IsInVehicle) return;
@@ -451,7 +451,7 @@ namespace NeptuneEvo.Core
                     case "Выписать штраф":
                         if (player.IsInVehicle) return;
                         player.SetData("TICKETTARGET", target);
-                        Trigger.ClientEvent(player, "openInput", "Выписать штраф (сумма)", "Сумма от 0 до 7000$", 4, "player_ticketsum");
+                        Trigger.ClientEvent(player, "openInput", "Write out a fine (amount)","Amount from 0 to 7000 $", 4, "player_ticketsum");
                         return;
                 }
             }
@@ -461,7 +461,7 @@ namespace NeptuneEvo.Core
         public static void playerTransferMoney(Player player, string arg)
         {
             if(Main.Players[player].LVL < 1) {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Передача денег будет доступна начиная с 1 уровня.", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Money transfer will be available starting from level 1.", 3000);
                 return;
             }
             try
@@ -470,38 +470,38 @@ namespace NeptuneEvo.Core
             }
             catch
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Введите корректные данные", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Please enter correct data", 3000);
                 return;
             }
             var amount = Convert.ToInt32(arg);
             if (amount < 1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Введите корректные данные", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Enter correct data", 3000);
                 return;
             }
             Player target = player.GetData<Player>("SELECTEDPLAYER");
             if (!Main.Players.ContainsKey(target) || player.Position.DistanceTo(target.Position) > 2)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок слишком далеко от Вас", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The player is too far from you", 3000);
                 return;
             }
             if (amount > Main.Players[player].Money)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас недостаточно средств", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't have enough funds", 3000);
                 return;
             }
             if (player.HasData("NEXT_TRANSFERM") && DateTime.Now < player.GetData<DateTime>("NEXT_TRANSFERM") && Main.Players[player].AdminLVL == 0)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "С момента последней передачи денег прошло мало времени.", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Little time has passed since the last transfer of money.", 3000);
                 return;
             }
             player.SetData("NEXT_TRANSFERM", DateTime.Now.AddMinutes(1));
-            Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, $"Игрок ({player.Value}) передал Вам {amount}$", 3000);
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы передали игроку ({target.Value}) {amount}$", 3000);
+            Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, $"The player ({player.Value}) gave you {amount}$", 3000);
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You transferred to the player ({target.Value}) {amount}$", 3000);
             MoneySystem.Wallet.Change(target, amount);
             MoneySystem.Wallet.Change(player, -amount);
             GameLog.Money($"player({Main.Players[player].UUID})", $"player({Main.Players[target].UUID})", amount, $"transfer");
-            Commands.RPChat("me", player, $"передал(а) {amount}$ " + "{name}", target);
+            Commands.RPChat("me", player, $"handed over{amount}$ " + "{name}", target);
         }
         public static void playerHealTarget(Player player, Player target)
         {
@@ -509,13 +509,13 @@ namespace NeptuneEvo.Core
             {
                 if (player.Position.DistanceTo(target.Position) > 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок слишком далеко от Вас", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The player is too far from you", 3000);
                     return;
                 }
                 var item = nInventory.Find(Main.Players[player].UUID, ItemType.HealthKit);
                 if (item == null || item.Count < 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас нет аптечки", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't have a first aid kit", 3000);
                     return;
                 }
 
@@ -523,8 +523,8 @@ namespace NeptuneEvo.Core
                 if (target.HasData("IS_DYING"))
                 {
                     player.PlayAnimation("amb@medic@standing@tendtodead@idle_a", "idle_a", 39);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы начали реанимирование игрока ({target.Value})", 3000);
-                    Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, $"Игрок ({player.Value}) начал реанимировать Вас", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You have started resuscitating a player ({target.Value})", 3000);
+                    Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, $"Player ({player.Value}) began to revive you", 3000);
                     NAPI.Task.Run(() =>
                     {
                         try
@@ -537,7 +537,7 @@ namespace NeptuneEvo.Core
                                 var random = new Random();
                                 if (random.Next(0, 11) <= 5)
                                 {
-                                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Игрок ({target.Value}) чуть ласты не склеил. У Вас не вышло его реанимировать", 3000);
+                                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Player ({target.Value}) I almost glued the flippers together. You didn’t manage to revive hime to revive him", 3000);
                                     return;
                                 }
                             }
@@ -565,8 +565,8 @@ namespace NeptuneEvo.Core
                                 Timers.Stop(target.GetData<string>("DYING_TIMER"));
                                 target.ResetData("DYING_TIMER");
                             }
-                            Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, $"Игрок ({player.Value}) реанимировал Вас", 3000);
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы реанимировали игрока ({target.Value})", 3000);
+                            Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, $"Player ({player.Value}) revived you", 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You revived the player ({target.Value})", 3000);
 
                             if (target.HasData("CALLEMS_BLIP"))
                             {
@@ -582,8 +582,8 @@ namespace NeptuneEvo.Core
                 }
                 else
                 {
-                    Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, $"Игрок ({player.Value}) вылечил Вас с помощью аптечки", 3000);
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы вылечили игрока ({target.Value}) с помощью аптечки", 3000);
+                    Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, $"Player ({player.Value}) healed you with a first aid kit", 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You healed a player ({target.Value}) with a first aid kit", 3000);
                     target.Health = 100;
                 }
                 return;
@@ -594,20 +594,20 @@ namespace NeptuneEvo.Core
         {
             if (player.Position.DistanceTo(target.Position) > 2)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок слишком далеко от Вас", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The player is too far from you", 3000);
                 return;
             }
             if (!Fractions.Manager.canUseCommand(player, "takeguns")) return;
             Weapons.RemoveAll(target, true);
-            Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, $"Игрок ({player.Value}) изъял у Вас всё оружие", 3000);
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы изъяли всё оружие у игрока ({target.Value})", 3000);
+            Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, $"Player ({player.Value}) seized all weapons from you", 3000);
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You have removed all weapons from a player ({target.Value})", 3000);
             return;
         }
         public static void playerTakeIlleagal(Player player, Player target)
         {
             if (player.Position.DistanceTo(target.Position) > 2)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок слишком далеко от Вас", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The player is too far from you", 3000);
                 return;
             }
             var matItem = nInventory.Find(Main.Players[target].UUID, ItemType.Material);
@@ -616,13 +616,13 @@ namespace NeptuneEvo.Core
             var drugs = (drugItem == null) ? 0 : drugItem.Count;
             if (materials < 1 && drugs < 1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок не имеет ничего запрещённого", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The player has nothing forbidden ", 3000);
                 return;
             }
             nInventory.Remove(target, ItemType.Material, materials);
             nInventory.Remove(target, ItemType.Drugs, drugs);
-            Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, $"Игрок ({player.Value}) изъял у Вас запрещённые предметы", 3000);
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы изъяили у игрока {target.Value} запрещённые предметы", 3000);
+            Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, $"Player ({player.Value}) confiscated prohibited items from you ", 3000);
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You have withdrawn from the player {target.Value} prohibited items", 3000);
             return;
         }
         public static void playerOfferChangeItems(Player player)
@@ -636,7 +636,7 @@ namespace NeptuneEvo.Core
             }
             if (player.Position.DistanceTo(offerMaker.Position) > 2)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок слишком далеко", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The player is too far away", 3000);
                 return;
             }
 
@@ -655,10 +655,10 @@ namespace NeptuneEvo.Core
                     target.SetData("HANDSHAKER", player);
                     target.SetData("REQUEST", "HANDSHAKE");
                     target.SetData("IS_REQUESTED", true);
-                    Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, $"Игрок ({player.Value}) хочет пожать Вам руку. Y/N - принять/отклонить", 3000);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы предложили игроку ({target.Value}) пожать руку.", 3000);
-                } else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Невозможно пожать руку игроку в данный момент", 3000);
-            } else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Невозможно пожать руку игроку в данный момент", 3000);
+                    Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, $"Player ({player.Value}) wants to shake your hand. Y / N - accept / reject ", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You suggested to the player ({target.Value}) to shake the hand.", 3000);
+                } else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "It is impossible to shake hands with the player at the moment ", 3000);
+            } else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "It is impossible to shake hands with the player at the moment", 3000);
         }
         public static void hanshakeTarget(Player player)
         {

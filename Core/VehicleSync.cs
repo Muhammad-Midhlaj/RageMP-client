@@ -382,7 +382,7 @@ namespace NeptuneEvo.Core
             NAPI.ClientEvent.TriggerClientEventInDimension(veh.Dimension, "VehStream_SetVehicleDirtLevel", veh.Handle, dirt);
         }
 
-        // Вызывается клиентом для синхронизации данных двери
+        // Called by the client to synchronize door data
         [RemoteEvent("VehStream_SetDoorData")]
         public void VehStreamSetDoorData(Player player, Vehicle veh, int door1state, int door2state, int door3state, int door4state, int door5state, int door6state, int door7state, int door8state)
         {
@@ -401,11 +401,11 @@ namespace NeptuneEvo.Core
 
             UpdateVehicleSyncData(veh, data);
 
-            // Перераспределить товар
+            // Redistribute goods
             NAPI.ClientEvent.TriggerClientEventInDimension(veh.Dimension, "VehStream_SetVehicleDoorStatus", veh.Handle, door1state, door2state, door3state, door4state, door5state, door6state, door7state, door8state);
         }
 
-        // Вызывается клиентом для синхронизации данных окна
+        // Called by the client to sync window data
         [RemoteEvent("VehStream_SetWindowData")]
         public void VehStreamSetWindowData(Player player, Vehicle veh, int window1state, int window2state, int window3state, int window4state)
         {
@@ -420,11 +420,11 @@ namespace NeptuneEvo.Core
 
             UpdateVehicleSyncData(veh, data);
 
-            // Перераспределить товар
+            // Redistribute goods
             NAPI.ClientEvent.TriggerClientEventInDimension(veh.Dimension, "VehStream_SetVehicleWindowStatus", veh.Handle, window1state, window2state, window3state, window4state);
         }
 
-        // Вызывается клиентом для синхронизации данных колеса
+        // Called by the client to sync wheel data
         [RemoteEvent("VehStream_SetWheelData")]
         public void VehStreamSetWheelData(Player player, Vehicle veh, int wheel1state, int wheel2state, int wheel3state, int wheel4state, int wheel5state, int wheel6state, int wheel7state, int wheel8state, int wheel9state, int wheel10state)
         {

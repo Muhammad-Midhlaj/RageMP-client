@@ -58,7 +58,7 @@ namespace NeptuneEvo.Core
                             else
                             {
                                 Notify.Send(c, NotifyType.Error, NotifyPosition.BottomCenter,
-                                    $"У тебя есть дом. иди и припаркуйся в своем гараже!",
+                                    $"You have a house. go and park in your garage!",
                                 3000);
                             }
                         }
@@ -86,7 +86,7 @@ namespace NeptuneEvo.Core
                 if (spawnedVehiclesNumber.Contains(vNumber))
                 {
                     Notify.Send(c, NotifyType.Error, NotifyPosition.BottomCenter,
-                        $"Машины нет в гараже!",
+                        $"There is no car in the garage!",
                     3000);
                     return;
                 }
@@ -98,10 +98,10 @@ namespace NeptuneEvo.Core
                     // Check if player has a car
                     if (! VehicleManager.getAllPlayerVehicles(c.Name).Contains(vNumber))
                     {
-                        Log.Write("Кто-то пытался создать не его транспортное средство!");
+                        Log.Write("Someone tried to create a vehicle that was not his.!");
                         Commands.SendToAdmins(3, $"!{{#d35400}}[CAR-GARAGE-EXPLOIT] {c.Name} ({c.Value})");
                         Notify.Send(c, NotifyType.Warning, NotifyPosition.BottomCenter,
-                            $"Это не твоя машина!",
+                            $"This is not your car!",
                         3000);
                         return;
                     }
@@ -111,7 +111,7 @@ namespace NeptuneEvo.Core
                     if (! access)
                     {
                         Notify.Send(c, NotifyType.Info, NotifyPosition.BottomCenter,
-                            $"Кажется, вы потеряли ключи от машины. Возьми новую!",
+                            $"You seem to have lost your car keys. Take a new!",
                         3000);
                         nInventory.Add(c, new nItem(ItemType.CarKey, 1, $"{vNumber}_{VehicleManager.Vehicles[vNumber].KeyNum}"));
                     }
@@ -136,12 +136,12 @@ namespace NeptuneEvo.Core
                     else
                     {
                         Notify.Send(c, NotifyType.Error, NotifyPosition.BottomCenter,
-                            $"Машины нет в открытом гараже!",
+                            $"There is no car in the open garage!",
                         3000);
                         return;
                     }
                 }
-            } catch(Exception e) { Log.Write("Ошибка при создании машины из общественного гаража " + e.Message); }
+            } catch(Exception e) { Log.Write("Error while creating a car from a public garage " + e.Message); }
           
         }
 
@@ -165,7 +165,7 @@ namespace NeptuneEvo.Core
             {
                 if (position != new Vector3(116.7458, -1949.892, 19.748))
                 {
-                    NAPI.Blip.CreateBlip(50, position, 1, 4, "Общественная парковка", 255, 0, true);
+                    NAPI.Blip.CreateBlip(50, position, 1, 4, "Public parking", 255, 0, true);
                 }
 
                 NAPI.Marker.CreateMarker(1, position, new Vector3(), new Vector3(), 3, new Color(255, 255, 255, 220), false, 0);
@@ -175,7 +175,7 @@ namespace NeptuneEvo.Core
                     try
                     {
                         Notify.Send(entity, NotifyType.Info, NotifyPosition.BottomCenter,
-                            $"Нажмите Numpad 2, чтобы открыть меню!",
+                            $"Press Numpad 2 to open the menu!",
                         3000);
                     }
                     catch (Exception e) { Console.WriteLine("shape.OnEntityEnterColshape: " + e.Message); }

@@ -16,10 +16,10 @@ namespace NeptuneEvo.Core
     class RodManager : Script
     {
 
-        // Как сделать чтобы вещь выпадала с большим шансом?
-        // Добавляем намного больше строчек одного и тоже предмета
-        // напрмер предмет Щука, добавим 10 раз[цифры менять надо], значит
-        // в 10 раз будет чаще выпадать
+        // How to make the item drop with a high chance?
+        // Add many more lines of the same item
+        // for example the Pike object, add 10 times [the numbers need to be changed], so
+        // will drop 10 times more often
 
         [ServerEvent(Event.PlayerDeath)]
         public void OnPlayerDeath(Player player, Player killer, uint reason)
@@ -59,7 +59,7 @@ namespace NeptuneEvo.Core
             {17, ItemType.Chyka },
         };
 
-        public static Dictionary<int, ItemType> FishItems3 = new Dictionary<int, ItemType>
+        public static Dictionary<int, ItemType> FishItems3 = new Dictionary<int, ItemType> // POSSIBLE ERROR
         {
             {1, ItemType.Koroska },
             {2, ItemType.Kyndja },
@@ -87,34 +87,34 @@ namespace NeptuneEvo.Core
             var type = ItemType.Naz;
             switch (name)
             {
-                case "Корюшка":
+                case "Smelt":
                     type = ItemType.Koroska;
                     break;
-                case "Кунджа":
+                case "Kunja ":
                     type = ItemType.Kyndja;
                     break;
-                case "Лосось":
+                case "Salmon":
                     type = ItemType.Lococ;
                     break;
-                case "Окунь":
+                case "Perch":
                     type = ItemType.Okyn;
                     break;
-                case "Осётр":
+                case "Sturgeon":
                     type = ItemType.Ocetr;
                     break;
-                case "Скат":
+                case "Scat":
                     type = ItemType.Skat;
                     break;
-                case "Тунец":
+                case "Tuna":
                     type = ItemType.Tunec;
                     break;
-                case "Угорь":
+                case "Acne":
                     type = ItemType.Ygol;
                     break;
-                case "Чёрный амур":
+                case "Black cupid ":
                     type = ItemType.Amyr;
                     break;
-                case "Щука":
+                case "Pike":
                     type = ItemType.Chyka;
                     break;
             }
@@ -123,22 +123,22 @@ namespace NeptuneEvo.Core
 
         public static Dictionary<string, int> ProductsSellPrice = new Dictionary<string, int>()
         {
-            {"Корюшка",13},
-            {"Кунджа",16},
-            {"Лосось",10},
-            {"Окунь",4},
-            {"Осётр",5},
-            {"Скат",12},
-            {"Тунец",18},
-            {"Угорь",5},
-            {"Чёрный амур",15},
-            {"Щука",6},
+            {"Smelt",13},
+            {"Kunja",16},
+            {"Salmon",10}, // TODO : POSSSIBLE ERROR
+            {"Perch",4},
+            {"Sturgeon",5},
+            {"Stingray",12},
+            {"Tuna",18},
+            {"Acne",5},
+            {"Black cupid",15},
+            {"Pike",6},
         };
 
         public static Dictionary<string, int> ProductsRodPrice = new Dictionary<string, int>()
         {
-            {"Удочка", 1000},
-            {"Наживка", 100},
+            {"Fishing rod", 1000},
+            {"Pressing", 100},
         };
 
         public static string GetNameByItemType(ItemType tupe)
@@ -147,34 +147,34 @@ namespace NeptuneEvo.Core
             switch (tupe)
             {
                 case ItemType.Koroska:
-                    type = "Корюшка";
+                    type = "Smelt";
                     break;
                 case ItemType.Kyndja:
-                    type = "Кунджа";
+                    type = "Kunja";
                     break;
                 case ItemType.Lococ:
-                    type = "Лосось";
+                    type = "Salmon";
                     break;
                 case ItemType.Okyn:
-                    type = "Окунь";
+                    type = "Perch";
                     break;
                 case ItemType.Ocetr:
-                    type = "Осётр";
+                    type = "Sturgeon";
                     break;
                 case ItemType.Skat:
-                    type = "Скат";
+                    type = "Stingray ";
                     break;
                 case ItemType.Tunec:
-                    type = "Тунец";
+                    type = "Tuna";
                     break;
                 case ItemType.Ygol:
-                    type = "Угорь";
+                    type = "Acne";
                     break;
                 case ItemType.Amyr:
-                    type = "Чёрный амур";
+                    type = "Black cupid";
                     break;
                 case ItemType.Chyka:
-                    type = "Щука";
+                    type = "Pike";
                     break;
             }
 
@@ -293,7 +293,7 @@ namespace NeptuneEvo.Core
             var tryAdd = nInventory.TryAdd(player, new nItem(ItemType.Ocetr));
             if (tryAdd == -1 || tryAdd > 0)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Недостаточно места в инвентаре", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Insufficient space in inventory", 3000);
                 RodManager.crashpros(player);
                 return;
             }
@@ -302,21 +302,21 @@ namespace NeptuneEvo.Core
                 var rnd = new Random();
                 int fishco = rnd.Next(1, RodManager.FishItems1.Count);
                 nInventory.Add(player, new nItem(RodManager.FishItems1[fishco], 1));
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы поймали рыбу {GetNameByItemType(RodManager.FishItems1[fishco])}", 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You caught a fish {GetNameByItemType(RodManager.FishItems1[fishco])}", 3000);
             }
             if (player.GetData<int>("FISHLEVEL") == 2)
             {
                 var rnd = new Random();
                 int fishco = rnd.Next(1, RodManager.FishItems2.Count);
                 nInventory.Add(player, new nItem(RodManager.FishItems2[fishco], 1));
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы поймали рыбу {GetNameByItemType(RodManager.FishItems2[fishco])}", 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You caught a fish {GetNameByItemType(RodManager.FishItems2[fishco])}", 3000);
             }
             if (player.GetData<int>("FISHLEVEL") == 3)
             {
                 var rnd = new Random();
                 int fishco = rnd.Next(1, RodManager.FishItems3.Count);
                 nInventory.Add(player, new nItem(RodManager.FishItems3[fishco], 1));
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы поймали рыбу {GetNameByItemType(RodManager.FishItems3[fishco])}", 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You caught a fish {GetNameByItemType(RodManager.FishItems3[fishco])}", 3000);
             }
             RodManager.crashpros(player);
         }
@@ -324,7 +324,7 @@ namespace NeptuneEvo.Core
         [RemoteEvent("stopFishDrop")]
         public static void stopFishDrop(Player player)
         {
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Рыба сошла с крючка!", 3000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"The fish is off the hook!", 3000);
             RodManager.crashpros(player);
         }
 
@@ -333,31 +333,31 @@ namespace NeptuneEvo.Core
             nInventory.Add(player, new nItem(TypeRod[level], 1));
             if (player.IsInVehicle)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не должны находится в машине!", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't have to be in the car!", 3000);
                 GUI.Dashboard.Close(player);
                 return;
             }
             if (player.GetData<bool>("FISHING") == true)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы уже рыбачите!", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are already fishing!", 3000);
                 return;
             }
             var aItem = nInventory.Find(Main.Players[player].UUID, ItemType.Naz);
             if (aItem == null)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "У Вас нет наживки", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You have no bait", 3000);
                 return;
             }
             if (player.GetData<bool>("ALLOWFISHING") == false || player.GetData<bool>("ALLOWFISHING") == null)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "В данном месте нельзя рыбачить", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You cannot fish in this place", 3000);
                 return;
             }
             var rndf = new Random();
             nInventory.Remove(player, ItemType.Naz, 1);
             player.SetData("FISHLEVEL", level);
             RodManager.setallow(player);
-            Commands.RPChat("me", player, $"Начал(а) рыбачить");
+            Commands.RPChat("me", player, $"Started fishing");
         }
 
         public class Roding

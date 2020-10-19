@@ -15,52 +15,52 @@ namespace NeptuneEvo.Core
     {
         public static Dictionary<int, string> ItemsNames = new Dictionary<int, string>
         {
-            {-1, "Маска" },
-            {-3, "Перчатки" },
-            {-4, "Штаны"},
-            {-5, "Рюкзак"},
-            {-6, "Обувь"},
-            {-7, "Аксессуар"},
-            {-8, "Нижняя одежда"},
-            {-9, "Бронежилет"},
-            {-10, "Украшения"},
-            {-11, "Верхняя одежда" },
-            {-12, "Головной убор" },
-            {-13, "Очки" },
-            {-14, "Аксессуар" },
-            {1, "Аптечка"},
-            {2, "Канистра"},
-            {3, "Чипсы"},
-            {4, "Пиво"},
-            {5, "Пицца"},
-            {6, "Бургер"},
-            {7, "Хот-Дог"},
-            {8, "Сэндвич"},
-            {9, "eCola"},
-            {10, "Sprunk"},
-            {11, "Отмычка для замков"},
-            {12, "Сумка с деньгами"},
-            {13, "Материалы"},
-            {14, "Наркотики"},
-            {15, "Сумка с дрелью"},
-            {16, "Военная отмычка"},
-            {17, "Мешок"},
-            {18, "Стяжки"},
-            {19, "Ключи от машины"},
-            {40, "Подарок"},
-            {41, "Связка ключей"},
+            {-1, "Mask" },
+            {-3, "Gloves"},
+            {-4, "Trousers"},
+            {-5, "Backpack"},
+            {-6, "Footwear"},
+            {-7, "Accessory"},
+            {-8, "Underwear"},
+            {-9, "Body armor"},
+            {-10,"Decorations"},
+            {-11,"Outerwear"},
+            {-12,"Headdress" },
+            {-13, "Points"},
+            {-14, "Accessory"},
+            {1, "First aid kit"},
+            {2, "Canister"},
+            {3, "Chips"},
+            {4, "Beer"},
+            {5, "Pizza"},
+            {6, "Burger"},
+            {7, "Hot dog"},
+            {8, "Sandwich"},
+            {9, "andGlue"},
+            {10,"Sprunk"},
+            {11,"Pick for locks"},
+            {12,"Money bag"},
+            {13,"Materials"},
+            {14,"Drugs"},
+            {15,"Drill Bag"},
+            {16,"Military master key"},
+            {17,"Bag"},
+            {18,"Couplers"},
+            {19,"Car keys"},
+            {40,"Present"},
+            {41,"Bunch of keys"},
 
-            {20, "«На корке лимона»"},
-            {21, "«На бруснике»"},
-            {22, "«Русский стандарт»"},
-            {23, "«Asahi»"},
+            {20, "«On a lemon peel»"},
+            {21, "«On cranberries»"},
+            {22, "«Russian standard»"},
+            {23, "«asahi»"},
             {24, "«Midori»"},
             {25, "«Yamazaki»"},
             {26, "«Martini Asti»"},
             {27, "«Sambuca»"},
             {28, "«Campari»"},
-            {29, "«Дживан»"},
-            {30, "«Арарат»"},
+            {29, "«Jivan»"},
+            {30, "«Ararat»"},
             {31, "«Noyan Tapan»"},
 
             {100, "Pistol" },
@@ -118,43 +118,43 @@ namespace NeptuneEvo.Core
             {148, "Sweeper Shotgun" },
             {149, "Pump Shotgun Mk2" },
 
-            {180, "Нож" },
-            {181, "Дубинка" },
-            {182, "Молоток" },
-            {183, "Бита" },
-            {184, "Лом" },
-            {185, "Гольф клюшка" },
-            {186, "Бутылка" },
-            {187, "Кинжал" },
-            {188, "Топор" },
-            {189, "Кастет" },
-            {190, "Мачете" },
-            {191, "Фонарик" },
-            {192, "Швейцарский нож" },
-            {193, "Кий" },
-            {194, "Ключ" },
-            {195, "Боевой топор" },
+            {180, "Knife"},
+            {181, "Cudgel"},
+            {182, "Hammer" },
+            {183, "Bits"},
+            {184, "Scrap"},
+            {185, "Golf Club"},
+            {186, "Bottle"},
+            {187, "Dagger"},
+            {188, "Ax"},
+            {189, "Cassette"},
+            {190, "Machete"},
+            {191, "Lantern" },
+            {192, "Swiss knife" },
+            {193, "Cue"},
+            {194, "Key"},
+            {195, "Battle ax" },
 
-            {200, "Пистолетный калибр" },
-            {201, "Малый калибр" },
-            {202, "Автоматный калибр" },
-            {203, "Снайперский калибр" },
-            {204, "Дробь" },
+            {200, "Pistol caliber" },
+            {201, "Small caliber"},
+            {202, "Automatic caliber" },
+            {203, "Sniper caliber" },
+            {204, "Fraction"},
 
-            {205, "Удочка" },
-            {206, "Улучшенная удочка" },
-            {207, "Удочка MK2" },
-            {208, "Наживка" },
-            {209, "Корюшка" },
-            {210, "Кунджа" },
-            {211, "Лосось" },
-            {212, "Окунь" },
-            {213, "Осётр" },
-            {214, "Скат" },
-            {215, "Тунец" },
-            {216, "Угорь" },
-            {217, "Чёрный амур" },
-            {218, "Щука" },
+            {205, "Fishing rod" },
+            {206, "Improved Fishing Pole" },
+            {207, "Fishing rod MK2"},
+            {208, "Fill"},
+            {209, "Smelt"},
+            {210, "Kunja"},
+            {211, "Salmon"},
+            {212, "Perch"},
+            {213, "Sturgeon"},
+            {214, "Stingray"},
+            {215, "Tuna"},
+            {216, "Eel"},
+            {217, "Black Cupid"},
+            {218, "Pike"},
         };
         public static Dictionary<int, string> ItemsDescriptions = new Dictionary<int, string>();
         public static Dictionary<ItemType, uint> ItemModels = new Dictionary<ItemType, uint>()
@@ -1230,14 +1230,14 @@ namespace NeptuneEvo.Core
                     var clothesGender = Convert.ToBoolean(data.Split('_')[2]);
                     if (clothesGender != Main.Players[player].Gender)
                     {
-                        var error_gender = (clothesGender) ? "мужская" : "женская";
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Это {error_gender} одежда", 3000);
+                        var error_gender = (clothesGender) ? "male ":"Female";
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"it{error_gender} clothes", 3000);
                         GUI.Dashboard.Close(player);
                         return;
                     }
                     if ((player.GetData<bool>("ON_DUTY") && Fractions.Manager.FractionTypes[Main.Players[player].FractionID] == 2 && Main.Players[player].FractionID != 9) || player.GetData<bool>("ON_WORK"))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не можете использовать это сейчас", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You can't use it now", 3000);
                         GUI.Dashboard.Close(player);
                         return;
                     }
@@ -1295,7 +1295,7 @@ namespace NeptuneEvo.Core
 
                     if (player.HasData("RESIST_BAN"))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы пьяны до такой степени, что не можете открыть бутылку", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are drunk to the point that you cannot open the bottle", 3000);
                         return;
                     }
 
@@ -1340,7 +1340,7 @@ namespace NeptuneEvo.Core
                     /*if (!player.HasData("RESIST_TIMER"))
                         player.SetData("RESIST_TIMER", Timers.Start(1000, () => Fractions.AlcoFabrication.ResistTimer(player.Name)));*/
 
-                    Commands.RPChat("me", player, "выпил бутылку " + nInventory.ItemsNames[(int)item.Type]);
+                    Commands.RPChat("me", player, "drank a bottle " + nInventory.ItemsNames[(int)item.Type]);
                     GameLog.Items($"player({Main.Players[player].UUID})", "use", Convert.ToInt32(item.Type), 1, $"{item.Data}");
                 }
 
@@ -1363,7 +1363,7 @@ namespace NeptuneEvo.Core
                                 var mask = Customization.CustomPlayerData[Main.Players[player].UUID].Clothes.Mask.Variation;
                                 if (Customization.MaskTypes.ContainsKey(mask) && Customization.MaskTypes[mask].Item3)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не можете надеть эти очки с маской", 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You cannot wear these glasses with a mask. ", 3000);
                                     return;
                                 }
                                 var itemData = (string)item.Data;
@@ -1392,7 +1392,7 @@ namespace NeptuneEvo.Core
                                 var mask = Customization.CustomPlayerData[Main.Players[player].UUID].Clothes.Mask.Variation;
                                 if (Customization.MaskTypes.ContainsKey(mask) && Customization.MaskTypes[mask].Item2)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не можете надеть этот головной убор с маской", 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You cannot wear this headgear with a mask", 3000);
                                     return;
                                 }
                                 var itemData = (string)item.Data;
@@ -1613,13 +1613,13 @@ namespace NeptuneEvo.Core
                                     }
                                     else
                                     {
-                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Заняты обе руки", 3000);
+                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Both hands are busy", 3000);
                                         return;
                                     }
                                 }
                                 else 
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Левая рука занята, а на правой никто часы не носит", 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "The left hand is busy, but on the right no one wears a watch", 3000);
                                     return;
                                 }
                             }
@@ -1646,7 +1646,7 @@ namespace NeptuneEvo.Core
                                 {
                                     if (underwear.Top == -1)
                                     {
-                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Эту одежду можно одеть только под низ верхней", 3000);
+                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "These clothes can only be worn under the bottom of the top", 3000);
                                         return;
                                     }
                                     Customization.CustomPlayerData[Main.Players[player].UUID].Clothes.Top = new ComponentItem(underwear.Top, texture);
@@ -1663,7 +1663,7 @@ namespace NeptuneEvo.Core
                                         var topType = nowTop.Type;
                                         if (!underwear.UndershirtIDs.ContainsKey(topType))
                                         {
-                                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Эта одежда несовместима с Вашей верхней одеждой", 3000);
+                                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "This garment is incompatible with your outerwear", 3000);
                                             return;
                                         }
                                         Customization.CustomPlayerData[Main.Players[player].UUID].Clothes.Undershit = new ComponentItem(underwear.UndershirtIDs[topType], texture);
@@ -1676,7 +1676,7 @@ namespace NeptuneEvo.Core
                                     {
                                         if (underwear.Top == -1)
                                         {
-                                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Эту одежду можно одеть только под низ верхней", 3000);
+                                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "These clothes can only be worn under the bottom of the top", 3000);
                                             return;
                                         }
                                         Customization.CustomPlayerData[Main.Players[player].UUID].Clothes.Top = new ComponentItem(underwear.Top, texture);
@@ -1856,7 +1856,7 @@ namespace NeptuneEvo.Core
                         foreach (var key in keys)
                             items.Add(new nItem(ItemType.CarKey, 1, key));
                         player.SetData("KEYRING", nInventory.Items[Main.Players[player].UUID].IndexOf(item));
-                        GUI.Dashboard.OpenOut(player, items, "Связка ключей", 7);
+                        GUI.Dashboard.OpenOut(player, items, "Bunch of keys", 7);
                         return;
                     case ItemType.Material:
                         Trigger.ClientEvent(player, "board", "close");
@@ -1867,36 +1867,36 @@ namespace NeptuneEvo.Core
                     case ItemType.Beer:
                         EatManager.AddWater(player, 12);
                         EatManager.AddEat(player, 2);
-                        Commands.RPChat("me", player, $"выпил(а) {nInventory.ItemsNames[(int)item.Type]}");
+                        Commands.RPChat("me", player, $"drank {nInventory.ItemsNames[(int)item.Type]}");
                         break;
                     case ItemType.Burger:
                         player.Health = (player.Health + 30 > 100) ? 100 : player.Health + 30;
                         EatManager.AddEat(player, 15);
                         if (player.GetData<int>("RESIST_TIME") < 600) Trigger.ClientEvent(player, "stopScreenEffect", "PPFilter");
-                        Commands.RPChat("me", player, $"съел(а) {nInventory.ItemsNames[(int)item.Type]}");
+                        Commands.RPChat("me", player, $"ate {nInventory.ItemsNames[(int)item.Type]}");
                         break;
                     case ItemType.eCola:
                         EatManager.AddWater(player, 15);
                         EatManager.AddEat(player, 2);
-                        Commands.RPChat("me", player, $"выпил(а) {nInventory.ItemsNames[(int)item.Type]}");
+                        Commands.RPChat("me", player, $"drank {nInventory.ItemsNames[(int)item.Type]}");
                         break;
                     case ItemType.HotDog:
                         EatManager.AddWater(player, -10);
                         EatManager.AddEat(player, 14);
                         if (player.GetData<int>("RESIST_TIME") < 600) Trigger.ClientEvent(player, "stopScreenEffect", "PPFilter");
-                        Commands.RPChat("me", player, $"съел(а) {nInventory.ItemsNames[(int)item.Type]}");
+                        Commands.RPChat("me", player, $"ate {nInventory.ItemsNames[(int)item.Type]}");
                         break;
                     case ItemType.Pizza:
                         EatManager.AddWater(player, -10);
                         EatManager.AddEat(player, 30);
                         if (player.GetData<int>("RESIST_TIME") < 600) Trigger.ClientEvent(player, "stopScreenEffect", "PPFilter");
-                        Commands.RPChat("me", player, $"съел(а) {nInventory.ItemsNames[(int)item.Type]}");
+                        Commands.RPChat("me", player, $"ate {nInventory.ItemsNames[(int)item.Type]}");
                         break;
                     case ItemType.Sandwich:
                         EatManager.AddWater(player, -5);
                         EatManager.AddEat(player, 8);
                         if (player.GetData<int>("RESIST_TIME") < 600) Trigger.ClientEvent(player, "stopScreenEffect", "PPFilter");
-                        Commands.RPChat("me", player, $"съел(а) {nInventory.ItemsNames[(int)item.Type]}");
+                        Commands.RPChat("me", player, $"ate {nInventory.ItemsNames[(int)item.Type]}");
                         break;
                     case ItemType.Sprunk:
                         EatManager.AddWater(player, 25);
@@ -1908,7 +1908,7 @@ namespace NeptuneEvo.Core
                         EatManager.AddWater(player, -10);
                         EatManager.AddEat(player, 15);
                         if (player.GetData<int>("RESIST_TIME") < 600) Trigger.ClientEvent(player, "stopScreenEffect", "PPFilter");
-                        Commands.RPChat("me", player, $"съел(а) {nInventory.ItemsNames[(int)item.Type]}");
+                        Commands.RPChat("me", player, $"ate{nInventory.ItemsNames[(int)item.Type]}");
                         break;
                     case ItemType.Rod:
                         RodManager.useInventory(player, 1);
@@ -1924,19 +1924,19 @@ namespace NeptuneEvo.Core
                         {
                             player.Health = (player.Health + 50 > 100) ? 100 : player.Health + 50;
                             Trigger.ClientEvent(player, "startScreenEffect", "DrugsTrevorClownsFight", 300000, false);
-                            Commands.RPChat("me", player, $"закурил(а) косяк");
+                            Commands.RPChat("me", player, $"lit a joint");
                             player.SetData("USE_DRUGS", DateTime.Now.AddMinutes(3));
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Попробуйте использовать позже", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Try to use later", 3000);
                             return;
                         }
                         break;
                     case ItemType.GasCan:
                         if (!player.IsInVehicle)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны находиться в машине", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must be in the car", 3000);
                             GUI.Dashboard.Close(player);
                             return;
                         }
@@ -1945,7 +1945,7 @@ namespace NeptuneEvo.Core
                         var fuel = veh.GetSharedData<int>("PETROL");
                         if (fuel == VehicleManager.VehicleTank[veh.Class])
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"В машине полный бак", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The tank is full", 3000);
                             GUI.Dashboard.Close(player);
                             return;
                         }
@@ -1975,18 +1975,18 @@ namespace NeptuneEvo.Core
                                     Trigger.ClientEvent(player, "stopScreenEffect", "PPFilter");
                                 } catch { }
                             }, 5000);
-                            Commands.RPChat("me", player, $"использовал(а) аптечку");
+                            Commands.RPChat("me", player, $"used a first aid kit");
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Попробуйте использовать позже", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Try to use later", 3000);
                             return;
                         }
                         break;
                     case ItemType.Lockpick:
                         if (player.GetData<int>("INTERACTIONCHECK") != 3)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Невозможно использовать в данный момент", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Cannot be used at the moment", 3000);
                             GUI.Dashboard.Close(player);
                             return;
                         }
@@ -1994,27 +1994,27 @@ namespace NeptuneEvo.Core
                         player.SetData("LOCK_TIMER", Timers.StartOnce(10000, () => SafeMain.lockCrack(player, player.Name)));
                         //player.FreezePosition = true;
                         Trigger.ClientEvent(player, "showLoader", "Идёт взлом", 1);
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы начали взламывать дверь", 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You started to break open the door", 3000);
                         break;
                     case ItemType.ArmyLockpick:
                         if (!player.IsInVehicle || player.Vehicle.DisplayName != "Barracks")
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны находиться в военном перевозчике материалов", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must be in a military material carrier", 3000);
                             return;
                         }
                         if (VehicleStreaming.GetEngineState(player.Vehicle))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Машину уже заведена", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The car is already started", 3000);
                             return;
                         }
                         var lucky = new Random().Next(0, 5);
                         Log.Debug(lucky.ToString());
                         if (lucky == 5)
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас не получилось завести машину. Попробуйте ещё раз", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You failed to start the car. Try again", 3000);
                         else
                         {
                             VehicleStreaming.SetEngineState(player.Vehicle, true);
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"У Вас получилось завести машину", 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Did you manage to start the car", 3000);
                         }
                         break;
                     case ItemType.Present:
@@ -2059,7 +2059,7 @@ namespace NeptuneEvo.Core
                         break;
                 }
                 nInventory.Remove(player, item.Type, 1);
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы использовали {nInventory.ItemsNames[item.ID]}", 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Have you used {nInventory.ItemsNames[item.ID]}", 3000);
                 GameLog.Items($"player({Main.Players[player].UUID})", "use", Convert.ToInt32(item.Type), 1, $"{item.Data}");
                 GUI.Dashboard.Close(player);
             }
@@ -2089,7 +2089,7 @@ namespace NeptuneEvo.Core
             {
                 var rnd = new Random();
                 if (data != null && (int)data != 1)
-                    Commands.RPChat("me", player, $"выбросил(а) {nInventory.ItemsNames[(int)item.Type]}");
+                    Commands.RPChat("me", player, $"threw away {nInventory.ItemsNames[(int)item.Type]}");
 
                 GameLog.Items($"player({Main.Players[player].UUID})", "ground", Convert.ToInt32(item.Type), 1, $"{item.Data}");
 

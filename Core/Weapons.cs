@@ -438,7 +438,7 @@ namespace NeptuneEvo.Core
         }
 
         [RemoteEvent("takeoffWeapon")]
-        public static void RemoteEvent_takeoffWeapon(Player player, int hash, int ammoInClip) // вызывается, если оружие убрали серверно
+        public static void RemoteEvent_takeoffWeapon(Player player, int hash, int ammoInClip) // called if the weapon is removed server-side
         {
             try
             {

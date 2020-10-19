@@ -59,10 +59,10 @@ namespace NeptuneEvo.Core
                 shape.OnEntityExitColShape += onPlayerExitSchool;
 
                 NAPI.Marker.CreateMarker(1, enterSchool - new Vector3(0, 0, 0.7), new Vector3(), new Vector3(), 1, new Color(0, 255, 255));
-                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~g~Автошкола"), new Vector3(enterSchool.X, enterSchool.Y, enterSchool.Z + 1), 5f, 0.3f, 0, new Color(255, 255, 255));
+                NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~g~Driving school"), new Vector3(enterSchool.X, enterSchool.Y, enterSchool.Z + 1), 5f, 0.3f, 0, new Color(255, 255, 255));
                 var blip = NAPI.Blip.CreateBlip(enterSchool, 0);
                 blip.ShortRange = true;
-                blip.Name = Main.StringToU16("Автошкола");
+                blip.Name = Main.StringToU16("Driving school");
                 blip.Sprite = 545;
                 blip.Color = 29;
                 for (int i = 0; i < drivingCoords.Count; i++)
@@ -108,7 +108,7 @@ namespace NeptuneEvo.Core
                     //Main.StopT(player.GetData<string>("SCHOOL_TIMER"), "timer_36");
                     Timers.Stop(player.GetData<string>("SCHOOL_TIMER"));
                     player.ResetData("SCHOOL_TIMER");
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"Вы провалили экзмен", 3000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"You failed exmen", 3000);
                 }
                 catch (Exception e) { Log.Write("TimerDrivingSchool: " + e.Message, nLog.Type.Error); }
             });
@@ -129,12 +129,12 @@ namespace NeptuneEvo.Core
         {
             if (player.HasData("IS_DRIVING") || player.GetData<bool>("ON_WORK"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не можете сделать это сейчас", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You can't do it now", 3000);
                 return;
             }
             if (Main.Players[player].Licenses[index])
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас уже есть эта лицензия", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You already have this license", 3000);
                 return;
             }
             switch (index)
@@ -142,7 +142,7 @@ namespace NeptuneEvo.Core
                 case 0:
                     if (Main.Players[player].Money < LicPrices[0])
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас недостаточно денег, чтобы купить эту лицензию", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't have enough money to buy this license", 3000);
                         return;
                     }
                     var vehicle = NAPI.Vehicle.CreateVehicle(VehicleHash.Bagger, startCourseCoord[0], startCourseRot[0], 30, 30);
@@ -159,12 +159,12 @@ namespace NeptuneEvo.Core
                     Fractions.Stocks.fracStocks[6].Money += LicPrices[0];
                     GameLog.Money($"player({Main.Players[player].UUID})", $"frac(6)", LicPrices[0], $"buyLic");
                     Core.VehicleStreaming.SetEngineState(vehicle, false);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Чтобы завести транспорт, нажмите B", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"To start the vehicle, press B", 3000);
                     return;
                 case 1:
                     if (Main.Players[player].Money < LicPrices[1])
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас недостаточно денег, чтобы купить эту лицензию", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't have enough money to buy this license", 3000);
                         return;
                     }
                     vehicle = NAPI.Vehicle.CreateVehicle(VehicleHash.Dilettante, startCourseCoord[0], startCourseRot[0], 30, 30);
@@ -181,12 +181,12 @@ namespace NeptuneEvo.Core
                     Fractions.Stocks.fracStocks[6].Money += LicPrices[1];
                     GameLog.Money($"player({Main.Players[player].UUID})", $"frac(6)", LicPrices[1], $"buyLic");
                     Core.VehicleStreaming.SetEngineState(vehicle, false);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Чтобы завести транспорт, нажмите B", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"To start the vehicle, press B", 3000);
                     return;
                 case 2:
                     if (Main.Players[player].Money < LicPrices[2])
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас недостаточно денег, чтобы купить эту лицензию", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't have enough money to buy this license", 3000);
                         return;
                     }
                     vehicle = NAPI.Vehicle.CreateVehicle(VehicleHash.Flatbed, startCourseCoord[0], startCourseRot[0], 30, 30);
@@ -203,46 +203,46 @@ namespace NeptuneEvo.Core
                     Fractions.Stocks.fracStocks[6].Money += LicPrices[2];
                     GameLog.Money($"player({Main.Players[player].UUID})", $"frac(6)", LicPrices[2], $"buyLic");
                     Core.VehicleStreaming.SetEngineState(vehicle, false);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Чтобы завести транспорт, нажмите B", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"To start the vehicle, press B", 3000);
                     return;
                 case 3:
                     if (Main.Players[player].Money < LicPrices[3])
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас недостаточно денег, чтобы купить эту лицензию", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't have enough money to buy this license", 3000);
                         return;
                     }
                     Main.Players[player].Licenses[3] = true;
                     MoneySystem.Wallet.Change(player, -LicPrices[3]);
                     Fractions.Stocks.fracStocks[6].Money += LicPrices[3];
                     GameLog.Money($"player({Main.Players[player].UUID})", $"frac(6)", LicPrices[3], $"buyLic");
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы успешно купили лицензию на водный транспорт", 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You have successfully purchased a water transport license", 3000);
                     Dashboard.sendStats(player);
                     return;
                 case 4:
                     if (Main.Players[player].Money < LicPrices[4])
                     {
                         Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"", 3000);
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас недостаточно денег, чтобы купить эту лицензию", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't have enough money to buy this license", 3000);
                         return;
                     }
                     Main.Players[player].Licenses[4] = true;
                     MoneySystem.Wallet.Change(player, -LicPrices[4]);
                     Fractions.Stocks.fracStocks[6].Money += LicPrices[4];
                     GameLog.Money($"player({Main.Players[player].UUID})", $"frac(6)", LicPrices[4], $"buyLic");
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы успешно купили лицензию управление вертолётами", 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You have successfully purchased a helicopter flying license", 3000);
                     Dashboard.sendStats(player);
                     return;
                 case 5:
                     if (Main.Players[player].Money < LicPrices[5])
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас недостаточно денег, чтобы купить эту лицензию", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't have enough money to buy this license", 3000);
                         return;
                     }
                     Main.Players[player].Licenses[5] = true;
                     MoneySystem.Wallet.Change(player, -LicPrices[5]);
                     Fractions.Stocks.fracStocks[6].Money += LicPrices[5];
                     GameLog.Money($"player({Main.Players[player].UUID})", $"frac(6)", LicPrices[5], $"buyLic");
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы успешно купили лицензию управление самолётами", 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You have successfully purchased an aircraft control license", 3000);
                     Dashboard.sendStats(player);
                     return;
             }
@@ -285,11 +285,11 @@ namespace NeptuneEvo.Core
                     player.ResetData("SCHOOLVEH");
                     if (vehHP < 500)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы провалили экзамен", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You failed the exam", 3000);
                         return;
                     }
                     Main.Players[player].Licenses[player.GetData<int>("LICENSE")] = true;
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы успешно сдали экзамен", 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You passed the exam successfully", 3000);
                     Dashboard.sendStats(player);
                     Trigger.ClientEvent(player, "deleteCheckpoint", 12, 0);
                     return;
@@ -315,35 +315,35 @@ namespace NeptuneEvo.Core
             menu.Callback = callback_driveschool;
 
             Menu.Item menuItem = new Menu.Item("header", Menu.MenuItem.Header);
-            menuItem.Text = "Лицензии";
+            menuItem.Text = "Licenses";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("lic_0", Menu.MenuItem.Button);
-            menuItem.Text = $"(A) Мотоциклы - {LicPrices[0]}$";
+            menuItem.Text = $"(A)Motorcycles - {LicPrices[0]}$";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("lic_1", Menu.MenuItem.Button);
-            menuItem.Text = $"(B) Легковые машины - {LicPrices[1]}$";
+            menuItem.Text = $"(B) Cars - {LicPrices[1]}$";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("lic_2", Menu.MenuItem.Button);
-            menuItem.Text = $"(C) Грузовые машины - {LicPrices[2]}$";
+            menuItem.Text = $"(C) Trucks - {LicPrices[2]}$";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("lic_3", Menu.MenuItem.Button);
-            menuItem.Text = $"(V) Водный транспорт - {LicPrices[3]}$";
+            menuItem.Text = $"(V) Water transport - {LicPrices[3]}$";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("lic_4", Menu.MenuItem.Button);
-            menuItem.Text = $"(LV) Вертолёты - {LicPrices[4]}$";
+            menuItem.Text = $"(LV) Helicopters - {LicPrices[4]}$";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("lic_5", Menu.MenuItem.Button);
-            menuItem.Text = $"(LS) Самолёты - {LicPrices[5]}$";
+            menuItem.Text = $"(LS) Aircraft - {LicPrices[5]}$";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("close", Menu.MenuItem.Button);
-            menuItem.Text = "Закрыть";
+            menuItem.Text = "Close";
             menu.Add(menuItem);
 
             menu.Open(player);
