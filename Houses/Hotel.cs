@@ -111,7 +111,7 @@ namespace NeptuneEvo.Houses
                     else if (Main.Players[player].HotelID == -1)
                         OpenHotelBuyMenu(player);
                     else
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы уже арендовали отель", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You have already rented a hotel", 3000);
                     return;
                 case 49:
                     NAPI.Entity.SetEntityPosition(player, HotelEnters[Main.Players[player].InsideHotelID] + new Vector3(0, 0, 1.5));
@@ -181,24 +181,24 @@ namespace NeptuneEvo.Houses
 
             if (Main.Players[player].HotelID == -1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не поселены ни в один отель", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You are not accommodated in any hotel", 3000);
                 return;
             }
 
             if (Main.Players[player].HotelLeft + hours > 10)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Аренда может быть оплачена только на 10 часов", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Rent can only be paid for 10 hours", 3000);
                 return;
             }
 
             if (!MoneySystem.Wallet.Change(player, -HotelRent * hours))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Недостаточно средств", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Insufficient funds", 3000);
                 return;
             }
             GameLog.Money($"player({Main.Players[player].UUID})", $"server", HotelRent * hours, $"hotelRent");
             Main.Players[player].HotelLeft += hours;
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы продлили аренду на {hours} часов, Вас выселят через {Main.Players[player].HotelLeft} часов", 3000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You have extended your lease for {hours}hours, you will be evicted in {Main.Players[player].HotelLeft} hours", 3000);
         }
 
         public static void MoveOutPlayer(Player player)
@@ -224,11 +224,11 @@ namespace NeptuneEvo.Houses
             menu.Callback += callback_hotelbuy;
 
             Menu.Item menuItem = new Menu.Item("header", Menu.MenuItem.Header);
-            menuItem.Text = $"Отель";
+            menuItem.Text = $"Hotel";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("info", Menu.MenuItem.Card);
-            menuItem.Text = $"money за аренду будут сниматься каждый пейдей только когда Вы в игре.";
+            menuItem.Text = $"Money for rent will be charged every payday only when you are in the game.";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("rent", Menu.MenuItem.Button);
@@ -236,7 +236,7 @@ namespace NeptuneEvo.Houses
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("close", Menu.MenuItem.Button);
-            menuItem.Text = "Закрыть";
+            menuItem.Text = "Close";
             menu.Add(menuItem);
 
             menu.Open(player);
@@ -248,20 +248,20 @@ namespace NeptuneEvo.Houses
                 case "rent":
                     if (Houses.HouseManager.GetHouse(player) != null)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы проживаете в доме и не можете арендовать комнату в отеле", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You live in a house and cannot rent a room In a hotel", 3000);
                         return;
                     }
 
                     if (!MoneySystem.Wallet.Change(player, -HotelRent))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Недостаточно средств", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Insufficient funds", 3000);
                         return;
                     }
                     GameLog.Money($"player({Main.Players[player].UUID})", $"server", HotelRent, $"hotelRent");
                     Main.Players[player].HotelID = player.GetData<int>("HOTEL_ID");
                     Main.Players[player].HotelLeft = 1;
 
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы арендовали комнату в отеле на 1ч. Продлить аренду можно в телефоне (M)", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You rented a hotel room for 1 hour. You can extend the lease on your phone (M)", 3000);
                     SendToRoom(player);
                     MenuManager.Close(player);
                     return;
@@ -277,23 +277,23 @@ namespace NeptuneEvo.Houses
             menu.Callback += callback_hotelmanage;
 
             Menu.Item menuItem = new Menu.Item("header", Menu.MenuItem.Header);
-            menuItem.Text = $"Отель";
+            menuItem.Text = $"Hotel";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("info", Menu.MenuItem.Card);
-            menuItem.Text = $"Аренда оплачена на {Main.Players[player].HotelLeft}ч";
+            menuItem.Text = $"Rent paid for {Main.Players[player].HotelLeft}ч";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("extend", Menu.MenuItem.Button);
-            menuItem.Text = "Продлить аренду";
+            menuItem.Text = "Renew lease";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("moveout", Menu.MenuItem.Button);
-            menuItem.Text = "Выселиться";
+            menuItem.Text = "Move out";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("close", Menu.MenuItem.Button);
-            menuItem.Text = "Закрыть";
+            menuItem.Text = "Close";
             menu.Add(menuItem);
 
             menu.Open(player);
@@ -304,11 +304,11 @@ namespace NeptuneEvo.Houses
             {
                 case "extend":
                     MenuManager.Close(player);
-                    Trigger.ClientEvent(player, "openInput", $"Продлить аренду ({HotelRent}$/ч)", "Введите количество часов", 1, "extend_hotel_rent");
+                    Trigger.ClientEvent(player, "openInput", $"Renew lease ({HotelRent}$/ч)", "Enter the number of hours", 1, "extend_hotel_rent");
                     return;
                 case "moveout":
                     MoveOutPlayer(player);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, "Вы выселились из отеля", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, "You checked out of the hotel", 3000);
                     MenuManager.Close(player);
                     return;
                 case "close":

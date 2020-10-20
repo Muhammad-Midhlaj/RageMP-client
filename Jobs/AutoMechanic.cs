@@ -36,47 +36,47 @@ namespace NeptuneEvo.Jobs
         {
             if (Main.Players[player].WorkID != 8 || !player.GetData<bool>("ON_WORK"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не работает автомехаником", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't work as an auto mechanic", 3000);
                 return;
             }
             if (!player.IsInVehicle || !player.Vehicle.HasData("TYPE") || player.Vehicle.GetData<string>("TYPE") != "MECHANIC")
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны находиться в рабочем транспорте", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must be in work transport", 3000);
                 return;
             }
             if (!target.IsInVehicle)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок должен находиться в транспортном средстве", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The player must be in the vehicle", 3000);
                 return;
             }
             if (player.Vehicle.Position.DistanceTo(target.Vehicle.Position) > 5)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок слишком далеко от Вас", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The player is too far from you", 3000);
                 return;
             }
             if (price < 50 || price > 300)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы можете установить цену от 50$ до 300$", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You can set the price from $ 50 to $ 300 ", 3000);
                 return;
             }
             if (Main.Players[target].Money < price)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У игрока недостаточно денег", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The player does not have enough money", 3000);
                 return;
             }
             
             target.SetData("MECHANIC", player);
             target.SetData("MECHANIC_PRICE", price);
-            Trigger.ClientEvent(target, "openDialog", "REPAIR_CAR", $"Игрок ({player.Value}) предложил отремонтировать Ваш транспорт за ${price}");
+            Trigger.ClientEvent(target, "openDialog", "REPAIR_CAR", $"Игрок ({player.Value}) пoffered to repair your transport for ${price}");
             
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы предложили игроку ({target.Value}) отремонтировать транспорт за {price}$", 3000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You suggested to the player ({target.Value}) renovate transport to {price}$", 3000);
         }
 
         public static void mechanicRent(Player player)
         {
             if (!NAPI.Player.IsPlayerInAnyVehicle(player) || player.VehicleSeat != 0 || player.Vehicle.GetData<string>("TYPE") != "MECHANIC") return;
 
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы арендовали рабочий транспорт. Ожидайте заказ", 3000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You rented a work vehicle. Wait for order", 3000);
             MoneySystem.Wallet.Change(player, -mechanicRentCost);
             GameLog.Money($"player({Main.Players[player].UUID})", $"server", mechanicRentCost, $"mechanicRent");
             var vehicle = player.Vehicle;
@@ -91,14 +91,14 @@ namespace NeptuneEvo.Jobs
         {
             if (!player.IsInVehicle)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны находиться в транспортном средстве", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must be in the vehicle", 3000);
                 return;
             }
 
             var price = NAPI.Data.GetEntityData(player, "MECHANIC_PRICE");
             if (Main.Players[player].Money < price)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас недостаточно средств", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't have enough funds", 3000);
                 return;
             }
 
@@ -107,9 +107,9 @@ namespace NeptuneEvo.Jobs
             MoneySystem.Wallet.Change(player, -price);
             MoneySystem.Wallet.Change(driver, price);
             GameLog.Money($"player({Main.Players[player].UUID})", $"player({Main.Players[driver].UUID})", price, $"mechanicRepair");
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы оплатили ремонт Вашего транспортного средства", 3000);
-            Notify.Send(driver, NotifyType.Info, NotifyPosition.BottomCenter, $"Игрок ({player.Value}) оплатил ремонт", 3000);
-            Commands.RPChat("me", driver, $"починил автомобиль");
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You paid for the repair of your vehicle", 3000);
+            Notify.Send(driver, NotifyType.Info, NotifyPosition.BottomCenter, $"Player ({player.Value}) paid for the repair", 3000);
+            Commands.RPChat("me", driver, $"fixed the car");
 
             player.ResetData("MECHANIC_DRIVER");
             driver.ResetData("MECHANIC_CLIENT");
@@ -131,8 +131,8 @@ namespace NeptuneEvo.Jobs
                 driver.ResetData("MECHANIC_CLIENT");
                 player.ResetData("MECHANIC_DRIVER");
                 player.SetData("IS_CALL_MECHANIC", false);
-                Notify.Send(driver, NotifyType.Warning, NotifyPosition.BottomCenter, $"Клиент отменил заказ", 3000);
-                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"Вы покинули место вызова автомеханика", 3000);
+                Notify.Send(driver, NotifyType.Warning, NotifyPosition.BottomCenter, $"Customer canceled order", 3000);
+                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"You have left the place of the auto mechanic call", 3000);
                 try
                 {
                     NAPI.ColShape.DeleteColShape(orderCols[player]);
@@ -152,7 +152,7 @@ namespace NeptuneEvo.Jobs
                 {
                     if (!Main.Players[player].Licenses[1])
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас нет лицензии категории B", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You do not have a Category B license", 3000);
                         VehicleManager.WarpPlayerOutOfVehicle(player);
                         return;
                     }
@@ -162,7 +162,7 @@ namespace NeptuneEvo.Jobs
                         {
                             if (vehicle.GetData<Player>("DRIVER") != null)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Этот рабочий транспорт уже занят", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"This work vehicle is already taken", 3000);
                                 return;
                             }
                             if (Main.Players[player].Money >= mechanicRentCost)
@@ -171,16 +171,16 @@ namespace NeptuneEvo.Jobs
                             }
                             else
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас не хватает " + (mechanicRentCost - Main.Players[player].Money) + "$ на аренду рабочего транспорта", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are missing " + (mechanicRentCost - Main.Players[player].Money) + "$ for rent of working transport", 3000);
                                 VehicleManager.WarpPlayerOutOfVehicle(player);
                             }
                         }
                         else if (NAPI.Data.GetEntityData(player, "WORK") == vehicle) NAPI.Data.SetEntityData(player, "IN_WORK_CAR", true);
-                        else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы уже работаете", 3000);
+                        else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are already workingе", 3000);
                     }
                     else
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не работаете автомехаником. Устроиться можно в мэрии", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not a car mechanic. You can get a job at the city hall", 3000);
                         VehicleManager.WarpPlayerOutOfVehicle(player);
                     }
                 }
@@ -219,7 +219,7 @@ namespace NeptuneEvo.Jobs
                 {
                     Player driver = player.GetData<Player>("MECHANIC_DRIVER");
                     driver.ResetData("MECHANIC_CLIENT");
-                    Notify.Send(driver, NotifyType.Warning, NotifyPosition.BottomCenter, $"Клиент отменил заказ", 3000);
+                    Notify.Send(driver, NotifyType.Warning, NotifyPosition.BottomCenter, $"Customer canceled order", 3000);
                     try
                     {
                         NAPI.ColShape.DeleteColShape(orderCols[player]);
@@ -236,7 +236,7 @@ namespace NeptuneEvo.Jobs
                         Player client = player.GetData<Player>("MECHANIC_CLIENT");
                         client.ResetData("MECHANIC_DRIVER");
                         client.SetData("IS_CALL_MECHANIC", false);
-                        Notify.Send(client, NotifyType.Warning, NotifyPosition.BottomCenter, $"Автомеханик покинул рабочее место, сделайте новый заказ", 3000);
+                        Notify.Send(client, NotifyType.Warning, NotifyPosition.BottomCenter, $"Auto mechanic left the workplace, make a new order", 3000);
                         try
                         {
                             NAPI.ColShape.DeleteColShape(orderCols[client]);
@@ -258,7 +258,7 @@ namespace NeptuneEvo.Jobs
                 Main.Players[player].WorkID == 8 &&
                 NAPI.Data.GetEntityData(player, "WORK") == vehicle)
                 {
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"Если Вы не сядете в транспорт через 5 минут, то рабочий день закончится", 3000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"If you do not get on the transport after 5 minutes, then the working day will end", 3000);
                     NAPI.Data.SetEntityData(player, "IN_WORK_CAR", false);
                     if (player.HasData("WORK_CAR_EXIT_TIMER"))
                         //Main.StopT(NAPI.Data.GetEntityData(player, "WORK_CAR_EXIT_TIMER"), "timer_1");
@@ -298,7 +298,7 @@ namespace NeptuneEvo.Jobs
                             Player client = player.GetData<Player>("MECHANIC_CLIENT");
                             client.ResetData("MECHANIC_DRIVER");
                             client.SetData("IS_CALL_MECHANIC", false);
-                            Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"Автомеханик покинул рабочее место, сделайте новый заказ", 3000);
+                            Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"Аthe mechanic left the workplace, place a new order", 3000);
                             player.ResetData("MECHANIC_CLIENT");
                             try
                             {
@@ -324,13 +324,13 @@ namespace NeptuneEvo.Jobs
             {
                 if (player.HasData("MECHANIC_CLIENT"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы уже взяли заказ", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You have already taken an order", 3000);
                     return;
                 }
                 if (NAPI.Data.GetEntityData(target, "IS_CALL_MECHANIC") && !target.HasData("MECHANIC_DRIVER"))
                 {
-                    Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, $"Игрок ({player.Value}) принял Ваш вызов. Оставайтесь на мест", 3000);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы приняли вызов игрока ({target.Value})", 3000);
+                    Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, $"Player({player.Value}) accepted your challenge. Stay seated", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You accepted the player's challenge ({target.Value})", 3000);
                     Trigger.ClientEvent(player, "createWaypoint", NAPI.Entity.GetEntityPosition(target).X, NAPI.Entity.GetEntityPosition(target).Y);
 
                     target.SetData("MECHANIC_DRIVER", player);
@@ -340,9 +340,9 @@ namespace NeptuneEvo.Jobs
                     orderCols[target].SetData("MECHANIC_CLIENT", target);
                     orderCols[target].OnEntityExitColShape += order_onEntityExit;
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок не вызывал автомеханика", 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Player did not call auto mechanic", 3000);
             }
-            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не работаете автомехаником в данный момент", 3000);
+            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not currently working as a car mechanic", 3000);
         }
 
         public static void cancelMechanic(Player player)
@@ -353,8 +353,8 @@ namespace NeptuneEvo.Jobs
                 client.ResetData("MECHANIC_DRIVER");
                 client.SetData("IS_CALL_MECHANIC", false);
                 player.ResetData("MECHANIC_CLIENT");
-                Notify.Send(client, NotifyType.Warning, NotifyPosition.BottomCenter, $"Автомеханик покинул рабочее место, сделайте новый заказ", 3000);
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы отменили выезд к клиенту", 3000);
+                Notify.Send(client, NotifyType.Warning, NotifyPosition.BottomCenter, $"Auto mechanic left the workplace, make a new order", 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You canceled a visit to a client", 3000);
                 try
                 {
                     NAPI.ColShape.DeleteColShape(orderCols[client]);
@@ -366,13 +366,13 @@ namespace NeptuneEvo.Jobs
             if (NAPI.Data.GetEntityData(player, "IS_CALL_MECHANIC"))
             {
                 NAPI.Data.SetEntityData(player, "IS_CALL_MECHANIC", false);
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы отменили вызов автомеханика", 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You canceled a car mechanic call", 3000);
                 if (player.HasData("MECHANIC_DRIVER"))
                 {
                     Player driver = player.GetData<Player>("MECHANIC_DRIVER");
                     driver.ResetData("MECHANIC_CLIENT");
                     player.ResetData("MECHANIC_DRIVER");
-                    Notify.Send(driver, NotifyType.Warning, NotifyPosition.BottomCenter, $"Клиент отменил заказ", 3000);
+                    Notify.Send(driver, NotifyType.Warning, NotifyPosition.BottomCenter, $"Customer canceled order", 3000);
                     try
                     {
                         NAPI.ColShape.DeleteColShape(orderCols[player]);
@@ -381,7 +381,7 @@ namespace NeptuneEvo.Jobs
                     catch { }
                 }
             }
-            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не вызывали автомеханика.", 3000);
+            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You didn't call an auto mechanic.", 3000);
         }
 
         public static void callMechanic(Player player)
@@ -396,17 +396,17 @@ namespace NeptuneEvo.Jobs
                     if (Main.Players[p].WorkID == 8 && NAPI.Data.GetEntityData(p, "ON_WORK"))
                     {
                         i++;
-                        NAPI.Chat.SendChatMessageToPlayer(p, $"~g~[ДИСПЕТЧЕР]: ~w~Игрок ({player.Value}) вызвал автомеханика ~y~({player.Position.DistanceTo(p.Position)}м)~w~. Напишите ~y~/ma ~b~[ID]~w~, чтобы принять вызов");
+                        NAPI.Chat.SendChatMessageToPlayer(p, $"~g~[DISPATCHER]: ~w~Player ({player.Value}) called a car mechanic ~y~({player.Position.DistanceTo(p.Position)}м)~w~. Write ~y~/ma ~b~[ID]~w~, to accept the challenge");
                     }
                 }
                 if (i > 0)
                 {
                     NAPI.Data.SetEntityData(player, "IS_CALL_MECHANIC", true);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Ожидайте принятия вызова. В Вашем районе сейчас {i} автомехаников. Для отмены вызова используйте /cmechanic", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Wait for the call. In your area now {i} auto mechanics. To cancel the call use / cmechanic", 3000);
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"В Вашем районе сейчас нет автомехаников. Попробуйте в другой раз", 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"В There are no auto mechanics in your area right now. Try another time", 3000);
             }
-            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы уже вызвали автомеханика. Для отмены напишите /cmechanic", 3000);
+            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You have already called a car mechanic. To cancel write / cmechanic", 3000);
         }
 
         public static void buyFuel(Player player, int fuel)
@@ -414,92 +414,92 @@ namespace NeptuneEvo.Jobs
             if (!Main.Players.ContainsKey(player)) return;
             if (Main.Players[player].WorkID != 8 || !player.GetData<bool>("ON_WORK") || !player.IsInVehicle || player.GetData<Vehicle>("WORK") != player.Vehicle)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны работать автомехаником и находиться в рабочей машине", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must work as a car mechanic and be in a working car", 3000);
                 return;
             }
             if (player.GetData<int>("BIZ_ID") == -1 || BusinessManager.BizList[player.GetData<int>("BIZ_ID")].Type != 1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны находиться на заправке", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must be at a gas station", 3000);
                 return;
             }
             if (fuel <= 0)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Введите корректные данные", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Enter correct data", 3000);
                 return;
             }
             Business biz = BusinessManager.BizList[player.GetData<int>("BIZ_ID")];
             if (Main.Players[player].Money < biz.Products[0].Price * fuel)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Недостаточно средств", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Insufficient funds", 3000);
                 return;
             }
             if (player.Vehicle.GetSharedData<int>("FUELTANK") + fuel > 1000)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Бак с бензином полон", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Gas tank full", 3000);
                 return;
             }
             if (!BusinessManager.takeProd(biz.ID, fuel, biz.Products[0].Name, biz.Products[0].Price * fuel))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Недостаточно топлива на заправке", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Not enough fuel at the gas station", 3000);
                 return;
             }
             MoneySystem.Wallet.Change(player, -biz.Products[0].Price * fuel);
             GameLog.Money($"player({Main.Players[player].UUID})", $"biz({biz.ID})", biz.Products[0].Price * fuel, $"mechanicBuyFuel");
             player.Vehicle.SetSharedData("FUELTANK", player.Vehicle.GetSharedData<int>("FUELTANK") + fuel);
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы пополнили бак в вашей рабочей машине до {player.Vehicle.GetSharedData<int>("FUELTANK")}л", 3000);
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You have refilled the tank in your work machine.о {player.Vehicle.GetSharedData<int>("FUELTANK")}л", 3000);
         }
 
         public static void mechanicFuel(Player player, Player target, int fuel, int pricePerLitr)
         {
             if (Main.Players[player].WorkID != 8 || !player.GetData<bool>("ON_WORK"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не работает автомехаником", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't work as an auto mechanic", 3000);
                 return;
             }
             if (!player.IsInVehicle || !player.Vehicle.HasData("TYPE") || player.Vehicle.GetData<string>("TYPE") != "MECHANIC")
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны находиться в рабочем транспорте", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must be in work transport", 3000);
                 return;
             }
             if (!target.IsInVehicle)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок должен находиться в транспортном средстве", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The player must be in the vehicle", 3000);
                 return;
             }
             if (player.Vehicle.Position.DistanceTo(target.Vehicle.Position) > 5)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок слишком далеко от Вас", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The player is too far from you", 3000);
                 return;
             }
             if (fuel < 1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не можете продать меньше литра", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You cannot sell less than a liter", 3000);
                 return;
             }
             if (pricePerLitr < 2 || pricePerLitr > 10)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы можете установить цену от 2$ до 10$ за литр", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You can set the price from $ 2 to $ 10 per liter", 3000);
                 return;
             }
             if (Main.Players[target].Money < pricePerLitr * fuel)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У игрока недостаточно денег", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The player does not have enough money", 3000);
                 return;
             }
             
             target.SetData("MECHANIC", player);
             target.SetData("MECHANIC_PRICE", pricePerLitr);
             target.SetData("MECHANIC_FEUL", fuel);
-            Trigger.ClientEvent(target, "openDialog", "FUEL_CAR", $"Игрок ({player.Value}) предложил заправить Ваш транспорт на {fuel}л за ${fuel * pricePerLitr}");
+            Trigger.ClientEvent(target, "openDialog", "FUEL_CAR", $"Player ({player.Value}) offered to refuel your vehicle at {fuel}l for ${fuel * pricePerLitr}");
             
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы предложили игроку ({target.Value}) заправить транспорт на {fuel}л за {fuel * pricePerLitr}$.", 3000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You suggested to the player ({target.Value}) refuel transport on {fuel}l for {fuel * pricePerLitr}$.", 3000);
         }
 
         public static void mechanicPayFuel(Player player)
         {
             if (!player.IsInVehicle)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны находиться в транспортном средстве", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must be in the vehicle", 3000);
                 return;
             }
 
@@ -507,7 +507,7 @@ namespace NeptuneEvo.Jobs
             var fuel = NAPI.Data.GetEntityData(player, "MECHANIC_FEUL");
             if (Main.Players[player].Money < price * fuel)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас недостаточно средств", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't have enough funds", 3000);
                 return;
             }
 
@@ -515,22 +515,22 @@ namespace NeptuneEvo.Jobs
 
             if (!driver.IsInVehicle || !driver.Vehicle.HasData("TYPE") || driver.Vehicle.GetData<string>("TYPE") != "MECHANIC")
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Механик должен находиться в транспортном средстве", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The mechanic must be in the vehicle", 3000);
                 return;
             }
 
             if (driver.Vehicle.GetSharedData<object>("FUELTANK") < fuel)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У механика недостаточно топлива, чтобы заправить Вас", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The mechanic doesn't have enough fuel to fuel you", 3000);
                 return;
             }
 
             MoneySystem.Wallet.Change(player, -price * fuel);
             MoneySystem.Wallet.Change(driver, price * fuel);
             GameLog.Money($"player({Main.Players[player].UUID})", $"player({Main.Players[driver].UUID})", price * fuel, $"mechanicFuel");
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы оплатили ремонт заправку транспортного средства", 3000);
-            Notify.Send(driver, NotifyType.Info, NotifyPosition.BottomCenter, $"Игрок ({player.Value}) оплатил заправку транспорта", 3000);
-            Commands.RPChat("me", driver, $"заправил транспортное средство");
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You paid for the repair and refueling of the vehicle", 3000);
+            Notify.Send(driver, NotifyType.Info, NotifyPosition.BottomCenter, $"Player ({player.Value}) paid for refueling vehicles", 3000);
+            Commands.RPChat("me", driver, $"refueled the vehicle");
 
             var carFuel = (player.Vehicle.GetSharedData<object>("PETROL") + fuel > player.Vehicle.GetSharedData<object>("MAXPETROL")) ? player.Vehicle.GetSharedData<object>("MAXPETROL") : player.Vehicle.GetSharedData<object>("PETROL") + fuel;
             player.Vehicle.SetSharedData("PETROL", carFuel);

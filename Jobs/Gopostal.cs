@@ -89,7 +89,7 @@ namespace NeptuneEvo.Jobs
                 {
                     if (NAPI.Player.IsPlayerInAnyVehicle(player))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Покиньте транспортное средство", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Leave the vehicle", 3000);
                         return;
                     }
                     if (player.GetData<int>("PACKAGES") == 0) return;
@@ -104,7 +104,7 @@ namespace NeptuneEvo.Jobs
                         DateTime lastTime = player.GetData<DateTime>("W_LASTTIME");
                         if (DateTime.Now < lastTime.AddSeconds(coef * 2))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Хозяина нет дома, попробуйте позже", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "The owner is not at home, please try again later", 3000);
                             return;
                         }
 
@@ -138,7 +138,7 @@ namespace NeptuneEvo.Jobs
                         DateTime lastTime = player.GetData<DateTime>("W_LASTTIME");
                         if (DateTime.Now < lastTime.AddSeconds(coef * 2))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Хозяина нет дома, попробуйте позже", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "The owner is not at home, please try again later", 3000);
                             return;
                         }
 
@@ -154,7 +154,7 @@ namespace NeptuneEvo.Jobs
                         Trigger.ClientEvent(player, "deleteCheckpoint", 1, 0);
                         NAPI.Player.PlayPlayerAnimation(player, -1, "anim@heists@narcotics@trash", "drop_side");
                         player.SetData("PACKAGES", 0);
-                        Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"У Вас не осталось посылок, возьмите новые", 3000);
+                        Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"You have no packages left, take new ones", 3000);
                     }
                 }
             }
@@ -191,12 +191,12 @@ namespace NeptuneEvo.Jobs
         {
             if (Main.Players[player].WorkID != 2)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не работаете курьером", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not a courier", 3000);
                 return;
             }
             if (!player.GetData<bool>("ON_WORK"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must start your work day", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"youMustStartYourWorkDay", 3000);
                 return;
             }
             if (player.GetData<Player>("WORK") != null)
@@ -207,7 +207,7 @@ namespace NeptuneEvo.Jobs
             }
             var veh = API.Shared.CreateVehicle(VehicleHash.Faggio, player.Position + new Vector3(0, 0, 1), player.Rotation.Z, 10, 10);
             player.SetData("WORK", veh);
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы получили рабочий транспорт", 3000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You got a working transport", 3000);
             veh.SetData("ACCESS", "WORK");
             Core.VehicleStreaming.SetEngineState(veh, true);
         }

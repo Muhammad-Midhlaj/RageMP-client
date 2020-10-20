@@ -45,29 +45,29 @@ namespace NeptuneEvo.Jobs
                 NAPI.Marker.CreateMarker(1, Points[0] - new Vector3(0, 0, 0.7), new Vector3(), new Vector3(), 1f, new Color(255, 255, 255, 220));
 
                 // blips
-                NAPI.Blip.CreateBlip(354, new Vector3(724.9625, 133.9959, 79.83643), 1.5f, 46, Main.StringToU16("Электростанция"), 255, 0, true, 0, 0);
-                NAPI.Blip.CreateBlip(408, new Vector3(105.4633, -1568.843, 28.60269), 1, 3, Main.StringToU16("Почта"), 255, 0, true, 0, 0);
-                NAPI.Blip.CreateBlip(198, new Vector3(903.3215, -191.7, 73.40494), 1, 46, Main.StringToU16("Такси"), 255, 0, true, 0, 0);
-                NAPI.Blip.CreateBlip(198, new Vector3(1956.65015, 3769.12817, 31.0833454), 1, 46, Main.StringToU16("Такси"), 255, 0, true, 0, 0);//TODOTAXI
-                NAPI.Blip.CreateBlip(198, new Vector3(1791.82837, 4586.595, 36.2361145), 1, 46, Main.StringToU16("Такси"), 255, 0, true, 0, 0);
-                NAPI.Blip.CreateBlip(513, new Vector3(462.6476, -605.5295, 27.49518), 1, 46, Main.StringToU16("Автобусная станция"), 255, 0, true, 0, 0);
-                NAPI.Blip.CreateBlip(512, new Vector3(-1331.475, 53.58579, 53.53268), 1, 2, Main.StringToU16("Газонокосилка"), 255, 0, true, 0, 0);
-                NAPI.Blip.CreateBlip(477, new Vector3(588.2037, -3037.641, 6.303829), 1, 3, Main.StringToU16("Дальнобойщики"), 255, 0, true, 0, 0);
-                NAPI.Blip.CreateBlip(477, new Vector3(338.9279, 3417.426, 35.38838), 1, 3, Main.StringToU16("Дальнобойщики"), 255, 0, true, 0, 0);
-                NAPI.Blip.CreateBlip(477, new Vector3(-2212.77, 4249.193, 46.17959), 1, 3, Main.StringToU16("Дальнобойщики"), 255, 0, true, 0, 0);
-                NAPI.Blip.CreateBlip(67, new Vector3(915.9069, -1265.255, 25.52912), 1, 25, Main.StringToU16("Инкассаторы"), 255, 0, true, 0, 0);
-                NAPI.Blip.CreateBlip(67, new Vector3(-1481.75537, -508.08847, 31.6868382), 1, 25, Main.StringToU16("Инкассаторы"), 255, 0, true, 0, 0);
-                NAPI.Blip.CreateBlip(67, new Vector3(-144.374817, 6354.90869, 30.3706112), 1, 25, Main.StringToU16("Инкассаторы"), 255, 0, true, 0, 0);
-                NAPI.Blip.CreateBlip(544, new Vector3(473.9508, -1275.597, 29.60513), 1, 40, Main.StringToU16("Автомеханики"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(354, new Vector3(724.9625, 133.9959, 79.83643), 1.5f, 46, Main.StringToU16("Power station"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(408, new Vector3(105.4633, -1568.843, 28.60269), 1, 3, Main.StringToU16("mail"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(198, new Vector3(903.3215, -191.7, 73.40494), 1, 46, Main.StringToU16("Taxi "), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(198, new Vector3(1956.65015, 3769.12817, 31.0833454), 1, 46, Main.StringToU16("Taxi"), 255, 0, true, 0, 0);//TODOTAXI
+                NAPI.Blip.CreateBlip(198, new Vector3(1791.82837, 4586.595, 36.2361145), 1, 46, Main.StringToU16("Taxi"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(513, new Vector3(462.6476, -605.5295, 27.49518), 1, 46, Main.StringToU16("Bus station"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(512, new Vector3(-1331.475, 53.58579, 53.53268), 1, 2, Main.StringToU16("Lawn mower"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(477, new Vector3(588.2037, -3037.641, 6.303829), 1, 3, Main.StringToU16("Truckers"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(477, new Vector3(338.9279, 3417.426, 35.38838), 1, 3, Main.StringToU16("Truckers"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(477, new Vector3(-2212.77, 4249.193, 46.17959), 1, 3, Main.StringToU16("Truckers"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(67, new Vector3(915.9069, -1265.255, 25.52912), 1, 25, Main.StringToU16("Cash collectors"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(67, new Vector3(-1481.75537, -508.08847, 31.6868382), 1, 25, Main.StringToU16("Cash collectors"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(67, new Vector3(-144.374817, 6354.90869, 30.3706112), 1, 25, Main.StringToU16("Cash collectors"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(544, new Vector3(473.9508, -1275.597, 29.60513), 1, 40, Main.StringToU16("Car mechanics"), 255, 0, true, 0, 0);
 
-                NAPI.Blip.CreateBlip(225, new Vector3(-530.78833, 59.4290543, 52.57218), 1, 1, Main.StringToU16("Аренда машин"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(225, new Vector3(-530.78833, 59.4290543, 52.57218), 1, 1, Main.StringToU16("Rent a car"), 255, 0, true, 0, 0);
                 //NAPI.Blip.CreateBlip(495, new Vector3(-1108.662, -1690.129, 3.254202), 1, 84, Main.StringToU16("Rent-a-Cycle"), 255, 0, true, 0, 0);
                 // NAPI.Blip.CreateBlip(471, new Vector3(-1625.545, -1164.137, 0.2994334), 1, 38, Main.StringToU16("Rent-a-Boat"), 255, 0, true, 0, 0);
 
-                NAPI.Blip.CreateBlip(478, Truckers.getProduct[0], 1, 84, Main.StringToU16("Склад продуктов"), 255, 0, true, 0, 0);
-                NAPI.Blip.CreateBlip(478, Truckers.getProduct[1], 1, 36, Main.StringToU16("Склад бензина"), 255, 0, true, 0, 0);
-                NAPI.Blip.CreateBlip(478, Truckers.getProduct[2], 1, 15, Main.StringToU16("Автосклад"), 255, 0, true, 0, 0);
-                NAPI.Blip.CreateBlip(478, Truckers.getProduct[3], 1, 62, Main.StringToU16("Склад оружия"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(478, Truckers.getProduct[0], 1, 84, Main.StringToU16("Product warehouse"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(478, Truckers.getProduct[1], 1, 36, Main.StringToU16("Gasoline composition"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(478, Truckers.getProduct[2], 1, 15, Main.StringToU16("Warehouse"), 255, 0, true, 0, 0);
+                NAPI.Blip.CreateBlip(478, Truckers.getProduct[3], 1, 62, Main.StringToU16("Armory"), 255, 0, true, 0, 0);
 
                 // markers
                 NAPI.Marker.CreateMarker(1, new Vector3(105.4633, -1568.843, 28.60269) - new Vector3(0, 0, 0.7), new Vector3(), new Vector3(), 1f, new Color(255, 255, 255, 220));
@@ -89,14 +89,14 @@ namespace NeptuneEvo.Jobs
         private static SortedDictionary<int, ColShape> Cols = new SortedDictionary<int, ColShape>();
         public static List<string> JobStats = new List<string>
         {
-            "Электрик",
-            "Почтальон",
-            "Таксист",
-            "Водитель автобуса",
-            "Газонокосильщик",
-            "Дальнобойщик",
-            "Инкассатор",
-            "Автомеханик",
+            "Electrician",
+            "Postman",
+            "Taxi driver",
+            "Bus driver",
+            "Lawnmower",
+            "Trucker",
+            "Collector",
+            "Auto mechanic",
         };
         public static SortedList<int, Vector3> Points = new SortedList<int, Vector3>
         {
@@ -112,14 +112,14 @@ namespace NeptuneEvo.Jobs
         };
         private static SortedList<int, string> JobList = new SortedList<int, string>
         {
-            {1, "электриком" },
-            {2, "почтальоном" },
-            {3, "таксистом" },
-            {4, "водителем автобуса" },
-            {5, "газонокосильщиком" },
-            {6, "дальнобойщиком" },
-            {7, "инкассатором" },
-            {8, "автомехаником" },
+            {1, "electrician"},
+            {2, "postman"},
+            {3, "taxi driver"},
+            {4, "bus driver"},
+            {5, "lawnmower"},
+            {6, "trucker"},
+            {7, "collector"},
+            {8, "car mechanic"},
         };
         private static SortedList<int, int> JobsMinLVL = new SortedList<int, int>()
         {
@@ -137,58 +137,58 @@ namespace NeptuneEvo.Jobs
         {
             if (NAPI.Data.GetEntityData(player, "ON_WORK") == true)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны сначала закончить рабочий день", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must finish your work day first ", 3000);
                 return;
             }
             if (Main.Players[player].WorkID != 0)
             {
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы уволились с работы", 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You quit your job", 3000);
                 Main.Players[player].WorkID = 0;
                 Dashboard.sendStats(player);
                 Trigger.ClientEvent(player, "showJobMenu", Main.Players[player].LVL, Main.Players[player].WorkID);
             }
             else
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы никем не работаете", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't work for anyone", 3000);
         }
         public static void JobJoin(Player player, int job)
         {
             if (Main.Players[player].FractionID != 0)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не можете устроиться на работу, потому что состоите в организации", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You cannot get a job because you are a member of an organization", 3000);
                 return;
             }
             if (Main.Players[player].WorkID != 0)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Для начала увольтесь с предыдущей работы.", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"First, quit your previous job..", 3000);
                 return;
             }
             if (NAPI.Data.GetEntityData(player, "ON_WORK") == true)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны сначала закончить рабочий день", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must end your work day first", 3000);
                 return;
             }
 
             if (Main.Players[player].WorkID == job)
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы уже работаете {JobList[job]}", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are already working{JobList[job]}", 3000);
             else
             {
                 if (Main.Players[player].LVL < JobsMinLVL[job])
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Необходим как минимум {JobsMinLVL[job]} уровень", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Required at least {JobsMinLVL[job]} level", 3000);
                     return;
                 }
                 if ((job == 3 || job == 8) && !Main.Players[player].Licenses[1])
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас нет лицензии категории B", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You do not have a Category B license", 3000);
                     return;
                 }
                 if ((job == 4 || job == 6 || job == 7) && !Main.Players[player].Licenses[2])
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас нет лицензии категории C", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You do not have a Category C license", 3000);
                     return;
                 }
                 Main.Players[player].WorkID = job;
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы устроились работать {JobList[job]}. Доберитесь до точки начала работы", 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You got a job {JobList[job]}.Get to the starting point", 3000);
                 Trigger.ClientEvent(player, "createWaypoint", Points[job].X, Points[job].Y);
                 Dashboard.sendStats(player);
                 Trigger.ClientEvent(player, "showJobMenu", Main.Players[player].LVL, Main.Players[player].WorkID);
@@ -255,23 +255,23 @@ namespace NeptuneEvo.Jobs
             menu.Callback = callback_gpStartMenu;
 
             Menu.Item menuItem = new Menu.Item("header", Menu.MenuItem.Header);
-            menuItem.Text = "Склад";
+            menuItem.Text = "Storage";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("start", Menu.MenuItem.Button);
-            menuItem.Text = "Начать работу";
+            menuItem.Text = "Get started ";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("get", Menu.MenuItem.Button);
-            menuItem.Text = "Взять посылки";
+            menuItem.Text = "Take parcels";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("finish", Menu.MenuItem.Button);
-            menuItem.Text = "Закончить работу";
+            menuItem.Text = "Finish work";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("close", Menu.MenuItem.Button);
-            menuItem.Text = "Закрыть";
+            menuItem.Text = "Close";
             menu.Add(menuItem);
 
             menu.Open(player);
@@ -293,7 +293,7 @@ namespace NeptuneEvo.Jobs
                         {
                             if (Houses.HouseManager.Houses.Count == 0) return;
                             client.SetData("PACKAGES", 10);
-                            Notify.Send(client, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы получили 10 посылок, развезите их по домам", 3000);
+                            Notify.Send(client, NotifyType.Info, NotifyPosition.BottomCenter, $"You have received 10 parcels, take them home", 3000);
                             client.SetData("ON_WORK", true);
 
                             client.SetData("W_LASTPOS", client.Position);
@@ -329,30 +329,30 @@ namespace NeptuneEvo.Jobs
                             int x = Jobs.WorkManager.rnd.Next(0, Gopostal.GoPostalObjects.Count);
                             BasicSync.AttachObjectToPlayer(client, Jobs.Gopostal.GoPostalObjects[x], 60309, new Vector3(0.03, 0, 0.02), new Vector3(0, 0, 50));
                         }
-                        else Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы уже начали рабочий день", 3000);
+                        else Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"You have already started your working day ", 3000);
                     }
-                    else Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не работаете курьером. Устроиться можно в мэрии", 3000);
+                    else Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not a courier. You can get a job at the city hall", 3000);
                     return;
                 case "get":
                     {
                         if (Main.Players[client].WorkID != 2)
                         {
-                            Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не работаете курьером", 3000);
+                            Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not a courier", 3000);
                             return;
                         }
                         if (!client.GetData<bool>("ON_WORK"))
                         {
-                            Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не начали рабочий день", 3000);
+                            Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"You haven't started your work day", 3000);
                             return;
                         }
                         if (client.GetData<int>("PACKAGES") != 0)
                         {
-                            Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не раздали все посылки. У Вас осталось ещё {client.GetData<int>("PACKAGES")} штук", 3000);
+                            Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"You have not distributed all the packages. You still have {client.GetData<int>("PACKAGES")} pieces", 3000);
                             return;
                         }
                         if (Houses.HouseManager.Houses.Count == 0) return;
                         client.SetData("PACKAGES", 10);
-                        Notify.Send(client, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы получили 10 посылок. Развезите их по домам", 3000);
+                        Notify.Send(client, NotifyType.Info, NotifyPosition.BottomCenter, $"You have received 10 packages. Take them home", 3000);
 
                         client.SetData("W_LASTPOS", client.Position);
                         client.SetData("W_LASTTIME", DateTime.Now);
@@ -394,10 +394,10 @@ namespace NeptuneEvo.Jobs
                                 client.SetData<Vehicle>("WORK", null);
                             }
                         }
-                        else Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не работаете", 3000);
+                        else Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"You're not working", 3000);
 
                     }
-                    else Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не работаете курьером", 3000);
+                    else Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"You're not working by courier ", 3000);
                     return;
                 case "close":
                     MenuManager.Close(client);
@@ -428,7 +428,7 @@ namespace NeptuneEvo.Jobs
 
             if (ordersIDs.Count == 0)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Нет свободных заказов", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "No free orders", 3000);
                 return;
             }
 
@@ -437,7 +437,7 @@ namespace NeptuneEvo.Jobs
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("Name", Menu.MenuItem.Card);
-            menuItem.Text = $"Продукт: {order.Name}";
+            menuItem.Text = $"Product: {order.Name}";
             menu.Add(menuItem);
 
             var youGet = Convert.ToInt32(order.Amount * BusinessManager.ProductsOrderPrice[order.Name] * 0.1);
@@ -446,15 +446,15 @@ namespace NeptuneEvo.Jobs
             if (youGet > max) youGet = max;
             else if (youGet < min) youGet = min;
             menuItem = new Menu.Item("youget", Menu.MenuItem.Card);
-            menuItem.Text = $"Вы получите: {youGet}$";
+            menuItem.Text = $"You'll get: {youGet}$";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("take", Menu.MenuItem.Button);
-            menuItem.Text = "Взять заказ";
+            menuItem.Text = "Take order";
             menu.Add(menuItem);
 
             menuItem = new Menu.Item("close", Menu.MenuItem.Button);
-            menuItem.Text = "Закрыть";
+            menuItem.Text = "Close";
             menu.Add(menuItem);
 
             menu.Open(player);
@@ -493,7 +493,7 @@ namespace NeptuneEvo.Jobs
                         Business biz = BusinessManager.BizList[BusinessManager.Orders[uid]];
                         var order = biz.Orders.FirstOrDefault(o => o.UID == uid);
 
-                        menu.Items[2].Text = $"Продукт: {order.Name}";
+                        menu.Items[2].Text = $"Product: {order.Name}";
                         menu.Change(client, 2, menu.Items[2]);
 
                         var youGet = Convert.ToInt32(order.Amount * BusinessManager.ProductsOrderPrice[order.Name] * 0.1);
@@ -501,7 +501,7 @@ namespace NeptuneEvo.Jobs
                         var min = Convert.ToInt32(500 * Group.GroupPayAdd[Main.Accounts[client].VipLvl]);
                         if (youGet > max) youGet = max;
                         else if (youGet < min) youGet = min;
-                        menu.Items[3].Text = $"Вы получите: {youGet}$";
+                        menu.Items[3].Text = $"You'll get: {youGet}$";
                         menu.Change(client, 3, menu.Items[3]);
                         return;
                     }
@@ -513,13 +513,13 @@ namespace NeptuneEvo.Jobs
                         {
                             if (client.HasData("ORDER"))
                             {
-                                Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы уже взяли заказ", 3000);
+                                Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"You have already taken an order", 3000);
                                 return;
                             }
                             var uid = Convert.ToInt32(data["1"]["Value"].ToString());
                             if (!BusinessManager.Orders.ContainsKey(uid))
                             {
-                                Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"Такого заказа больше не существует", 3000);
+                                Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"This order no longer exists", 3000);
                                 return;
                             };
 
@@ -527,7 +527,7 @@ namespace NeptuneEvo.Jobs
                             var order = biz.Orders.FirstOrDefault(o => o.UID == uid);
                             if (order == null || order.Taked)
                             {
-                                Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"Этот заказ уже взял кто-то другой", 3000);
+                                Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"This order has already been taken by someone else", 3000);
                                 return;
                             }
 
@@ -535,7 +535,7 @@ namespace NeptuneEvo.Jobs
 
                             client.SetData("ORDERDATE", DateTime.Now.AddMinutes(6));
 
-                            Notify.Send(client, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы взяли заказ по доставке {order.Name} в {BusinessManager.BusinessTypeNames[biz.Type]}. Сначала закупите товар", 3000);
+                            Notify.Send(client, NotifyType.Info, NotifyPosition.BottomCenter, $"You took delivery order {order.Name} в {BusinessManager.BusinessTypeNames[biz.Type]}. Buy cargo first", 3000);
                             var pos = getProduct[biz.Type];
                             Trigger.ClientEvent(client, "createWaypoint", pos.X, pos.Y);
                             client.SetData("ORDER", uid);

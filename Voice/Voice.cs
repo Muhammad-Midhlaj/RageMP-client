@@ -79,7 +79,7 @@ namespace NeptuneEvo.Voice
                     var pSim = Main.Players[player].Sim;
                     var playerName = (Main.Players[target].Contacts.ContainsKey(pSim)) ? Main.Players[target].Contacts[pSim] : pSim.ToString();
 
-                    Notify.Send(target, NotifyType.Alert, NotifyPosition.BottomCenter, $"{playerName} завершил вызов", 3000);
+                    Notify.Send(target, NotifyType.Alert, NotifyPosition.BottomCenter, $"{playerName} ended the call", 3000);
                     targetPhoneMeta.Target = null;
                     targetPhoneMeta.CallingState = "nothing";
 
@@ -103,21 +103,21 @@ namespace NeptuneEvo.Voice
         [Command("v_reload")]
         public void voiceDebugReload(Player player)
         {
-            player.SendChatMessage("Вы успешно перезагрузили голосовой чат для себя (v1).");
+            player.SendChatMessage("You have successfully reloaded voice chat for yourself (v1).");
             Trigger.ClientEvent(player, "v_reload");
         }
 
         [Command("v_reload2")]
         public void voiceDebug2Reload(Player player)
         {
-            player.SendChatMessage("Вы успешно перезагрузили голосовой чат для себя (v2).");
+            player.SendChatMessage("You have successfully reloaded voice chat for yourself (v2).");
             Trigger.ClientEvent(player, "v_reload2");
         }
 
         [Command("v_reload3")]
         public void voiceDebug3Reload(Player player)
         {
-            player.SendChatMessage("Вы успешно перезагрузили голосовой чат для себя (v3).");
+            player.SendChatMessage("You have successfully reloaded voice chat for yourself (v3).");
             Trigger.ClientEvent(player, "v_reload3");
         }
 
@@ -161,7 +161,7 @@ namespace NeptuneEvo.Voice
             {
                 if (player.HasData("AntiAnimDown"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Невозможно достать мобильный телефон", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Unable to reach mobile phone", 3000);
                     return;
                 }
                 if (target != null && Main.Players.ContainsKey(target))
@@ -171,7 +171,7 @@ namespace NeptuneEvo.Voice
 
                     if (playerPhoneMeta.Target != null)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "В данный момент Вы уже разговариваете", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You are already talking at the moment", 3000);
                         return;
                     }
 
@@ -183,8 +183,8 @@ namespace NeptuneEvo.Voice
 
                     if (targetPhoneMeta.Target != null)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"В данный момент {targetName} занят", 3000);
-                        Notify.Send(target, NotifyType.Alert, NotifyPosition.BottomCenter, $"{playerName} пытался Вам дозвониться", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"At the moment {targetName} busy", 3000);
+                        Notify.Send(target, NotifyType.Alert, NotifyPosition.BottomCenter, $"{playerName} tried to call you ", 3000);
                         return;
                     }
 
@@ -228,19 +228,19 @@ namespace NeptuneEvo.Voice
 
                             player.ResetData("AntiAnimDown");
 
-                            Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, $"{targetName} не отвечает", 3000);
-                            Notify.Send(target, NotifyType.Alert, NotifyPosition.BottomCenter, $"{playerName} завершил вызов", 3000);
+                            Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, $"{targetName} does not answer ",3000);
+                            Notify.Send(target, NotifyType.Alert, NotifyPosition.BottomCenter, $"{playerName} ended the call", 3000);
                         }
                         catch { }
                         
                     }, 20000);
 
-                    Notify.Send(target, NotifyType.Alert, NotifyPosition.BottomCenter, $"{playerName} звонит Вам. Откройте телефон, чтобы принять/отклонить вызов", 3000);
-                    Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, $"Вы звоните {targetName}", 3000);
+                    Notify.Send(target, NotifyType.Alert, NotifyPosition.BottomCenter, $"{playerName} calls you. Open your phone to accept / reject a call", 3000);
+                    Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, $"You call{targetName}", 3000);
                 }
                 else
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Абонент вне зоны действия сети", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "The subscriber is out of the network coverage area", 3000);
                 }
 
             }
@@ -273,7 +273,7 @@ namespace NeptuneEvo.Voice
 
                 if (playerPhoneMeta.Target == null || playerPhoneMeta.CallingState == "callTo" || !Main.Players.ContainsKey(playerPhoneMeta.Target))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"В данный момент Вам никто не звонит", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Nobody calls you at the moment", 3000);
                     return;
                 }
 
@@ -290,8 +290,8 @@ namespace NeptuneEvo.Voice
                 var playerName = (Main.Players[target].Contacts.ContainsKey(pSim)) ? Main.Players[target].Contacts[pSim] : pSim.ToString();
                 var targetName = (Main.Players[player].Contacts.ContainsKey(tSim)) ? Main.Players[player].Contacts[tSim] : tSim.ToString();
 
-                Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, $"{playerName} принял Ваш вызов", 3000);
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы приняли вызов от {targetName}", 3000);
+                Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, $"{playerName}accepted your challenge", 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You have accepted the challenge from {targetName}", 3000);
 
                 Main.OnAntiAnim(player);
                 player.PlayAnimation("anim@cellphone@in_car@ds", "cellphone_call_listen_base", 49);
@@ -334,8 +334,8 @@ namespace NeptuneEvo.Voice
                 var playerName = (Main.Players[target].Contacts.ContainsKey(pSim)) ? Main.Players[target].Contacts[pSim] : pSim.ToString();
                 var targetName = (Main.Players[player].Contacts.ContainsKey(tSim)) ? Main.Players[player].Contacts[tSim] : tSim.ToString();
 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Звонок завершен", 3000);
-                Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, $"{playerName} завершил звонок", 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Call ended", 3000);
+                Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, $"{playerName} ended the call", 3000);
 
                 playerPhoneMeta.Target = null;
                 targetPhoneMeta.Target = null;

@@ -121,7 +121,7 @@ namespace NeptuneEvo.Jobs
         {
             if (Main.Players[player].WorkID != 1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не работаете электриком. Устроиться можно в мэрии", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You are not an electrician. You can get a job at the city hall", 3000);
                 return;
             }
             if (player.GetData<bool>("ON_WORK"))

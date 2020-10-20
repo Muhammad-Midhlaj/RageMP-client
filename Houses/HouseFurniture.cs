@@ -63,9 +63,9 @@ namespace NeptuneEvo.Houses
         }
         public static Dictionary<string, string> NameModels = new Dictionary<string, string>()
         {
-            { "Оружейный сейф", "prop_ld_int_safe_01" },
-            { "Шкаф с одеждой", "prop_rub_cabinet02" },
-            { "Шкаф с предметами", "prop_rub_cabinet01" },
+            { "Weapon safe", "prop_ld_int_safe_01" },
+            { "A wardrobe", "prop_rub_cabinet02" },
+            { "Wardrobe with items", "prop_rub_cabinet01" },
         };
         public static void Save()
         {
@@ -93,7 +93,7 @@ namespace NeptuneEvo.Houses
             int i = HouseFurnitures[id].Count();
             while (HouseFurnitures[id].ContainsKey(i)) i++;
             List<nItem> data = null;
-            if (name == "Шкаф с одеждой" || name == "Оружейный сейф" || name == "Шкаф с предметами") data = new List<nItem>();
+            if (name == "A wardrobe" || name == "Weapon safe" || name == "Wardrobe with items") data = new List<nItem>();
             HouseFurniture furn = new HouseFurniture(i, name, NameModels[name]);
             FurnituresItems[id].Add(furn.ID, data);
             HouseFurnitures[id].Add(i, furn);
@@ -108,7 +108,7 @@ namespace NeptuneEvo.Houses
                 House house = HouseManager.GetHouse(player, true);
                 if (house == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас нет дома", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't have a home", 3000);
                     return;
                 }
                 int id = player.GetData<int>("EDIT_ID");
@@ -140,9 +140,9 @@ namespace NeptuneEvo.Houses
         #region Safes Inventory
         public static Dictionary<string, int> SafesType = new Dictionary<string, int>()
         {
-            { "Шкаф с предметами", 3 },
-            { "Шкаф с одеждой", 4 },
-            { "Оружейный сейф", 8 },
+            { "Wardrobe with objects", 3 },
+            { "A wardrobe",4 },
+            { "Weapon safe",8 },
         };
 
         public static void Add(int houseID, int furnID, nItem item)
