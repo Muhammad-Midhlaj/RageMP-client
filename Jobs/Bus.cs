@@ -18,12 +18,12 @@ namespace NeptuneEvo.Jobs
         private static int BusRentCost = 150;
         private static List<String> BusWaysNames = new List<String>
         {
-            "ЛСПД  - Центральная Площадь - ФБР",
-            "Западное Гетто - Аэропорт -  Центральная Площадь",
-            "Западное Гетто - Автошкола - Центральная Площадь",
-            "Западное Гетто  - Аэропорт - Центральная Площадь - Газонокосилка - Электростанция - Таксопарк",
-            "Западное Гетто - Дальнобойщик - Восточное Гетто -  Инкасатор -  Механик",
-            "Центральная Площадь - Чумаш - Армия - Палето Бэй - Сэнди Шорс",
+            "LSPD - Central Square - FBI",
+            "Western Ghetto - Airport - Central Square",
+            "Western Ghetto - Driving School - Central Square",
+            "Western Ghetto - Airport - Central Square - Lawnmower - Power Station - Taxopark",
+            "Western Ghetto - Trucker - Eastern Ghetto - Incasator - Mechanic",
+            "Central Square - Chumash - Army - Paleto Bay - Sandy Shores",
         };
         private static List<List<BusCheck>> BusWays = new List<List<BusCheck>>()
         {
@@ -666,21 +666,21 @@ namespace NeptuneEvo.Jobs
         private static Dictionary<string, Vector3> BusStations = new Dictionary<string, Vector3>()
         {
             { "LSPD", new Vector3(394.8946, -990.8792, 30.60689) },
-            { "Главная площадь", new Vector3(-528.8386, -328.6082, 36.34783) },
+            { "Main square", new Vector3(-528.8386, -328.6082, 36.34783) },
             { "FIB", new Vector3(-1621.519, -532.9644, 35.70459) },
-            { "Западное гетто", new Vector3(19.75618, -1533.853, 30.54906) },
-            { "Аэропорт", new Vector3(-1032.82, -2723.92, 14.99705) },
-            { "Отель в аэропорте", new Vector3(-888.1733, -2186.11, 9.900888) },
-            { "Работа газонокосильщика", new Vector3(-1354.111, -43.5153, 52.53339) },
-            { "Электростанция", new Vector3(740.4898, 100.5469, 81.29053) },
-            { "Таксопарк", new Vector3(918.1192, -188.8451, 74.84467) },
-            { "Стоянка дальнобойщиков", new Vector3(602.8403, -3018.18, 6.131153) },
-            { "Восточное гетто", new Vector3(837.6479, -1807.675, 29.10327) },
-            { "Стоянка инкассаторов", new Vector3(807.4769, -1195.802, 27.39124) },
-            { "Стоянка механиков", new Vector3(449.7962, -1249.931, 30.22602) },
-            { "Чу-маш", new Vector3(-3104.435, 1097.097, 20.59407) },
-            { "Палето-Бэй", new Vector3(-151.3444, 6211.825, 31.31864) },
-            { "Сэнди-Шорс", new Vector3(1856.94, 3669.111, 34.11074) },
+            { "Western ghetto", new Vector3(19.75618, -1533.853, 30.54906) },
+            { "The airport", new Vector3(-1032.82, -2723.92, 14.99705) },
+            { "Airport hotel", new Vector3(-888.1733, -2186.11, 9.900888) },
+            { "Lawnmower work", new Vector3(-1354.111, -43.5153, 52.53339) },
+            { "Power station", new Vector3(740.4898, 100.5469, 81.29053) },
+            { "Taxi park", new Vector3(918.1192, -188.8451, 74.84467) },
+            { "Truckers parking", new Vector3(602.8403, -3018.18, 6.131153) },
+            { "Eastern ghetto", new Vector3(837.6479, -1807.675, 29.10327) },
+            { "Cash collectors parking", new Vector3(807.4769, -1195.802, 27.39124) },
+            { "Parking lot of mechanics", new Vector3(449.7962, -1249.931, 30.22602) },
+            { "Chu-mash", new Vector3(-3104.435, 1097.097, 20.59407) },
+            { "Paleto Bay", new Vector3(-151.3444, 6211.825, 31.31864) },
+            { "Sandy Shores", new Vector3(1856.94, 3669.111, 34.11074) },
         };
         #endregion
 
@@ -810,11 +810,11 @@ namespace NeptuneEvo.Jobs
                     Trigger.ClientEvent(player, "deleteWorkBlip");
 
                     NAPI.Data.SetEntityData(player, "BUS_ONSTOP", true);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Остановка. Через 10 секунд Вы сможете продолжить маршрут", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Stop. After 10 seconds you can continue the route", 3000);
                     player.SetData("BUS_TIMER", Timers.StartOnce(10000, () => timer_busStop(player, way, check)));
 
                     foreach (var p in Main.GetPlayersInRadiusOfPosition(player.Position, 30))
-                        p.SendChatMessage("!{#3ADF00}Через 10 секунд отходит автобус, следующий по маршруту " + BusWaysNames[way]);
+                        p.SendChatMessage("!{#3ADF00}After 10 seconds, the bus departs following the route " + BusWaysNames[way]);
                 }
             }
             catch (Exception ex) { Log.Write("busCheckpointEnterWay: " + ex.Message, nLog.Type.Error); }
@@ -827,7 +827,7 @@ namespace NeptuneEvo.Jobs
                 try
                 {
                     NAPI.Data.SetEntityData(player, "BUS_ONSTOP", false);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Можете ехать дальше", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You can go further", 3000);
                     var payment = Convert.ToInt32(BuswaysPayments[way] * Group.GroupPayAdd[Main.Accounts[player].VipLvl] * Main.oldconfig.PaydayMultiplier);
                     //NAPI.Data.SetEntityData(player, "PAYMENT", NAPI.Data.GetEntityData(player, "PAYMENT") + payment);
                     MoneySystem.Wallet.Change(player, payment);
@@ -847,7 +847,7 @@ namespace NeptuneEvo.Jobs
                     player.ResetData("BUS_TIMER");
 
                     foreach (var p in Main.GetPlayersInRadiusOfPosition(player.Position, 30))
-                        p.SendChatMessage("!{#3ADF00}Автобус отправляется по маршруту " + BusWaysNames[way]);
+                        p.SendChatMessage("!{#3ADF00}The bus departs along the route " + BusWaysNames[way]);
                 }
                 catch (Exception e)
                 {
@@ -867,7 +867,7 @@ namespace NeptuneEvo.Jobs
                     NAPI.Data.GetEntityData(player, "ON_WORK") &&
                     NAPI.Data.GetEntityData(player, "WORK") == vehicle)
                 {
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"Если Вы не сядете в транспорт через 60 секунд, то рабочий день закончится", 3000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"If you do not get on the transport after 60 seconds, then the working day will end", 3000);
                     NAPI.Data.SetEntityData(player, "IN_WORK_CAR", false);
                     if (player.HasData("WORK_CAR_EXIT_TIMER"))
                         //Main.StopT(NAPI.Data.GetEntityData(player, "WORK_CAR_EXIT_TIMER"), "timer_24");
@@ -928,7 +928,7 @@ namespace NeptuneEvo.Jobs
                 {
                     if (!Main.Players[player].Licenses[2])
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас нет лицензии категории C", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You do not have a Category C license", 3000);
                         VehicleManager.WarpPlayerOutOfVehicle(player);
                         return;
                     }
@@ -940,22 +940,22 @@ namespace NeptuneEvo.Jobs
                             {
                                 if (Main.Players[player].Money >= BusRentCost)
                                 {
-                                    Trigger.ClientEvent(player, "openDialog", "BUS_RENT", $"Арендовать автобус за ${BusRentCost}?");
+                                    Trigger.ClientEvent(player, "openDialog", "BUS_RENT", $"Rent a bus for ${BusRentCost}?");
                                 }
                                 else
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас не хватает " + (BusRentCost - Main.Players[player].Money) + "$ на аренду автобуса", 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are missing " + (BusRentCost - Main.Players[player].Money) + "$ на аренду автобуса", 3000);
                                     VehicleManager.WarpPlayerOutOfVehicle(player);
                                 }
                             }
                             else
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас уже есть арендованный автобус", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You already have a rented bus", 3000);
                         }
                         else
                         {
                             if (NAPI.Data.GetEntityData(player, "WORK") != vehicle)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У автобуса уже есть водитель", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The bus already has a driver", 3000);
                                 VehicleManager.WarpPlayerOutOfVehicle(player);
                             }
                             else
@@ -964,7 +964,7 @@ namespace NeptuneEvo.Jobs
                     }
                     else
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не работаете водителем автобуса. Устроиться можно в мэрии", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not a bus driver. You can get a job at the city hall", 3000);
                         VehicleManager.WarpPlayerOutOfVehicle(player);
                     }
                 }
@@ -975,20 +975,20 @@ namespace NeptuneEvo.Jobs
                         var price = 30;
                         if (Main.Players[player].Money >= price)
                         {
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы заплатили за проезд {price}$", 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You paid the fare{price}$", 3000);
                             MoneySystem.Wallet.Change(player, -price);
                             Fractions.Stocks.fracStocks[6].Money += price;
                             GameLog.Money($"player({Main.Players[player].UUID})", $"frac(6)", price, $"busPay");
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас недостаточно средств для оплаты проезда", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't have enough funds to pay for your trip", 3000);
                             VehicleManager.WarpPlayerOutOfVehicle(player);
                         }
                     }
                     else
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"В автобусе сейчас нет водителя", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"There is no driver on the bus now", 3000);
                         VehicleManager.WarpPlayerOutOfVehicle(player);
                     }
                 }
@@ -1054,11 +1054,11 @@ namespace NeptuneEvo.Jobs
                 NAPI.Data.SetEntityData(player, "WORK", vehicle);
 
                 //BasicSync.AttachLabelToObject("~y~" + BusWaysNames[way] + "\n~w~Проезд: ~g~15$", new Vector3(0, 0, 1.5), vehicle);
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы арендовали автобус. Вас распределили на маршрут {BusWaysNames[way]}", 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You rented a bus. You were assigned to the route {BusWaysNames[way]}", 3000);
             }
             else
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны находиться в автобусе", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must be on the bus", 3000);
             }
         }
 

@@ -50,7 +50,7 @@ namespace NeptuneEvo.Jobs
                         return;
                     }
                     GameLog.Money($"player({Main.Players[player].UUID})", $"server", taxiRentCost, $"taxiRent");
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы арендовали такси. Чтобы предложить игроку оплатить проезд, напишите /tprice [ID] [Цена]", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You rented a taxi. To offer the player to pay for the ride, write / tprice [ID] [Price]", 3000);
                     Core.VehicleStreaming.SetEngineState(vehicle, false);
                 }
             }
@@ -70,8 +70,8 @@ namespace NeptuneEvo.Jobs
             }
             MoneySystem.Wallet.Change(seller, price);
             GameLog.Money($"player({Main.Players[player].UUID})", $"player({Main.Players[seller].UUID})", taxiRentCost, $"taxiPay");
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы оплатили проезд", 3000);
-            Notify.Send(seller, NotifyType.Info, NotifyPosition.BottomCenter, $"Игрок " + player.Name.Replace('_', ' ') + " оплатил проезд", 3000);
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You paid the fare", 3000);
+            Notify.Send(seller, NotifyType.Info, NotifyPosition.BottomCenter, $"Player " + player.Name.Replace('_', ' ') + " paid the fare", 3000);
         }
 
         private static void order_onEntityExit(ColShape shape, Player player)
@@ -124,7 +124,7 @@ namespace NeptuneEvo.Jobs
                             }
                             if (Main.Players[player].Money >= taxiRentCost)
                             {
-                                Trigger.ClientEvent(player, "openDialog", "TAXI_RENT", $"Арендовать такси за ${taxiRentCost}?");
+                                Trigger.ClientEvent(player, "openDialog", "TAXI_RENT", $"Rent a taxi for ${taxiRentCost}?");
                             }
                             else
                             {
@@ -283,7 +283,7 @@ namespace NeptuneEvo.Jobs
                             Player passager = player.GetData<Player>("PASSAGER");
                             passager.ResetData("TAXI_DRIVER");
                             passager.SetData("IS_CALL_TAXI", false);
-                            Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"Таксист покинул рабочее место, сделайте новый заказ", 3000);
+                            Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"The taxi driver left the workplace, make a new order", 3000);
                             player.ResetData("PASSAGER");
                             try
                             {
@@ -322,16 +322,16 @@ namespace NeptuneEvo.Jobs
                             return;
                         }
 
-                        Trigger.ClientEvent(target, "openDialog", "TAXI_PAY", $"Оплатить проезд за ${price}?");
+                        Trigger.ClientEvent(target, "openDialog", "TAXI_PAY", $"Pay the fare for ${price}?");
                         target.SetData("TAXI_SELLER", player);
                         target.SetData("TAXI_PAY", price);
 
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы предложили игроку ({target.Value}) оплатить поездку за {price}$", 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You suggested to the player ({target.Value}) pay the trip for {price}$", 3000);
                     }
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не работает в данный момент", 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not working at the moment", 3000);
             }
-            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не работаете таксистом", 3000);
+            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't work as a taxi driver", 3000);
         }
 
         public static void acceptTaxi(Player player, Player target)
@@ -340,13 +340,13 @@ namespace NeptuneEvo.Jobs
             {
                 if (player.HasData("PASSAGER"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы уже взяли заказ", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You have already taken an order", 3000);
                     return;
                 }
                 if (NAPI.Data.GetEntityData(target, "IS_CALL_TAXI") && !target.HasData("TAXI_DRIVER"))
                 {
-                    Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, $"Таксист ({player.Value}) принял Ваш вызов. Оставайтесь на мест", 3000);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы приняли вызов игрока ({target.Value})", 3000);
+                    Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, $"Taxi driver ({player.Value}) accepted your challenge. Stay seated", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You accepted the player's challenge({target.Value})", 3000);
                     Trigger.ClientEvent(player, "createWaypoint", NAPI.Entity.GetEntityPosition(target).X, NAPI.Entity.GetEntityPosition(target).Y);
 
                     target.SetData("TAXI_DRIVER", player);
@@ -356,9 +356,9 @@ namespace NeptuneEvo.Jobs
                     orderCols[target].SetData("PASSAGER", target);
                     orderCols[target].OnEntityExitColShape += order_onEntityExit;
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок не вызывал такси или его уже приняли", 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The player did not call a taxi or was already accepted", 3000);
             }
-            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не работаете таксистом в данный момент", 3000);
+            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not working as a taxi driver at the moment", 3000);
         }
 
         public static void cancelTaxi(Player player)
@@ -369,8 +369,8 @@ namespace NeptuneEvo.Jobs
                 passager.ResetData("TAXI_DRIVER");
                 passager.SetData("IS_CALL_TAXI", false);
                 player.ResetData("PASSAGER");
-                Notify.Send(passager, NotifyType.Warning, NotifyPosition.BottomCenter, $"Таксист покинул рабочее место, сделайте новый заказ", 3000);
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы отменили выезд к клиенту", 3000);
+                Notify.Send(passager, NotifyType.Warning, NotifyPosition.BottomCenter, $"The taxi driver left the workplace, make a new order", 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You canceled a visit to a client", 3000);
                 NAPI.Task.Run(() =>
                 {
                     try
@@ -386,13 +386,13 @@ namespace NeptuneEvo.Jobs
             if (NAPI.Data.GetEntityData(player, "IS_CALL_TAXI"))
             {
                 NAPI.Data.SetEntityData(player, "IS_CALL_TAXI", false);
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы отменили вызов такси", 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You canceled the taxi call", 3000);
                 if (player.HasData("TAXI_DRIVER"))
                 {
                     Player driver = player.GetData<Player>("TAXI_DRIVER");
                     driver.ResetData("PASSAGER");
                     player.ResetData("TAXI_DRIVER");
-                    Notify.Send(driver, NotifyType.Warning, NotifyPosition.BottomCenter, $"Пассажир отменил заказ", 3000);
+                    Notify.Send(driver, NotifyType.Warning, NotifyPosition.BottomCenter, $"The passenger canceled the order", 3000);
                     NAPI.Task.Run(() =>
                     {
                         try
@@ -404,7 +404,7 @@ namespace NeptuneEvo.Jobs
                     });
                 }
             }
-            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не вызывали такси.", 3000);
+            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You didn't call a taxi.", 3000);
         }
 
         public static void callTaxi(Player player)
@@ -419,17 +419,17 @@ namespace NeptuneEvo.Jobs
                     if (Main.Players[p].WorkID == 3 && NAPI.Data.GetEntityData(p, "WORK") != null)
                     {
                         i++;
-                        NAPI.Chat.SendChatMessageToPlayer(p, $"~g~[ДИСПЕТЧЕР]: ~w~Игрок ({player.Value}) вызвал такси ~y~({player.Position.DistanceTo(p.Position)}м)~w~. Напишите ~y~/ta ~b~[ID]~w~, чтобы принять вызов");
+                        NAPI.Chat.SendChatMessageToPlayer(p, $"~g~[DISPATCHER]: ~w~Player ({player.Value}) called a taxi ~y~({player.Position.DistanceTo(p.Position)}м)~w~.Write ~y~/ta ~b~[ID]~w~, to accept the challenge");
                     }
                 }
                 if (i > 0)
                 {
                     NAPI.Data.SetEntityData(player, "IS_CALL_TAXI", true);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Ожидайте принятия вызова. В Вашем районе сейчас {i} таксистов. Для отмены вызова используйте /ctaxi", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Wait for the call. In your area now {i}taxi drivers. To cancel the call use / ctaxi", 3000);
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"В Вашем районе сейчас нет таксистов. Попробуйте в другой раз", 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"There are no taxi drivers in your area right now. Please try another time", 3000);
             }
-            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы уже Вызвали такси. Для отмены напишите /ctaxi", 3000);
+            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You have already called a taxi. To cancel write /ctaxi", 3000);
         }
     }
 }

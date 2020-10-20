@@ -10,16 +10,16 @@ namespace NeptuneEvo.MoneySystem
 {
     class Casino : Script
     {
-        private static nLog Log = new nLog("Казино");
-        private static Config config = new Config("Казино");
+        private static nLog Log = new nLog("Casino");
+        private static Config config = new Config("Casino");// POSSIBLE ERROR
 
         private static readonly Random random = new Random();
         private static readonly byte[] webnums = new byte[37] { 0, 14, 31, 2, 33, 18, 27, 6, 21, 10, 19, 23, 4, 25, 12, 35, 16, 29, 8, 34, 13, 32, 9, 20, 17, 30, 1, 26, 5, 7, 22, 11, 36, 15, 28, 3, 24 }; // номера ячейки для каждого числа 0, 1, 2 и т.д.
         private static int[] rednums = new int[18] { 1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36 }; // Все красные числа на рулетке
         private static int WinNum = -1; // Изначально не имеем заданного выигрышного номера
-        private static string CasinoT = null; // Таймер казино будет активен только тогда, когда в него будет играть ХОТЯ БЫ 1 человек, во всех других случаях таймер неактивен.
-        private static byte CasinoState = 0; // Стартует казино с первой фазы, о самих фазах в самом таймере.
-        private static byte CTime = 45; // 45 секунд работает ожидание до старта рулетки + 10 в самом таймере накидывается на прокрутку самого колеса
+        private static string CasinoT = null;// The casino timer will be active only when AT LEAST 1 person is playing it, in all other cases I studied the timer is inactive.
+        private static byte CasinoState = 0; // The casino starts from the first phase, about the phases themselves in the timer itself.
+        private static byte CTime = 45; // 45seconds are waiting until the start of the roulette + 10 in the timer itself is thrown on the scrolling of the wheel itself
         private static Dictionary<Player, (ushort, ushort, ushort)> PlayersList = new Dictionary<Player, (ushort, ushort, ushort)>();
         //RED. ZERO, BLACK
         private static long minBalance = config.TryGet<long>("minBalance", 15000);
@@ -64,7 +64,7 @@ namespace NeptuneEvo.MoneySystem
             blip = NAPI.Blip.CreateBlip(blipID, blipPosition, 1, blipColor, blipName, 255, 0, true);
             Console.WriteLine(blip.Position);
             NAPI.Marker.CreateMarker(21, colPosition, new Vector3(), new Vector3(), 0.8f, new Color(255, 255, 255, 60));
-            NAPI.TextLabel.CreateTextLabel("~y~Нажмите E чтобы начать играть", colPosition + new Vector3(0, 0, 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
+            NAPI.TextLabel.CreateTextLabel("~y~Press E to start playing", colPosition + new Vector3(0, 0, 0.3), 5F, 0.3F, 0, new Color(255, 255, 255));
         }
 
         [ServerEvent(Event.PlayerDeath)]
@@ -136,14 +136,14 @@ namespace NeptuneEvo.MoneySystem
             {
                 if (Main.Players[client].Money < minBalance)
                 {
-                    Notify.Send(client, NotifyType.Warning, NotifyPosition.BottomCenter, $"Для игры необходимо иметь баланс больше {minBalance}$", 4000);
+                    Notify.Send(client, NotifyType.Warning, NotifyPosition.BottomCenter, $"To play, you need to have more balance {minBalance}$", 4000);
                     return;
                 }
 
                 if (PlayersList.Count == 0) CasinoT = Timers.StartTask("CasinoT", 5000, CasinoTick); // Если это первый игрок, то запускаем таймер казино с задержкой в 5 секунд
                 client.Dimension = (uint)(client.Value + 1);
-                PlayersList.Add(client, (0, 0, 0)); // Добавляем игрока в лист игроков
-                                                    // Заменить переменную на ту, что держит кол-во денег в банке у player, Обновляем в UI количество реальных денег со счёта
+                PlayersList.Add(client, (0, 0, 0)); //Add the player to the player list
+                                                    //Replace the variable with the one that keeps the amount of money in the player's bank, Update the amount of real money from the account in the UI
                 Trigger.ClientEvent(client, "startroulete", CTime, CasinoState, Main.Players[client].Money);
             }
         }
@@ -246,7 +246,7 @@ namespace NeptuneEvo.MoneySystem
                                 {
                                     wonbet = wonbet * 14;
                                     Wallet.Change(target, wonbet);
-                                    GameLog.Money("Казино", $"player({Main.Players[target].UUID})", wonbet, "winZero");
+                                    GameLog.Money("Casino", $"player({Main.Players[target].UUID})", wonbet, "winZero");
                                 }
                             }
                             else if (index == 1)
@@ -266,7 +266,7 @@ namespace NeptuneEvo.MoneySystem
                                 {
                                     wonbet = wonbet * 2;
                                     Wallet.Change(target, wonbet);
-                                    GameLog.Money("Казино", $"player({Main.Players[target].UUID})", wonbet, "winBlack");
+                                    GameLog.Money("casino", $"player({Main.Players[target].UUID})", wonbet, "winBlack");
                                 }
                             }
                             // Отсылаем всем игрокам их новые суммы в банке и данные об выигрыше в UI, если он есть.
@@ -286,7 +286,7 @@ namespace NeptuneEvo.MoneySystem
         }
 
         private static void SendTimeAndState()
-        { // Каждые 5 секунд обновляем у игроков время и state в их UI 
+        { // Every 5 seconds we update the players' time and state in their UI
             foreach (Player target in PlayersList.Keys)
             {
                 //NAPI.ClientEvent.TriggerClientEvent(target, "rouletecfg", 2, CTime, CasinoState);

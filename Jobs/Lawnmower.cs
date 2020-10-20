@@ -196,7 +196,7 @@ namespace NeptuneEvo.Jobs
                 NAPI.Data.GetEntityData(player, "ON_WORK") &&
                 NAPI.Data.GetEntityData(player, "WORK") == vehicle)
                 {
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"Если Вы не сядете в транспорт через 60 секунд, то рабочий день закончится", 3000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"If you do not get on the transport after 60 seconds, then the working day will end", 3000);
                     NAPI.Data.SetEntityData(player, "IN_WORK_CAR", false);
                     if (player.HasData("WORK_CAR_EXIT_TIMER"))
                         //Main.StopT(NAPI.Data.GetEntityData(player, "WORK_CAR_EXIT_TIMER"), "timer_4");
@@ -255,7 +255,7 @@ namespace NeptuneEvo.Jobs
                     {
                         if (NAPI.Data.GetEntityData(player, "WORK") == null)
                         {
-                            Trigger.ClientEvent(player, "openDialog", "MOWER_RENT", $"Начать работу газонокосильщиком?");
+                            Trigger.ClientEvent(player, "openDialog", "MOWER_RENT", $"Start working as a lawnmower?");
                         }
                         else if (NAPI.Data.GetEntityData(player, "WORK") == vehicle)
                             NAPI.Data.SetEntityData(player, "IN_WORK_CAR", true);
@@ -264,7 +264,7 @@ namespace NeptuneEvo.Jobs
                     {
                         if (NAPI.Data.GetEntityData(player, "WORK") != vehicle)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У газонокосилки есть газонокосильщик", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The lawn mower has a lawn mower", 3000);
                             VehicleManager.WarpPlayerOutOfVehicle(player);
                         }
                         else NAPI.Data.SetEntityData(player, "IN_WORK_CAR", true);
@@ -272,7 +272,7 @@ namespace NeptuneEvo.Jobs
                 }
                 else
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не работаете газонокосильщиком. Устроиться можно в мэрии", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You don't work as a lawnmower. You can get a job at the city hall", 3000);
                     VehicleManager.WarpPlayerOutOfVehicle(player);
                 }
             } catch (Exception e) { Log.Write("PlayerEnterVehicle: " + e.Message, nLog.Type.Error); }
@@ -283,7 +283,7 @@ namespace NeptuneEvo.Jobs
             if (NAPI.Player.IsPlayerInAnyVehicle(player) || player.VehicleSeat != 0 || player.Vehicle.GetData<string>("TYPE") != "MOWER")
             {
                 var way = 0;
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы начали работу газонокосильщика, следуйте по чекпоинтам", 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You have started a lawnmower job, follow the checkpoints", 3000);
                 var vehicle = player.Vehicle;
                 NAPI.Data.SetEntityData(player, "WORK", vehicle);
                 Core.VehicleStreaming.SetEngineState(vehicle, true);
@@ -318,7 +318,7 @@ namespace NeptuneEvo.Jobs
             }
             else
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны находиться в транспорте", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must be in transport", 3000);
             }
         }
 

@@ -96,9 +96,9 @@ namespace NeptuneEvo.Jobs
                     {
                         if (NAPI.Data.GetEntityData(player, "WORK") == null)
                         {
-                            if (Main.Players[player].Money >= 100) Trigger.ClientEvent(player, "openDialog", "COLLECTOR_RENT", "Вы действительно хотите начать работу инкассатором и арендовать транспорт за $100?");
+                            if (Main.Players[player].Money >= 100) Trigger.ClientEvent(player, "openDialog", "COLLECTOR_RENT", "Are you sure you want to start working as a cash collector and rent a vehicle for $ 100?");
                             else {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас не хватает " + (100 - Main.Players[player].Money) + "$ на аренду автобуса", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are missing " + (100 - Main.Players[player].Money) + "$ for bus rental", 3000);
                                 VehicleManager.WarpPlayerOutOfVehicle(player);
                             }
                         }
@@ -109,7 +109,7 @@ namespace NeptuneEvo.Jobs
                     {
                         if (NAPI.Data.GetEntityData(player, "WORK") != vehicle)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Эта машина занята", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"This car is busy ", 3000);
                             VehicleManager.WarpPlayerOutOfVehicle(player);
                         }
                         else NAPI.Data.SetEntityData(player, "IN_WORK_CAR", true);
@@ -117,7 +117,7 @@ namespace NeptuneEvo.Jobs
                 }
                 else
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не работаете инкассатором. Устроиться можно в мэрии", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You are not a cash collector. You can get a job at the city hall", 3000);
                     VehicleManager.WarpPlayerOutOfVehicle(player);
                 }
             }
@@ -140,7 +140,7 @@ namespace NeptuneEvo.Jobs
                         player.SetData("WORKOBJECT", true);
                     }
 
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"Если Вы не сядете в транспорт через 3 минуты, то рабочий день закончится", 3000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"If you do not get on the transport after 3 minutes, then the working day will end", 3000);
                     NAPI.Data.SetEntityData(player, "IN_WORK_CAR", false);
                     if (player.HasData("WORK_CAR_EXIT_TIMER"))
                         //Main.StopT(NAPI.Data.GetEntityData(player, "WORK_CAR_EXIT_TIMER"), "timer_13");
@@ -258,7 +258,7 @@ namespace NeptuneEvo.Jobs
         {
             if (!NAPI.Player.IsPlayerInAnyVehicle(player) || player.VehicleSeat != 0 || player.Vehicle.GetData<string>("TYPE") != "COLLECTOR") return;
 
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы начали работу инкассатором. Развезите money по банкоматам.", 3000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You have started working as a cash collector. Deliver money to ATMs.", 3000);
             MoneySystem.Wallet.Change(player, -100);
             GameLog.Money($"player({Main.Players[player].UUID})", $"server", 100, $"collectorRent");
             var vehicle = player.Vehicle;
@@ -305,12 +305,12 @@ namespace NeptuneEvo.Jobs
             if (player.IsInVehicle || Main.Players[player].WorkID != 7 || !player.GetData<bool>("ON_WORK")) return;
             if (player.GetData<int>("COLLECTOR_BAGS") != 0)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас ещё остались мешки с деньгами ({player.GetData<int>("COLLECTOR_BAGS")}шт)", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You still have bags of money ({player.GetData<int>("COLLECTOR_BAGS")}PC)", 3000);
                 return;
             }
             else
             {
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы взяли новые мешки с деньгами.", 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You have taken new bags of money.", 3000);
                 player.SetData("COLLECTOR_BAGS", 15);
 
                 var x = WorkManager.rnd.Next(0, MoneySystem.ATM.ATMs.Count - 1);
@@ -339,7 +339,7 @@ namespace NeptuneEvo.Jobs
                 DateTime lastTime = player.GetData<DateTime>("W_LASTTIME");
                 if (DateTime.Now < lastTime.AddSeconds(coef * 2))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Банкомат ещё полон. Попробуйте позже", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "The ATM is still full. try later", 3000);
                     return;
                 }
 
@@ -357,7 +357,7 @@ namespace NeptuneEvo.Jobs
 
                 if (player.GetData<int>("COLLECTOR_BAGS") == 0)
                 {
-                    Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, "Возвращайтесь на базу, чтобы взять новые мешки с деньгами", 3000);
+                    Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, "Return to base to get new bags of money", 3000);
                     Trigger.ClientEvent(player, "deleteWorkBlip");
                     Trigger.ClientEvent(player, "createWaypoint", TakeMoneyPos.X, TakeMoneyPos.Y);
                     Trigger.ClientEvent(player, "deleteCheckpoint", 16);
@@ -372,7 +372,7 @@ namespace NeptuneEvo.Jobs
                     Trigger.ClientEvent(player, "createCheckpoint", 16, 29, MoneySystem.ATM.ATMs[x] + new Vector3(0, 0, 1.12), 1, 0, 220, 220, 0);
                     Trigger.ClientEvent(player, "createWaypoint", MoneySystem.ATM.ATMs[x].X, MoneySystem.ATM.ATMs[x].Y);
                     Trigger.ClientEvent(player, "createWorkBlip", MoneySystem.ATM.ATMs[x]);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Направляйтесь к следующему банкомату.", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Head to the next ATM.", 3000);
                 }
             } catch { }
         }

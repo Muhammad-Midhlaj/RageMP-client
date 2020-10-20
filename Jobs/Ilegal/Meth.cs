@@ -48,7 +48,7 @@ class Meth : Script
     {
 
         Blip temp_blip = NAPI.Blip.CreateBlip(new Vector3(3392.58, 5499.587, 24.23199));
-        NAPI.Blip.SetBlipName(temp_blip, "Урожай опиума");
+        NAPI.Blip.SetBlipName(temp_blip, "The opium harvest");
         NAPI.Blip.SetBlipSprite(temp_blip, 468);
         NAPI.Blip.SetBlipColor(temp_blip, 59);
         NAPI.Blip.SetBlipScale(temp_blip, 1.0f);
@@ -92,7 +92,7 @@ class Meth : Script
             weed.downtime = 10 * 60;
             weed.timer = null;
             weed.objectHandle = API.Shared.CreateObject(-2093428068, new Vector3(weed.position.X, weed.position.Y, weed.position.Z - 1.2f), new Vector3(), 255, 0);
-            weed.textLabel = API.Shared.CreateTextLabel("~h~~g~-~y~Листья коки~g~ -~w~~n~~n~Нажмите ~y~Y~w~ чтобы забрать", new Vector3(weed.position.X, weed.position.Y, weed.position.Z - 0.4f), 11.0f, 0.3f, 4, new Color(255, 255, 255, 255), false, 0);
+            weed.textLabel = API.Shared.CreateTextLabel("~h~~g~-~y~Coca leaves~g~ -~w~~n~~n~Click ~y~Y~w~ to take", new Vector3(weed.position.X, weed.position.Y, weed.position.Z - 0.4f), 11.0f, 0.3f, 4, new Color(255, 255, 255, 255), false, 0);
         }
 
         ColShape opium = NAPI.ColShape.CreatCircleColShape(3392.58f, 5499.587f, 100, 0);

@@ -389,7 +389,7 @@ class XMR : Script
        
 
             xmr_radios[radio_id].objeto = API.Shared.CreateObject(2079380440, player.Position - new Vector3(0,0, 1.0f), new Vector3(0,0,0), 0);
-            xmr_radios[radio_id].label = API.Shared.CreateTextLabel("~y~[ ~w~Boombox~y~ ]~n~~b~((~w~ Use ~r~/setstation~w~ para alterar a estação ~b~))", xmr_radios[radio_id].objeto.Position + new Vector3(0, 0, 0.45f), 8.0f, 0.29f, 1, new Color(255,255,255,255));
+            xmr_radios[radio_id].label = API.Shared.CreateTextLabel("~y~[ ~w~Boombox~y~ ]~n~~b~((~w~ Use ~r~/setstation~w~to change the station ~b~))", xmr_radios[radio_id].objeto.Position + new Vector3(0, 0, 0.45f), 8.0f, 0.29f, 1, new Color(255,255,255,255));
         }
         else
         {

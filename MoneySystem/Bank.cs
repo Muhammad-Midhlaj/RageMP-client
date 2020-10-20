@@ -91,14 +91,14 @@ namespace NeptuneEvo.MoneySystem
             if (!Accounts.ContainsKey(lastAccID))
             {
                 if (firstAcc.Type == 1)
-                    BankNotify(NAPI.Player.GetPlayerFromName(firstAcc.Holder), BankNotifyType.InputError, "Такого счета не существует!");
+                    BankNotify(NAPI.Player.GetPlayerFromName(firstAcc.Holder), BankNotifyType.InputError, "There is no such account!");
                 Log.Write($"Transfer with error. Account does not exist! [{firstAccID.ToString()}->{lastAccID.ToString()}:{amount.ToString()}]", nLog.Type.Warn);
                 return false;
             }
             if (!Change(firstAccID, -amount))
             {
                 if (firstAcc.Type == 1)
-                    BankNotify(NAPI.Player.GetPlayerFromName(firstAcc.Holder), BankNotifyType.PayError, "Недостаточно средств!");
+                    BankNotify(NAPI.Player.GetPlayerFromName(firstAcc.Holder), BankNotifyType.PayError, "Insufficient funds!");
                 Log.Write($"Transfer with error. Insufficient funds! [{firstAccID.ToString()}->{lastAccID.ToString()}:{amount.ToString()}]", nLog.Type.Warn);
                 return false;
             }
@@ -121,16 +121,16 @@ namespace NeptuneEvo.MoneySystem
             switch (type)
             {
                 case BankNotifyType.InputError:
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Ошибка ввода", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Input Error", 3000);
                     return;
                 case BankNotifyType.PayError:
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Ошибка списания средств", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Withdrawal error", 3000);
                     return;
                 case BankNotifyType.PayIn:
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Поступление средств ({info}$)", 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Receipt of funds({info}$)", 3000);
                     return;
                 case BankNotifyType.PayOut:
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Списание средств ({info}$)", 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Debit ({info}$)", 3000);
                     return;
             }
         }
@@ -349,7 +349,7 @@ namespace NeptuneEvo.MoneySystem
             var acc = Main.Players[player];
             if (acc.Bank == 0)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Зарегистрируйте счет в ближайшем отделении банка", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Register an account at the nearest bank branch ", 3000);
                 return;
             }
             long balance = Bank.Accounts[acc.Bank].Balance;
@@ -376,7 +376,7 @@ namespace NeptuneEvo.MoneySystem
             else
             {
                 Trigger.ClientEvent(player, "atmOpen", "[1,0,0]");
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "У вас нет бизнеса!", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You have no business!", 3000);
             }
         }
 
@@ -387,7 +387,7 @@ namespace NeptuneEvo.MoneySystem
             {
                 if (Admin.IsServerStoping)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Сервер сейчас не может принять это действие", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "The server is currently unable to accept this action ", 3000);
                     return;
                 }
                 var acc = Main.Players[player];
@@ -422,19 +422,19 @@ namespace NeptuneEvo.MoneySystem
                         var maxMoney = Convert.ToInt32(house.Price / 100 * 0.013) * 24 * 7;
                         if (Bank.Accounts[house.BankID].Balance + Math.Abs(amount) > maxMoney)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Невозможно перевести столько средств на счет дома.", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "It is impossible to transfer that much money to an account at home.", 3000);
                             return;
                         }
                         if (!Wallet.Change(player, -Math.Abs(amount)))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Недостаточно средств.", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Insufficient funds.", 3000);
                             return;
                         }
                         Bank.Change(house.BankID, +Math.Abs(amount));
                         GameLog.Money($"player({Main.Players[player].UUID})", $"bank({house.BankID})", Math.Abs(amount), $"atmHouse");
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "Успешный перевод.", 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "Successful translation.", 3000);
                         Trigger.ClientEvent(player,
-                                "atmOpen", $"[2,'{Bank.Accounts[house.BankID].Balance}/{Convert.ToInt32(house.Price / 100 * 0.013) * 24 * 7}$','Сумма внесения наличных']");
+                                "atmOpen", $"[2,'{Bank.Accounts[house.BankID].Balance}/{Convert.ToInt32(house.Price / 100 * 0.013) * 24 * 7}$','Cash deposit amount']"); // POSSIBLE STRING ERROR
                         break;
                     case 3:
                         int bid = NAPI.Data.GetEntityData(player, "ATMBIZ");
@@ -444,56 +444,56 @@ namespace NeptuneEvo.MoneySystem
                         maxMoney = Convert.ToInt32(biz.SellPrice / 100 * 0.013) * 24 * 7;
                         if (Bank.Accounts[biz.BankID].Balance + Math.Abs(amount) > maxMoney)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Невозможно перевести столько средств на счет бизнеса.", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "It is impossible to transfer so much funds to the business account.", 3000);
                             return;
                         }
                         if (!Wallet.Change(player, -Math.Abs(amount)))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Недостаточно средств.", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Insufficient funds.", 3000);
                             return;
                         }
                         Bank.Change(biz.BankID, +Math.Abs(amount));
                         GameLog.Money($"player({Main.Players[player].UUID})", $"bank({biz.BankID})", Math.Abs(amount), $"atmBiz");
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "Успешный перевод.", 3000);
-                        Trigger.ClientEvent(player, "atmOpen", $"[2,'{Bank.Accounts[biz.BankID].Balance}/{Convert.ToInt32(biz.SellPrice / 100 * 0.013) * 24 * 7}$','Сумма зачисления']");
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "Successful translation.", 3000);
+                        Trigger.ClientEvent(player, "atmOpen", $"[2,'{Bank.Accounts[biz.BankID].Balance}/{Convert.ToInt32(biz.SellPrice / 100 * 0.013) * 24 * 7}$','Amount credited ']");
                         break;
                     case 4:
                         if (!Bank.Accounts.ContainsKey(amount) || amount <= 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Счет не найден!", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Account not found!", 3000);
                             Trigger.ClientEvent(player, "closeatm");
                             return;
                         }
                         NAPI.Data.SetEntityData(player, "ATM2ACC", amount);
                         Trigger.ClientEvent(player,
-                                "atmOpen", "[2,0,'Сумма для перевода']");
+                                "atmOpen", "[2,0,'Amount to transfer']");
                         NAPI.Data.SetEntityData(player, "ATMTYPE", 44);
                         break;
                     case 44:
                         if (Main.Players[player].LVL < 1)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Перевод денег доступен после первого уровня", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Money transfer is available after the first level", 3000);
                             return;
                         }
                         if (player.HasData("NEXT_BANK_TRANSFER") && DateTime.Now < player.GetData<DateTime>("NEXT_BANK_TRANSFER"))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Следующая транзакция будет возможна в течение минуты", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The next transaction will be possible within a minute", 3000);
                             return;
                         }
                         int bank = NAPI.Data.GetEntityData(player, "ATM2ACC");
                         if (!Bank.Accounts.ContainsKey(bank) || bank <= 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Счет не найден!", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Account not found!", 3000);
                             Trigger.ClientEvent(player, "closeatm");
                             return;
                         }
                         if(Bank.Accounts[bank].Type != 1 && Main.Players[player].AdminLVL == 0) {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Счет не найден!", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Account not found!", 3000);
                             Trigger.ClientEvent(player, "closeatm");
                             return;
                         }
                         if(acc.Bank == bank) {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Операция отменена.", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Operation canceled.", 3000);
                             Trigger.ClientEvent(player, "closeatm");
                             return;
                         }
@@ -541,24 +541,24 @@ namespace NeptuneEvo.MoneySystem
                         {
                             case 0:
                                 Trigger.ClientEvent(player,
-                                    "atmOpen", "[2,0,'Сумма внесения наличных']");
+                                    "atmOpen", "[2,0,'Cash deposit amount']");
                                 NAPI.Data.SetEntityData(player, "ATMTYPE", index);
                                 break;
                             case 1:
                                 Trigger.ClientEvent(player,
-                                    "atmOpen", "[2,0,'Сумма для снятия']");
+                                    "atmOpen", "[2,0,'Withdrawal amount']");
                                 NAPI.Data.SetEntityData(player, "ATMTYPE", index);
                                 break;
                             case 2:
                                 if (Houses.HouseManager.GetHouse(player, true) == null)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "У вас нет дома!", 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You have no home!", 3000);
                                     return;
                                 }
                                 var house = Houses.HouseManager.GetHouse(player, true);
                                 Trigger.ClientEvent(player,
-                                    "atmOpen", $"[2,'{Bank.Accounts[house.BankID].Balance}/{Convert.ToInt32(house.Price / 100 * 0.013) * 24 * 7}$','Сумма внесения наличных']");
-                                Trigger.ClientEvent(player, "setatm", "Дом", $"Дом #{house.ID}", Bank.Accounts[house.BankID].Balance, "");
+                                    "atmOpen", $"[2,'{Bank.Accounts[house.BankID].Balance}/{Convert.ToInt32(house.Price / 100 * 0.013) * 24 * 7}$','Cash deposit amount ']");
+                                Trigger.ClientEvent(player, "setatm", "House", $"House #{house.ID}", Bank.Accounts[house.BankID].Balance, "");
                                 NAPI.Data.SetEntityData(player, "ATMTYPE", index);
                                 break;
                             case 3:
@@ -567,7 +567,7 @@ namespace NeptuneEvo.MoneySystem
                                 break;
                             case 4:
                                 Trigger.ClientEvent(player,
-                                    "atmOpen", "[2,0,'Счет зачисления']");
+                                    "atmOpen", "[2,0,'Enrollment account']");
                                 NAPI.Data.SetEntityData(player, "ATMTYPE", index);
                                 break;
 
@@ -586,7 +586,7 @@ namespace NeptuneEvo.MoneySystem
                         }
                         Business biz = BusinessManager.BizList[acc.BizIDs[index]];
                         NAPI.Data.SetEntityData(player, "ATMBIZ", index);
-                        Trigger.ClientEvent(player, "atmOpen", $"[2,'{Bank.Accounts[biz.BankID].Balance}/{Convert.ToInt32(biz.SellPrice / 100 * 0.013) * 24 * 7}$','Сумма зачисления']");
+                        Trigger.ClientEvent(player, "atmOpen", $"[2,'{Bank.Accounts[biz.BankID].Balance}/{Convert.ToInt32(biz.SellPrice / 100 * 0.013) * 24 * 7}$','Amount credited']");
                         Trigger.ClientEvent(player, "setatm",
                             "Бизнес",
                             BusinessManager.BusinessTypeNames[biz.Type],
@@ -605,7 +605,7 @@ namespace NeptuneEvo.MoneySystem
             {
                 if (Admin.IsServerStoping)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Сервер сейчас не может принять это действие", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "The server is currently unable to accept this action.", 3000);
                     return;
                 }
                 int act = Convert.ToInt32(args[0]);
@@ -640,30 +640,30 @@ namespace NeptuneEvo.MoneySystem
                         var maxMoney = Convert.ToInt32(house.Price / 100 * 0.013) * 24 * 7;
                         if (Bank.Accounts[house.BankID].Balance + Math.Abs(amount) > maxMoney)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Невозможно перевести столько средств на счет дома.", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "It is impossible to transfer so much funds to the account at home.", 3000);
                             return;
                         }
                         if (!Wallet.Change(player, -Math.Abs(amount)))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Недостаточно средств.", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Insufficient funds.", 3000);
                             return;
                         }
                         Bank.Change(house.BankID, Math.Abs(amount));
                         GameLog.Money($"player({Main.Players[player].UUID})", $"bank({house.BankID})", Math.Abs(amount), $"atmHouse");
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "Успешный перевод.", 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "Successful translation.", 3000);
                         break;
                     case 3: //put biz tax
                         var check = NAPI.Data.GetEntityData(player, "bizcheck");
                         if (check == null) return;
                         if (acc.BizIDs.Count != check)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Возникла ошибка! Попробуйте еще раз.", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "An error has occurred! Please try again.", 3000);
                             return;
                         }
                         int bid = 0;
                         if (!Int32.TryParse(Convert.ToString(args[2]), out bid))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Возникла ошибка! Попробуйте еще раз.", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "An error has occurred! try again.", 3000);
                             return;
                         }
 
@@ -672,17 +672,17 @@ namespace NeptuneEvo.MoneySystem
                         maxMoney = Convert.ToInt32(biz.SellPrice / 100 * 0.01) * 24 * 7;
                         if (Bank.Accounts[biz.BankID].Balance + Math.Abs(amount) > maxMoney)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Невозможно перевести столько средств на счет бизнеса.", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "It is impossible to transfer so much funds to the business account.", 3000);
                             return;
                         }
                         if (!Wallet.Change(player, -Math.Abs(amount)))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Недостаточно средств.", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Insufficient funds.", 3000);
                             return;
                         }
                         Bank.Change(biz.BankID, Math.Abs(amount));
                         GameLog.Money($"player({Main.Players[player].UUID})", $"bank({biz.BankID})", Math.Abs(amount), $"atmBiz");
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "Успешный перевод.", 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "Successful translation.", 3000);
                         break;
                     case 4: //transfer to
                         int num = 0;
