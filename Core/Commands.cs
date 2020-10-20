@@ -63,11 +63,7 @@ namespace NeptuneEvo.Core
                 if (!Main.Players.ContainsKey(sender)) return;
                 if (Main.Players[sender].Unmute > 0)
                 {
-<<<<<<< HEAD
                     Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, $"You are tortured for another {Main.Players[sender].Unmute / 60} minutes ", 3000);
-=======
-                    Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, $"You are tortured for another {Main.Players[sender].Unmute / 60} minutes", 3000);
->>>>>>> d17078e52221222e8bd3b4eeb014e69739cb5079
                     return;
                 }
                 else if (Main.Players[sender].VoiceMuted)
