@@ -474,11 +474,7 @@ namespace NeptuneEvo.Core
                 var tryAdd = nInventory.TryAdd(target, new nItem(types[type], amount));
                 if (tryAdd == -1 || tryAdd > 0)
                 {
-<<<<<<< HEAD
-                    Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, "Insufficient inventory space", 3000);
-=======
                     Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, "Insufficient space in inventory", 3000);
->>>>>>> d17078e52221222e8bd3b4eeb014e69739cb5079
                     return;
                 }
                 nInventory.Add(target, new nItem(types[type], amount));
@@ -500,11 +496,7 @@ namespace NeptuneEvo.Core
 
                 if (VehicleManager.Vehicles.ContainsKey(newNum))
                 {
-<<<<<<< HEAD
                     Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"This number already exists ", 3000);
-=======
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"This number already exists", 3000);
->>>>>>> d17078e52221222e8bd3b4eeb014e69739cb5079
                     return;
                 }
 
@@ -602,15 +594,6 @@ namespace NeptuneEvo.Core
                 {
                     if (house.Owner == target.Name)
                     {
-<<<<<<< HEAD
-                        player.SendChatMessage($"The player has a house worth ${house.Price}class'{Houses.HouseManager.HouseTypeList[house.Type].Name}'");
-                        var targetVehicles = VehicleManager.getAllPlayerVehicles(target.Name);
-                        foreach (var num in targetVehicles)
-                            player.SendChatMessage($"The player has a car '{VehicleManager.Vehicles[num].Model}'with number '{num}'");
-                    }
-                    else
-                        player.SendChatMessage($"The player is settled in the house{house.Owner} cost${house.Price}");
-=======
                         player.SendChatMessage($"The player has a house worth ${house.Price} class '{Houses.HouseManager.HouseTypeList[house.Type].Name}'");
                         var targetVehicles = VehicleManager.getAllPlayerVehicles(target.Name);
                         foreach (var num in targetVehicles)
@@ -618,7 +601,6 @@ namespace NeptuneEvo.Core
                     }
                     else
                         player.SendChatMessage($"The player is settled in the house {house.Owner} cost ${house.Price}");
->>>>>>> d17078e52221222e8bd3b4eeb014e69739cb5079
                 }
                 else
                     player.SendChatMessage("The player has no home");
@@ -3279,7 +3261,7 @@ namespace NeptuneEvo.Core
                 KeyValuePair<Player, nAccount.Account> acc = Main.Accounts.FirstOrDefault(x => x.Value.Login == name);
                 if (acc.Value != null)
                 {
-                    Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"Игрок онлайн! {acc.Key.Name}:{acc.Key.Value}", 8000);
+                    Notify.Send(client, NotifyType.Error, NotifyPosition.BottomCenter, $"Online player! {acc.Key.Name}:{acc.Key.Value}", 8000);
                     return;
                 }
                 MySQL.Query($"update `accounts` set `redbucks`=`redbucks`+{amount} where `login`='{name}'");

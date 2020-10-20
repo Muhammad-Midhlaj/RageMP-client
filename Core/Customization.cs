@@ -2812,7 +2812,7 @@ namespace NeptuneEvo.Core
 
                 if (!isChanging)
                 {
-                    player.SendChatMessage("~y~Добро пожаловать в штат!");
+                    player.SendChatMessage("~y~Welcome to the state!");
                     if (!Main.Accounts[player].PresentGet && Main.Accounts[player].PromoCodes[0].Equals("loveu"))
                     {
                         Main.Accounts[player].PresentGet = true;
@@ -2825,7 +2825,7 @@ namespace NeptuneEvo.Core
                         Main.Accounts[player].VipLvl = 3;
                         Main.Accounts[player].VipDate = DateTime.Now.AddDays(3);
                         GUI.Dashboard.sendStats(player);
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "Добро пожаловать в штат! Вы получили первый уровень, Gold VIP на 3 дня и 5000$!", 6000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "Welcome to the state! You got the first level, Gold VIP for 3 days and $ 5000!", 6000);
                         NAPI.Task.Run(() => { try { Trigger.ClientEvent(player, "disabledmg", false); } catch { } }, 5000);
                     }
                 }

@@ -85,7 +85,7 @@ namespace NeptuneEvo.Core
                     //player.SetData("SCHOOL_TIMER", Main.StartT(60000, 99999999, (o) => timer_exitVehicle(player), "SCHOOL_TIMER"));
                     player.SetData("SCHOOL_TIMER", Timers.StartOnce(60000, () => timer_exitVehicle(player)));
 
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"Если вы не сядете в машину в течение 60 секунд, то провалите экзамен", 3000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, $"If you don't get into the car within 60 seconds, you will fail the exam.", 3000);
                     return;
                 }
             }

@@ -193,7 +193,7 @@ namespace NeptuneEvo.Core
                         }
                         if (VehicleStreaming.GetDoorState(vehicle, DoorID.DoorTrunk) == DoorState.DoorOpen)
                         {
-                            Commands.RPChat("me", player, $"закрыл(а) багажник");
+                            Commands.RPChat("me", player, $"closed the trunk");
                             VehicleStreaming.SetDoorState(vehicle, DoorID.DoorTrunk, DoorState.DoorClosed);
                             foreach (var p in Main.Players.Keys.ToList())
                             {
@@ -221,7 +221,7 @@ namespace NeptuneEvo.Core
                                 }
                             }
                             VehicleStreaming.SetDoorState(vehicle, DoorID.DoorTrunk, DoorState.DoorOpen);
-                            Commands.RPChat("me", player, $"открыл(а) багажник");
+                            Commands.RPChat("me", player, $"opened the trunk");
                         }
                         return;
                     case 2:
@@ -248,7 +248,7 @@ namespace NeptuneEvo.Core
                             return;
                         }
                         vehicle.SetData("BAGINUSE", true);
-                        GUI.Dashboard.OpenOut(player, vehicle.GetData<List<nItem>>("ITEMS"), "Багажник", 2);
+                        GUI.Dashboard.OpenOut(player, vehicle.GetData<List<nItem>>("ITEMS"), "Trunk", 2);
                         player.SetData("SELECTEDVEH", vehicle);
                         return;
                 }
